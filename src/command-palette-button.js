@@ -18,7 +18,7 @@ export const CommandPaletteButton = () => {
 			className="is-primary edit-site-welcome-guide__text"
 			onClick={ () => openCommandCenter() }
 		>
-			{ __( 'Command Palette' ) }
+			{ __( 'Open Command Palette' ) }
 		</Button>
 	);
 };

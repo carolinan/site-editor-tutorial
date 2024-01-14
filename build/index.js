@@ -1,6 +1,51 @@
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/command-palette-button.js":
+/*!***************************************!*\
+  !*** ./src/command-palette-button.js ***!
+  \***************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CommandPaletteButton: function() { return /* binding */ CommandPaletteButton; }
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_commands__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/commands */ "@wordpress/commands");
+/* harmony import */ var _wordpress_commands__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_commands__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
+
+/**
+ * This file adds a component for opening the command palette from the Site Editor welcome guide.
+ */
+
+/**
+ * WordPress dependencies
+ */
+
+
+
+
+const CommandPaletteButton = () => {
+  const {
+    open: openCommandCenter
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useDispatch)(_wordpress_commands__WEBPACK_IMPORTED_MODULE_3__.store);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
+    className: "is-primary edit-site-welcome-guide__text",
+    onClick: () => openCommandCenter()
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Open Command Palette'));
+};
+
+/***/ }),
+
 /***/ "./src/icons.js":
 /*!**********************!*\
   !*** ./src/icons.js ***!
@@ -333,51 +378,6 @@ function PageControl(props) {
 
 /***/ }),
 
-/***/ "./src/pages/command-palette-button.js":
-/*!*********************************************!*\
-  !*** ./src/pages/command-palette-button.js ***!
-  \*********************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   CommandPaletteButton: function() { return /* binding */ CommandPaletteButton; }
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_commands__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/commands */ "@wordpress/commands");
-/* harmony import */ var _wordpress_commands__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_commands__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
-
-/**
- * This file adds a component for opening the command palette from the Site Editor welcome guide.
- */
-
-/**
- * WordPress dependencies
- */
-
-
-
-
-const CommandPaletteButton = () => {
-  const {
-    open: openCommandCenter
-  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useDispatch)(_wordpress_commands__WEBPACK_IMPORTED_MODULE_3__.store);
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
-    className: "is-primary edit-site-welcome-guide__text",
-    onClick: () => openCommandCenter()
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Command Palette'));
-};
-
-/***/ }),
-
 /***/ "./src/pages/entry-pages.js":
 /*!**********************************!*\
   !*** ./src/pages/entry-pages.js ***!
@@ -395,7 +395,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _command_palette_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./command-palette-button */ "./src/pages/command-palette-button.js");
+/* harmony import */ var _command_palette_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../command-palette-button */ "./src/command-palette-button.js");
 
 /**
  * This file contains the content for the initial tutorial pages in the Site Editor welcome guide.
@@ -493,7 +493,7 @@ const entryPages = [{
   verticalplacement: 'bottom',
   horizontalplacement: 'none',
   offsetX: -4,
-  offsetY: 10,
+  offsetY: 20,
   highlight: true,
   showArrow: true,
   arrowPosition: 'top-left',
@@ -507,7 +507,7 @@ const entryPages = [{
   verticalplacement: 'bottom',
   horizontalplacement: 'none',
   offsetX: -4,
-  offsetY: 10,
+  offsetY: 20,
   highlight: true,
   showArrow: true,
   arrowPosition: 'top-left',
@@ -515,9 +515,11 @@ const entryPages = [{
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Command Palette')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('A command is a shortcut that you can use to perform common actions.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('The button with the maginfying glass opens the command palette.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can also open the command palette by pressing Command/Ctrl + K.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('A command is a shortcut that you can use to perform common actions, such as opening or creating new posts and pages or opening the front of your site in a new browser window.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('The button with the maginfying glass opens the command palette.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can also open the command palette by pressing Command/Ctrl + K.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('TODO: Add a proper tutorial for the command palette here.')))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Go ahead and open the command palette and type "view site" in the search field:')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_command_palette_button__WEBPACK_IMPORTED_MODULE_3__.CommandPaletteButton, null)))
 }, {
   anchor: '.edit-site-sidebar-button',
   verticalplacement: 'bottom',
@@ -548,7 +550,10 @@ const entryPages = [{
     className: "edit-site-welcome-guide__text"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Allows you to browse your menus and make basic changes.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('TODO: Add info here')))
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "/wp-admin/site-editor.php?path=%2Fnavigation",
+    className: "components-button is-primary"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Skip ahead to the Navigation tutorial'))))
 }, {
   anchor: '.edit-site-sidebar-navigation-item',
   nth: 1,
@@ -565,7 +570,10 @@ const entryPages = [{
     className: "edit-site-welcome-guide__text"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Provides a direct access to edit your site’s style variations.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('TODO: Add info here')))
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "/wp-admin/site-editor.php?path=%2Fwp_global_styles",
+    className: "components-button is-primary"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Skip ahead to the Styles tutorial'))))
 }, {
   anchor: '.edit-site-sidebar-navigation-item',
   nth: 2,
@@ -582,7 +590,10 @@ const entryPages = [{
     className: "edit-site-welcome-guide__text"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Edit the content of your pages inside the Site Editor itself.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('TODO: Add info here')))
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "/wp-admin/site-editor.php?path=%2Fpage",
+    className: "components-button is-primary"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Skip ahead to the Pages tutorial'))))
 }, {
   anchor: '.edit-site-sidebar-navigation-item',
   nth: 3,
@@ -599,7 +610,10 @@ const entryPages = [{
     className: "edit-site-welcome-guide__text"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Manage the different layouts for your site.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('TODO: Add info here')))
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "/wp-admin/site-editor.php?path=%2Fwp_template",
+    className: "components-button is-primary"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Skip ahead to the Templates tutorial'))))
 }, {
   anchor: '.edit-site-sidebar-navigation-item',
   nth: 4,
@@ -616,7 +630,10 @@ const entryPages = [{
     className: "edit-site-welcome-guide__text"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Manage your synced patterns and template parts here.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('TODO: Add info here')))
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "/wp-admin/site-editor.php?path=%2Fpatterns",
+    className: "components-button is-primary"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Skip ahead to the Pattern tutorial'))))
 }, {
   anchor: '.edit-site-save-hub',
   verticalplacement: 'top',
@@ -666,9 +683,7 @@ const entryPages = [{
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "/wp-admin/site-editor.php?path=%2Fpatterns",
     className: "components-button is-primary"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Patterns'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "edit-site-welcome-guide__text"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_command_palette_button__WEBPACK_IMPORTED_MODULE_3__.CommandPaletteButton, null)))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Patterns'))))
 }];
 
 /***/ }),

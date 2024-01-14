@@ -12,7 +12,7 @@ import { createInterpolateElement } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import { CommandPaletteButton } from './command-palette-button';
+import { CommandPaletteButton } from '../command-palette-button';
 
 export const entryPages = [
 	{
@@ -153,7 +153,7 @@ export const entryPages = [
 		verticalplacement: 'bottom',
 		horizontalplacement: 'none',
 		offsetX: -4,
-		offsetY: 10,
+		offsetY: 20,
 		highlight: true,
 		showArrow: true,
 		arrowPosition: 'top-left',
@@ -175,7 +175,7 @@ export const entryPages = [
 		verticalplacement: 'bottom',
 		horizontalplacement: 'none',
 		offsetX: -4,
-		offsetY: 10,
+		offsetY: 20,
 		highlight: true,
 		showArrow: true,
 		arrowPosition: 'top-left',
@@ -185,16 +185,19 @@ export const entryPages = [
 					{ __( 'Command Palette' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'A command is a shortcut that you can use to perform common actions.' ) }
-					<br />
+					{ __( 'A command is a shortcut that you can use to perform common actions, such as opening or creating new posts and pages or opening the front of your site in a new browser window.' ) }
+					<br /><br />
 					{ __( 'The button with the maginfying glass opens the command palette.' ) }
 					<br />
 					{ __( 'You can also open the command palette by pressing Command/Ctrl + K.' ) }
 				</p>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'TODO: Add a proper tutorial for the command palette here.' ) }
-
+					{ __( 'Go ahead and open the command palette and type "view site" in the search field:' ) }
 				</p>
+				<p className="edit-site-welcome-guide__text">
+					<CommandPaletteButton />
+				</p>
+
 			</>
 		),
 	},
@@ -237,7 +240,7 @@ export const entryPages = [
 					{ __( 'Allows you to browse your menus and make basic changes.' ) }
 				</p>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'TODO: Add info here' ) }
+					<a href="/wp-admin/site-editor.php?path=%2Fnavigation" className="components-button is-primary">{ __( 'Skip ahead to the Navigation tutorial' ) }</a>
 				</p>
 			</>
 		),
@@ -261,7 +264,7 @@ export const entryPages = [
 					{ __( 'Provides a direct access to edit your site’s style variations.' ) }
 				</p>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'TODO: Add info here' ) }
+					<a href="/wp-admin/site-editor.php?path=%2Fwp_global_styles" className="components-button is-primary">{ __( 'Skip ahead to the Styles tutorial' ) }</a>
 				</p>
 			</>
 		),
@@ -285,7 +288,7 @@ export const entryPages = [
 					{ __( 'Edit the content of your pages inside the Site Editor itself.' ) }
 				</p>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'TODO: Add info here' ) }
+					<a href="/wp-admin/site-editor.php?path=%2Fpage" className="components-button is-primary">{ __( 'Skip ahead to the Pages tutorial' ) }</a>
 				</p>
 			</>
 		),
@@ -309,7 +312,7 @@ export const entryPages = [
 					{ __( 'Manage the different layouts for your site.' ) }
 				</p>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'TODO: Add info here' ) }
+					<a href="/wp-admin/site-editor.php?path=%2Fwp_template" className="components-button is-primary">{ __( 'Skip ahead to the Templates tutorial' ) }</a>
 				</p>
 			</>
 		),
@@ -333,7 +336,7 @@ export const entryPages = [
 					{ __( 'Manage your synced patterns and template parts here.' ) }
 				</p>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'TODO: Add info here' ) }
+					<a href="/wp-admin/site-editor.php?path=%2Fpatterns" className="components-button is-primary">{ __( 'Skip ahead to the Pattern tutorial' ) }</a>
 				</p>
 			</>
 		),
@@ -387,9 +390,6 @@ export const entryPages = [
 				</p>
 				<p className="edit-site-welcome-guide__text">
 					<a href="/wp-admin/site-editor.php?path=%2Fpatterns" className="components-button is-primary">{ __( 'Patterns' ) }</a>
-				</p>
-				<p className="edit-site-welcome-guide__text">
-					<CommandPaletteButton />
 				</p>
 			</>
 		),
