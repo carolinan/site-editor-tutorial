@@ -1,0 +1,26 @@
+{
+	"name": "site-editor-tutorial",
+	"version": "0.1.0",
+	"description": "A turorial for the Site Editor.",
+	"author": "Carolina Nymark",
+	"license": "GPL-2.0-or-later",
+	"main": "build/index.js",
+	"scripts": {
+		"build": "wp-scripts build",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"packages-update": "wp-scripts packages-update",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"start": "wp-scripts start"
+	},
+	"devDependencies": {
+		"@wordpress/base-styles": "^4.35.0",
+		"@wordpress/eslint-plugin": "^17.5.0",
+		"@wordpress/scripts": "^26.15.0",
+		"prettier": "^3.2.2"
+	},
+	"dependencies": {
+		"classnames": "^2.3.2"
+	}
+}

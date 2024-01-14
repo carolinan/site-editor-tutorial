@@ -1,0 +1,127 @@
+.site-editor-tutorial {
+	&.site-editor-tutorial-arrow {
+		&::before {
+			content: '';
+			position: absolute;
+			width: 0;
+			height: 0;
+			border-style: solid;
+			display: block;
+			margin-top: 0;
+			left: 0;
+		}
+	}
+
+	&.site-editor-tutorial-arrow-bottom {
+		&::before {
+			margin-top: 0;
+			bottom: -10px;
+			left: 50%; /* Center the arrow horizontally */
+			border-width: 0 10px 10px 10px;
+			border-color: transparent transparent #ffffff transparent; /* Arrow color */
+			transform: scaleY(-1); /* Flip the arrow upside down */
+		}
+	}
+
+	&.site-editor-tutorial-arrow-bottom-right {
+		&::before {
+			margin-top: 0;
+			bottom: -10px;
+			left: 90%;
+			border-width: 0 10px 10px 10px;
+			border-color: transparent transparent #ffffff transparent; /* Arrow color */
+			transform: scaleY(-1); /* Flip the arrow upside down */
+		}
+	}
+
+	&.site-editor-tutorial-arrow-bottom-left {
+		&::before {
+			margin-top: 0;
+			bottom: -10px;
+			left: 20px;
+			border-width: 0 10px 10px 10px;
+			border-color: transparent transparent #ffffff transparent; /* Arrow color */
+			transform: scaleY(-1); /* Flip the arrow upside down */
+		}
+	}
+
+	&.site-editor-tutorial-arrow-top {
+		&::before {
+			margin-top: -10px;
+			left: 50%; /* Center the arrow horizontally */
+			border-color: transparent transparent #ffffff transparent; /* Arrow color */
+			border-width: 0 10px 10px 10px;
+		}
+	}
+	
+	&.site-editor-tutorial-arrow-top-left {
+		&::before {
+			margin-top: -10px;
+			left: 10px;
+			border-color: transparent transparent #ffffff transparent; /* Arrow color */
+			border-width: 0 10px 10px 10px;
+		}
+	}
+
+	&.site-editor-tutorial-arrow-top-right {
+		&::before {
+			margin-top: -10px;
+			left: 0%;
+			border-color: transparent transparent #ffffff transparent; /* Arrow color */
+			border-width: 0 10px 10px 10px; /* Adjust the border-width for the arrow direction */
+		}
+	}
+
+	&.site-editor-tutorial-arrow-left {
+		&::before {
+			border-width: 10px 10px 10px 0;
+			border-color: transparent #ffffff transparent transparent; /* Arrow color */
+			margin-top: 10px;
+			left: -10px;
+		}
+	}
+
+	&.site-editor-tutorial-arrow-left-middle {
+		&::before {
+			content: '';
+			position: absolute;
+			width: 0;
+			height: 0;
+			border-style: solid;
+			display: block;
+			margin-top: 90px;
+			left: -10px;
+			border-color: transparent #ffffff transparent transparent; /* Arrow color */
+			border-width: 10px 10px 10px 0;
+		}
+	}
+
+	&.site-editor-tutorial-arrow-right {
+		&::before {
+			border-width: 10px 0 10px 10px;
+			border-color: transparent transparent transparent #ffffff; /* Arrow color */
+			margin-top: 10px;
+			right: -10px;
+		}
+	}
+
+	&.site-editor-tutorial-arrow-right-top,
+	&.site-editor-tutorial-arrow-right-bottom {
+		&::before {
+			border-width: 10px 0 10px 10px;
+			border-color: transparent transparent transparent #ffffff; /* Arrow color */
+			margin-top: 10px;
+			right: -10px;
+		}
+	}
+
+	&.site-editor-tutorial-arrow-left-top,
+	&.site-editor-tutorial-arrow-left-bottom {
+		&::before {
+			border-width: 10px 10px 10px 0;
+			border-color: transparent #ffffff transparent transparent; /* Arrow color */
+			margin-top: 10px;
+			left: -10px;
+		}
+	}
+}
