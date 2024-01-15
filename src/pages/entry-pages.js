@@ -39,15 +39,12 @@ export const entryPages = [
 					{
 						__( 'You can close the tutorial by clicking the close button (X) in the top corner, or with the Esc key.' )
 					}
+					&nbsp;
 					{
-						__( 'You can navigate to the next or previous tutorial page with the left and right arrow keys.' )
+						__( 'You can also navigate to the next or previous tutorial page with the left and right arrow keys.' )
 					}
 				</p>
-				<p className="edit-site-welcome-guide__text">
-					{
-						__( 'This information-box points to the item that it describes. The item is also highlighted with a purple border.' )
-					}
-				</p>
+				<br />
 			</>
 		),
 	},
@@ -88,8 +85,9 @@ export const entryPages = [
 				<p className="edit-site-welcome-guide__text">
 					{ __( 'You can use the menu to navigate to different settings screens.' ) }
 					<br />
-					{ __( 'Positioned at the top, you will find shortcuts and a button that opens the command palette.' ) }
-					{ __( 'Below the menu, there is a status message that will notify you of unsaved changes.' ) }
+					{ __( 'Positioned at the top, you will find shortcuts and a button that opens the Command Palette.' ) }
+					<br />
+					{ __( 'Below the menu, there is a status area where you will be notified if you have unsaved changes.' ) }
 				</p>
 
 			</>
@@ -167,7 +165,7 @@ export const entryPages = [
 				</h1>
 				<p className="edit-site-welcome-guide__text">
 					{ __(
-						'Next to the site title is a link that opens the front of your website in a new window.'
+						'Next to the site title is a link that opens the front of your site in a new window.'
 					) }
 				</p>
 			</>
@@ -188,19 +186,21 @@ export const entryPages = [
 					{ __( 'Command Palette' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'A command is a shortcut that you can use to perform common actions, such as opening or creating new posts and pages or opening the front of your site in a new browser window.' ) }
+					{ __( 'A command is a shortcut that you can use to perform common actions, such as opening or creating new posts and pages.' ) }
 					<br /><br />
-					{ __( 'The button with the maginfying glass opens the command palette.' ) }
+					{ __( 'The button with the maginfying glass opens the Command Palette.' ) }
 					<br />
-					{ __( 'You can also open the command palette by pressing Command/Ctrl + K.' ) }
+					{ __( 'You can also open the Command Palette by pressing Command/Ctrl + K.' ) }
 				</p>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'Go ahead and open the command palette and type "view site" in the search field:' ) }
+					{ __( 'Go ahead and open the Command Palette and try it out by typing "view site" in the search field:' ) }
 				</p>
 				<p className="edit-site-welcome-guide__text">
 					<CommandPaletteButton />
 				</p>
-
+				<p className="edit-site-welcome-guide__text">
+					<a href="https://wordpress.org/documentation/article/site-editor-command-palette/" target="_new">{ __( 'Read more in the documentation.' ) }</a>
+				</p>
 			</>
 		),
 	},
@@ -240,10 +240,10 @@ export const entryPages = [
 					{ __( 'Navigation' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'Allows you to browse your menus and make basic changes such as adding, re-ordering or removing links and blocks from your menus.' ) }
+					{ __( 'Allows you to browse and edit your menus and make changes such as adding, re-ordering or removing links and blocks.' ) }
 				</p>
 				<p className="edit-site-welcome-guide__text">
-					<a href="https://wordpress.org/documentation/article/site-editor-navigation/">{ __( 'Read more about the navigation screen in the documentation.' ) }</a>
+					<a href="https://wordpress.org/documentation/article/site-editor-navigation/" target="_new">{ __( 'Read more in the documentation.' ) }</a>
 				</p>
 				<p className="edit-site-welcome-guide__text">
 					<a href="/wp-admin/site-editor.php?path=%2Fnavigation" className="components-button is-primary">{ __( 'Skip ahead to the Navigation tutorial' ) }</a>
@@ -267,7 +267,10 @@ export const entryPages = [
 					{ __( 'Styles' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'Provides a direct access to edit your site’s style variations.' ) }
+					{ __( 'Styles can change the look and feel of your site with a single setting, by switching color palettes and fonts.' ) }
+				</p>
+				<p className="edit-site-welcome-guide__text">
+					{ __( 'This menu provides direct access to previewing, selecting and editing your site’s style variations.' ) }
 				</p>
 				<p className="edit-site-welcome-guide__text">
 					<a href="/wp-admin/site-editor.php?path=%2Fwp_global_styles" className="components-button is-primary">{ __( 'Skip ahead to the Styles tutorial' ) }</a>
@@ -294,7 +297,10 @@ export const entryPages = [
 					{ __( 'Edit the content of your pages inside the Site Editor itself.' ) }
 				</p>
 				<p className="edit-site-welcome-guide__text">
-					<a href="/wp-admin/site-editor.php?path=%2Fpage" className="components-button is-primary">{ __( 'Skip ahead to the Pages tutorial' ) }</a>
+					<a href="https://wordpress.org/documentation/article/site-editor-pages/" target="_new">{ __( 'Read more in the documentation.' ) }</a>
+				</p>
+				<p className="edit-site-welcome-guide__text">
+					<a href="/wp-admin/site-editor.php?path=%2Fpage" className="components-button is-primary">{ __( 'Skip ahead to the Page tutorial' ) }</a>
 				</p>
 			</>
 		),
@@ -315,10 +321,13 @@ export const entryPages = [
 					{ __( 'Templates' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'Manage the different layouts for your site.' ) }
+					{ __( 'Templates are used to create the layout and structure for everything that you see on the front of your site: from the front page to the single posts and the 404 page.' ) }
 				</p>
 				<p className="edit-site-welcome-guide__text">
-					<a href="/wp-admin/site-editor.php?path=%2Fwp_template" className="components-button is-primary">{ __( 'Skip ahead to the Templates tutorial' ) }</a>
+					{ __( 'Here you can manage the different layouts for your site and create new custom templates.' ) }
+				</p>
+				<p className="edit-site-welcome-guide__text">
+					<a href="/wp-admin/site-editor.php?path=%2Fwp_template" className="components-button is-primary">{ __( 'Skip ahead to the Template tutorial' ) }</a>
 				</p>
 			</>
 		),
@@ -339,7 +348,16 @@ export const entryPages = [
 					{ __( 'Patterns' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
+					{ __( 'Patterns are blocks grouped together to create customizable design features. For example a gallery, FAQ, or pricing table. Patterns can be added to your content or your templates.' ) }
+				</p>
+				<p className="edit-site-welcome-guide__text">
+					{ __( 'Template parts can be used to display the site header and site footer in your templates.' ) }
+				</p>
+				<p className="edit-site-welcome-guide__text">
 					{ __( 'Manage your synced patterns and template parts here.' ) }
+				</p>
+				<p className="edit-site-welcome-guide__text">
+					<a href="https://wordpress.org/documentation/article/site-editor-patterns/" target="_new">{ __( 'Read more in the documentation.' ) }</a>
 				</p>
 				<p className="edit-site-welcome-guide__text">
 					<a href="/wp-admin/site-editor.php?path=%2Fpatterns" className="components-button is-primary">{ __( 'Skip ahead to the Pattern tutorial' ) }</a>
@@ -352,7 +370,7 @@ export const entryPages = [
 		verticalplacement: 'top',
 		horizontalplacement: 'left',
 		offsetX: 10,
-		offsetY: -140,
+		offsetY: -220,
 		highlight: true,
 		showArrow: true,
 		arrowPosition: 'bottom-left',
@@ -361,6 +379,10 @@ export const entryPages = [
 				<h1 className="edit-site-welcome-guide__heading">
 					{ __( 'Status messages' ) }
 				</h1>
+				<p className="edit-site-welcome-guide__text">
+					{ __( 'Status messages show information about unsaved changes that are pending review. For example changes to page content, templates or styles.' ) }
+					{ __( ' If the message reads "Saved" then you do not need to take action.' ) }
+				</p>
 			</>
 		),
 	},
@@ -383,19 +405,11 @@ export const entryPages = [
 					}
 				</p>
 				<p className="edit-site-welcome-guide__text">
-					<a href="/wp-admin/site-editor.php?path=%2Fnavigation" className="components-button is-primary">{ __( 'Navigation' ) }</a>
-				</p>
-				<p className="edit-site-welcome-guide__text">
-					<a href="/wp-admin/site-editor.php?path=%2Fwp_global_styles" className="components-button is-primary">{ __( 'Styles' ) }</a>
-				</p>
-				<p className="edit-site-welcome-guide__text">
-					<a href="/wp-admin/site-editor.php?path=%2Fpage" className="components-button is-primary">{ __( 'Pages' ) }</a>
-				</p>
-				<p className="edit-site-welcome-guide__text">
-					<a href="/wp-admin/site-editor.php?path=%2Fwp_template" className="components-button is-primary">{ __( 'Templates' ) }</a>
-				</p>
-				<p className="edit-site-welcome-guide__text">
-					<a href="/wp-admin/site-editor.php?path=%2Fpatterns" className="components-button is-primary">{ __( 'Patterns' ) }</a>
+					<a href="/wp-admin/site-editor.php?path=%2Fnavigation" className="components-button is-primary">{ __( 'Navigation' ) }</a>&nbsp;
+					<a href="/wp-admin/site-editor.php?path=%2Fwp_global_styles" className="components-button is-primary">{ __( 'Styles' ) }</a>&nbsp;
+					<a href="/wp-admin/site-editor.php?path=%2Fpage" className="components-button is-primary">{ __( 'Pages' ) }</a>&nbsp;
+					<a href="/wp-admin/site-editor.php?path=%2Fwp_template" className="components-button is-primary">{ __( 'Templates' ) }</a>&nbsp;
+					<a href="/wp-admin/site-editor.php?path=%2Fpatterns" className="components-button is-primary">{ __( 'Patterns' ) }</a>&nbsp;
 				</p>
 			</>
 		),

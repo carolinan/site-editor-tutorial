@@ -7,6 +7,9 @@
  */
 import { __ } from '@wordpress/i18n';
 
+/** 
+ * TODO: Find a way to calculate if it is the list of menus, or the details of a menu.
+ */
 export const navigationPages = [
 	{
 		anchor: '.edit-site-layout__sidebar-region',
@@ -20,23 +23,13 @@ export const navigationPages = [
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">
-					{ __( 'Navigation Settings' ) }
+					{ __( 'Navigation' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{
-						__( 'You have opened the navigation settings page.' )
-					}
-				</p>
-				<p className="edit-site-welcome-guide__text">
-					{ __( 'The navigation menu shows different options depending on how many menus you have on your website.' ) }
-				</p>
-				<p className="edit-site-welcome-guide__text">
-					{ __( ' - If you have one menu, you will only see the information and settings for that menu.' ) }
-					<br />
-					{ __( ' - If you have more than one, you will see a list of all your menus, and selecting a menu will open its individual settings page.' ) }
-				</p>
-				<p className="edit-site-welcome-guide__text">
-					{ __( 'Compared to other settings pages in the Site Editor, you will find that you can not create new menus here. To create a new menu, you need to select or place a navigation block in the editor.' ) }
+					{ __( 'This navigation menu shows different options depending on how many menus you have on your site.' ) }
+					<br/>
+					{ __( 'It will either show a list of menus, or the details of your main menu, including the menu name, links, and blocks.' ) }
+					<br/>
 				</p>
 			</>
 		),
@@ -60,6 +53,8 @@ export const navigationPages = [
 			</>
 		),
 	},
+
+
 	{
 		anchor: '.edit-site-sidebar-navigation-screen__title',
 		verticalplacement: 'bottom',
@@ -74,7 +69,7 @@ export const navigationPages = [
 					{ __( 'Menu name' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'If you have more than one menu on your website, this is the name of the menu you are editing.' ) }
+					{ __( 'If you have more than one menu on your site, this is the name of the menu you are editing.' ) }
 				</p>
 			</>
 		),

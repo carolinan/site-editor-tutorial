@@ -201,6 +201,7 @@ function SiteEditorTutorial() {
       break;
     case '/page':
       // /page is the page previews and the site editor menu with the list of pages.
+      // /pageedit is the editor page for a page.
       pages = _pages_pages_pages__WEBPACK_IMPORTED_MODULE_11__.pagesPages;
       break;
     case '/wp_template':
@@ -509,9 +510,7 @@ const entryPages = [{
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Welcome to the Site Editor tutorial')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This walkthrough will introduce the Site Editor interface and features.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('While the tutorial is open, you will not be able to interact with any other elements on the page.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can close the tutorial by clicking the close button (X) in the top corner, or with the Esc key.'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can navigate to the next or previous tutorial page with the left and right arrow keys.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This information-box points to the item that it describes. The item is also highlighted with a purple border.')))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This walkthrough will introduce the Site Editor interface and features.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('While the tutorial is open, you will not be able to interact with any other elements on the page.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can close the tutorial by clicking the close button (X) in the top corner, or with the Esc key.'), "\xA0", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can also navigate to the next or previous tutorial page with the left and right arrow keys.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null))
 }, {
   anchor: '.edit-site-layout__canvas',
   verticalplacement: 'top',
@@ -539,7 +538,7 @@ const entryPages = [{
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('The Siter Editor Menu')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can use the menu to navigate to different settings screens.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Positioned at the top, you will find shortcuts and a button that opens the command palette.'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Below the menu, there is a status message that will notify you of unsaved changes.')))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can use the menu to navigate to different settings screens.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Positioned at the top, you will find shortcuts and a button that opens the Command Palette.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Below the menu, there is a status area where you will be notified if you have unsaved changes.')))
 }, {
   anchor: '.edit-site-layout__view-mode-toggle',
   verticalplacement: 'bottom',
@@ -586,7 +585,7 @@ const entryPages = [{
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Shortcut to the front of your site')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Next to the site title is a link that opens the front of your website in a new window.')))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Next to the site title is a link that opens the front of your site in a new window.')))
 }, {
   anchor: '.edit-site-site-hub_toggle-command-center',
   verticalplacement: 'bottom',
@@ -600,11 +599,16 @@ const entryPages = [{
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Command Palette')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('A command is a shortcut that you can use to perform common actions, such as opening or creating new posts and pages or opening the front of your site in a new browser window.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('The button with the maginfying glass opens the command palette.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can also open the command palette by pressing Command/Ctrl + K.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('A command is a shortcut that you can use to perform common actions, such as opening or creating new posts and pages.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('The button with the maginfying glass opens the Command Palette.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can also open the Command Palette by pressing Command/Ctrl + K.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Go ahead and open the command palette and type "view site" in the search field:')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Go ahead and open the Command Palette and try it out by typing "view site" in the search field:')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_command_palette_button__WEBPACK_IMPORTED_MODULE_3__.CommandPaletteButton, null)))
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_command_palette_button__WEBPACK_IMPORTED_MODULE_3__.CommandPaletteButton, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "https://wordpress.org/documentation/article/site-editor-command-palette/",
+    target: "_new"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Read more in the documentation.'))))
 }, {
   anchor: '.edit-site-sidebar-button',
   verticalplacement: 'bottom',
@@ -633,11 +637,12 @@ const entryPages = [{
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Allows you to browse your menus and make basic changes such as adding, re-ordering or removing links and blocks from your menus.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Allows you to browse and edit your menus and make changes such as adding, re-ordering or removing links and blocks.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: "https://wordpress.org/documentation/article/site-editor-navigation/"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Read more about the navigation screen in the documentation.'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    href: "https://wordpress.org/documentation/article/site-editor-navigation/",
+    target: "_new"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Read more in the documentation.'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "/wp-admin/site-editor.php?path=%2Fnavigation",
@@ -657,7 +662,9 @@ const entryPages = [{
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Styles')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Provides a direct access to edit your site’s style variations.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Styles can change the look and feel of your site with a single setting, by switching color palettes and fonts.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This menu provides direct access to previewing, selecting and editing your site’s style variations.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "/wp-admin/site-editor.php?path=%2Fwp_global_styles",
@@ -680,9 +687,14 @@ const entryPages = [{
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Edit the content of your pages inside the Site Editor itself.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "https://wordpress.org/documentation/article/site-editor-pages/",
+    target: "_new"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Read more in the documentation.'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "/wp-admin/site-editor.php?path=%2Fpage",
     className: "components-button is-primary"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Skip ahead to the Pages tutorial'))))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Skip ahead to the Page tutorial'))))
 }, {
   anchor: '.edit-site-sidebar-navigation-item',
   nth: 3,
@@ -697,12 +709,14 @@ const entryPages = [{
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Templates')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Manage the different layouts for your site.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Templates are used to create the layout and structure for everything that you see on the front of your site: from the front page to the single posts and the 404 page.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Here you can manage the different layouts for your site and create new custom templates.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "/wp-admin/site-editor.php?path=%2Fwp_template",
     className: "components-button is-primary"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Skip ahead to the Templates tutorial'))))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Skip ahead to the Template tutorial'))))
 }, {
   anchor: '.edit-site-sidebar-navigation-item',
   nth: 4,
@@ -717,7 +731,16 @@ const entryPages = [{
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Patterns')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Patterns are blocks grouped together to create customizable design features. For example a gallery, FAQ, or pricing table. Patterns can be added to your content or your templates.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Template parts can be used to display the site header and site footer in your templates.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Manage your synced patterns and template parts here.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "https://wordpress.org/documentation/article/site-editor-patterns/",
+    target: "_new"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Read more in the documentation.'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "/wp-admin/site-editor.php?path=%2Fpatterns",
@@ -728,13 +751,15 @@ const entryPages = [{
   verticalplacement: 'top',
   horizontalplacement: 'left',
   offsetX: 10,
-  offsetY: -140,
+  offsetY: -220,
   highlight: true,
   showArrow: true,
   arrowPosition: 'bottom-left',
   content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     className: "edit-site-welcome-guide__heading"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Status messages')))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Status messages')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Status messages show information about unsaved changes that are pending review. For example changes to page content, templates or styles.'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(' If the message reads "Saved" then you do not need to take action.')))
 }, {
   anchor: '.interface-interface-skeleton__header',
   verticalplacement: 'bottom',
@@ -752,27 +777,19 @@ const entryPages = [{
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "/wp-admin/site-editor.php?path=%2Fnavigation",
     className: "components-button is-primary"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "edit-site-welcome-guide__text"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation')), "\xA0", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "/wp-admin/site-editor.php?path=%2Fwp_global_styles",
     className: "components-button is-primary"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Styles'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "edit-site-welcome-guide__text"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Styles')), "\xA0", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "/wp-admin/site-editor.php?path=%2Fpage",
     className: "components-button is-primary"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Pages'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "edit-site-welcome-guide__text"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Pages')), "\xA0", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "/wp-admin/site-editor.php?path=%2Fwp_template",
     className: "components-button is-primary"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Templates'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "edit-site-welcome-guide__text"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Templates')), "\xA0", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "/wp-admin/site-editor.php?path=%2Fpatterns",
     className: "components-button is-primary"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Patterns'))))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Patterns')), "\xA0"))
 }];
 
 /***/ }),
@@ -801,6 +818,10 @@ __webpack_require__.r(__webpack_exports__);
  * WordPress dependencies
  */
 
+
+/** 
+ * TODO: Find a way to calculate if it is the list of menus, or the details of a menu.
+ */
 const navigationPages = [{
   anchor: '.edit-site-layout__sidebar-region',
   verticalplacement: 'top',
@@ -812,15 +833,9 @@ const navigationPages = [{
   arrowPosition: 'left-middle',
   content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     className: "edit-site-welcome-guide__heading"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation Settings')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You have opened the navigation settings page.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('The navigation menu shows different options depending on how many menus you have on your website.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(' - If you have one menu, you will only see the information and settings for that menu.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(' - If you have more than one, you will see a list of all your menus, and selecting a menu will open its individual settings page.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Compared to other settings pages in the Site Editor, you will find that you can not create new menus here. To create a new menu, you need to select or place a navigation block in the editor.')))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This navigation menu shows different options depending on how many menus you have on your site.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('It will either show a list of menus, or the details of your main menu, including the menu name, links, and blocks.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null)))
 }, {
   anchor: '.edit-site-sidebar-button',
   verticalplacement: 'bottom',
@@ -846,7 +861,7 @@ const navigationPages = [{
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Menu name')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('If you have more than one menu on your website, this is the name of the menu you are editing.')))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('If you have more than one menu on your site, this is the name of the menu you are editing.')))
 }, {
   anchor: '.sidebar-navigation__more-menu button',
   verticalplacement: 'bottom',

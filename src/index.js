@@ -89,6 +89,7 @@ function SiteEditorTutorial() {
 			break;
 		case '/page':
 			// /page is the page previews and the site editor menu with the list of pages.
+			// /pageedit is the editor page for a page.
 			pages = pagesPages;
 			break;
 		case '/wp_template':
