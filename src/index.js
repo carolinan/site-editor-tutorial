@@ -49,7 +49,7 @@ function SiteEditorTutorial() {
 	 * The post type parameter is used to determine which post type that is being viewed,
 	 * for example post, page, pattern.
 	 */
-	const postTypeParam = getQueryParamValue( href, 'post_type'  ) || '';
+	const postTypeParam = getQueryParamValue( href, 'postType'  ) || '';
 	/**
 	 * If the canvas parameter is set, we are in the actual editor and not
 	 * in the preview mode where the navigation menu is shown.
