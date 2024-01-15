@@ -111,6 +111,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_pages_pages__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pages/pages-pages */ "./src/pages/pages-pages.js");
 /* harmony import */ var _pages_templates_pages__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pages/templates-pages */ "./src/pages/templates-pages.js");
 /* harmony import */ var _pages_patterns_pages__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pages/patterns-pages */ "./src/pages/patterns-pages.js");
+/* harmony import */ var _pages_editor_canvas_pages__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pages/editor-canvas-pages */ "./src/pages/editor-canvas-pages.js");
 
 /**
  * External dependencies
@@ -136,6 +137,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function SiteEditorTutorial() {
   const ref = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
   const [isOpen, setIsOpen] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)(true);
@@ -153,22 +155,64 @@ function SiteEditorTutorial() {
     const urlParams = new URLSearchParams(new URL(url).search);
     return urlParams.get(param);
   }
-  const pathParam = getQueryParamValue(href, 'path');
-  switch (pathParam) {
+  /**
+   * The path determines which Site Editor screen is shown.
+   * Example: wp-admin/site-editor.php?path=%2Fpage
+  */
+  const pathParam = getQueryParamValue(href, 'path') || '';
+  /**
+   * The post type parameter is used to determine which post type that is being viewed,
+   * for example post, page, pattern.
+   */
+  const postTypeParam = getQueryParamValue(href, 'post_type') || '';
+  /**
+   * If the canvas parameter is set, we are in the actual editor and not
+   * in the preview mode where the navigation menu is shown.
+  */
+  const canvasParam = getQueryParamValue(href, 'canvas') || '';
+
+  // Combine the parameters
+  const pageSelector = pathParam + postTypeParam + canvasParam;
+  console.log('href: ', href);
+  console.log('path: ', path);
+  console.log('pathParam: ', pathParam);
+  console.log('postTypeParam: ', postTypeParam);
+  console.log('canvasParam: ', canvasParam);
+  console.log('pageSelector: ', pageSelector);
+  switch (pageSelector) {
     case '/navigation':
+      /**
+       * /navigation is the page with the left hand menu where you manage menus.
+       *
+       * TODO: // wp-admin/site-editor.php?postId=906&postType=wp_navigation is the 
+       * edit page for a menu that matches the post id.
+       * It currently loads the default tutorial page which is incorrect.
+       */
       pages = _pages_navigation_pages__WEBPACK_IMPORTED_MODULE_9__.navigationPages;
       break;
     case '/wp_global_styles':
+      /**
+       * Note: /wp_global_stylesedit is an exception because it does not open with
+       * the select styles, just the editor.
+       * 
+       * /wp_global_styles is the page with the left hand menu where you preview style variations.
+       */
       pages = _pages_styles_pages__WEBPACK_IMPORTED_MODULE_10__.stylesPages;
       break;
     case '/page':
+      // /page is the page previews and the site editor menu with the list of pages.
       pages = _pages_pages_pages__WEBPACK_IMPORTED_MODULE_11__.pagesPages;
       break;
     case '/wp_template':
+      // /wp_templateedit is the editor page for a template.
+      // /wp_template is the preview page for a template.
       pages = _pages_templates_pages__WEBPACK_IMPORTED_MODULE_12__.templatesPages;
       break;
     case '/patterns':
       pages = _pages_patterns_pages__WEBPACK_IMPORTED_MODULE_13__.patternsPages;
+      break;
+    case 'edit':
+      pages = _pages_editor_canvas_pages__WEBPACK_IMPORTED_MODULE_14__.editorCanvasPages;
       break;
     default:
       pages = _pages_entry_pages__WEBPACK_IMPORTED_MODULE_8__.entryPages;
@@ -378,6 +422,47 @@ function PageControl(props) {
 
 /***/ }),
 
+/***/ "./src/pages/editor-canvas-pages.js":
+/*!******************************************!*\
+  !*** ./src/pages/editor-canvas-pages.js ***!
+  \******************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   editorCanvasPages: function() { return /* binding */ editorCanvasPages; }
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+
+/**
+ * This file contains the content for the editor tutorial pages in the Site Editor welcome guide.
+ */
+
+/**
+ * WordPress dependencies
+ */
+
+const editorCanvasPages = [{
+  anchor: '.edit-site-layout__sidebar-region',
+  verticalplacement: 'top',
+  horizontalplacement: 'right',
+  offsetX: 10,
+  offsetY: 10,
+  highlight: false,
+  showArrow: true,
+  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "edit-site-welcome-guide__heading"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Editor')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('TODO: Add info here')))
+}];
+
+/***/ }),
+
 /***/ "./src/pages/entry-pages.js":
 /*!**********************************!*\
   !*** ./src/pages/entry-pages.js ***!
@@ -424,7 +509,7 @@ const entryPages = [{
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Welcome to the Site Editor tutorial')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This walkthrough will introduce the Site Editor interface and features.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('While the tutorial is open, you will not be able to interact with any other elements on the page.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can close the tutorial by clicking the close button (X) in the top corner, or with the Esc key.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This walkthrough will introduce the Site Editor interface and features.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('While the tutorial is open, you will not be able to interact with any other elements on the page.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can close the tutorial by clicking the close button (X) in the top corner, or with the Esc key.'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can navigate to the next or previous tutorial page with the left and right arrow keys.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This information-box points to the item that it describes. The item is also highlighted with a purple border.')))
 }, {
@@ -548,7 +633,11 @@ const entryPages = [{
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Allows you to browse your menus and make basic changes.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Allows you to browse your menus and make basic changes such as adding, re-ordering or removing links and blocks from your menus.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "https://wordpress.org/documentation/article/site-editor-navigation/"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Read more about the navigation screen in the documentation.'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "/wp-admin/site-editor.php?path=%2Fnavigation",

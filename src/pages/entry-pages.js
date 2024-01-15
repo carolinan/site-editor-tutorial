@@ -39,6 +39,9 @@ export const entryPages = [
 					{
 						__( 'You can close the tutorial by clicking the close button (X) in the top corner, or with the Esc key.' )
 					}
+					{
+						__( 'You can navigate to the next or previous tutorial page with the left and right arrow keys.' )
+					}
 				</p>
 				<p className="edit-site-welcome-guide__text">
 					{
@@ -237,7 +240,10 @@ export const entryPages = [
 					{ __( 'Navigation' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'Allows you to browse your menus and make basic changes.' ) }
+					{ __( 'Allows you to browse your menus and make basic changes such as adding, re-ordering or removing links and blocks from your menus.' ) }
+				</p>
+				<p className="edit-site-welcome-guide__text">
+					<a href="https://wordpress.org/documentation/article/site-editor-navigation/">{ __( 'Read more about the navigation screen in the documentation.' ) }</a>
 				</p>
 				<p className="edit-site-welcome-guide__text">
 					<a href="/wp-admin/site-editor.php?path=%2Fnavigation" className="components-button is-primary">{ __( 'Skip ahead to the Navigation tutorial' ) }</a>

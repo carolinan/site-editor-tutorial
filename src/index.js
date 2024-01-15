@@ -22,6 +22,7 @@ import { stylesPages } from './pages/styles-pages';
 import { pagesPages } from './pages/pages-pages';
 import { templatesPages } from './pages/templates-pages';
 import { patternsPages } from './pages/patterns-pages';
+import { editorCanvasPages } from './pages/editor-canvas-pages';
 
 function SiteEditorTutorial() {
 	const ref = useRef( null );
@@ -39,23 +40,67 @@ function SiteEditorTutorial() {
 		const urlParams = new URLSearchParams( new URL( url ).search );
 		return urlParams.get( param );
 	}
-	const pathParam = getQueryParamValue( href, 'path' );
+	/**
+	 * The path determines which Site Editor screen is shown.
+	 * Example: wp-admin/site-editor.php?path=%2Fpage
+	*/
+	const pathParam = getQueryParamValue(href, 'path') || '';
+	/**
+	 * The post type parameter is used to determine which post type that is being viewed,
+	 * for example post, page, pattern.
+	 */
+	const postTypeParam = getQueryParamValue( href, 'post_type'  ) || '';
+	/**
+	 * If the canvas parameter is set, we are in the actual editor and not
+	 * in the preview mode where the navigation menu is shown.
+	*/
+	const canvasParam = getQueryParamValue( href, 'canvas' ) || '';
 
-	switch ( pathParam ) {
+	// Combine the parameters
+	const pageSelector = pathParam + postTypeParam + canvasParam;
+
+	console.log( 'href: ', href );
+	console.log( 'path: ', path );
+	console.log( 'pathParam: ', pathParam );
+	console.log( 'postTypeParam: ', postTypeParam );
+	console.log( 'canvasParam: ', canvasParam );
+
+	console.log( 'pageSelector: ', pageSelector );
+
+	switch ( pageSelector ) {
 		case '/navigation':
+			/**
+			 * /navigation is the page with the left hand menu where you manage menus.
+			 *
+			 * TODO: // wp-admin/site-editor.php?postId=906&postType=wp_navigation is the 
+			 * edit page for a menu that matches the post id.
+			 * It currently loads the default tutorial page which is incorrect.
+			 */
 			pages = navigationPages;
 			break;
 		case '/wp_global_styles':
+			/**
+			 * Note: /wp_global_stylesedit is an exception because it does not open with
+			 * the select styles, just the editor.
+			 * 
+			 * /wp_global_styles is the page with the left hand menu where you preview style variations.
+			 */
 			pages = stylesPages;
 			break;
 		case '/page':
+			// /page is the page previews and the site editor menu with the list of pages.
 			pages = pagesPages;
 			break;
 		case '/wp_template':
+			// /wp_templateedit is the editor page for a template.
+			// /wp_template is the preview page for a template.
 			pages = templatesPages;
 			break;
 		case '/patterns':
 			pages = patternsPages;
+			break;
+		case 'edit':
+			pages = editorCanvasPages;
 			break;
 		default:
 			pages = entryPages;

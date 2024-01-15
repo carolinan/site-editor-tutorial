@@ -23,7 +23,7 @@ function site_editor_tutorial_scripts_and_styles() {
 	wp_enqueue_script(
 		'site-editor-tutorial',
 		plugins_url( 'build/index.js', __FILE__ ),
-		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-edit-post', 'wp-edit-site' ),
+		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-edit-post', ),
 		filemtime( plugin_dir_path( __FILE__ ) . 'build/index.js' )
 	);
 
