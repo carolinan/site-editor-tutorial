@@ -10,7 +10,7 @@ import { Button } from '@wordpress/components';
 import { PageControlIcon } from './icons';
 
 export default function PageControl( props ) {
-	const { currentPage, numberOfPages, setCurrentPage } = props;
+	const { currentPage, numberOfPages, setCurrentPage, resetStyles } = props;
 
 	return (
 		<ul
@@ -32,7 +32,10 @@ export default function PageControl( props ) {
 							page + 1,
 							numberOfPages
 						) }
-						onClick={ () => setCurrentPage( page ) }
+						onClick={ () => {
+							setCurrentPage(page);
+							resetStyles();
+						}}
 					/>
 				</li>
 			) ) }

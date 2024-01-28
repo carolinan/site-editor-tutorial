@@ -19,6 +19,7 @@ export default function SiteEditorTutorialFooter( props ) {
 		goBack,
 		goForward,
 		onFinish,
+		resetStyles,
 	} = props;
 
 	return (
@@ -27,7 +28,9 @@ export default function SiteEditorTutorialFooter( props ) {
 				<PageControl
 					currentPage={ currentPage }
 					numberOfPages={ pages.length }
-					setCurrentPage={ setCurrentPage } />
+					setCurrentPage={ setCurrentPage }
+					resetStyles={ resetStyles }
+				/>
 			) },
 			{ canGoBack && (
 				<Button

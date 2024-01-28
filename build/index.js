@@ -365,7 +365,8 @@ function SiteEditorTutorial() {
     canGoForward: canGoForward,
     goBack: goBack,
     goForward: goForward,
-    onFinish: onFinish
+    onFinish: onFinish,
+    resetStyles: resetStyles
   })));
 }
 (0,_wordpress_plugins__WEBPACK_IMPORTED_MODULE_5__.registerPlugin)('site-editor-tutorial-plugin', {
@@ -408,7 +409,8 @@ function PageControl(props) {
   const {
     currentPage,
     numberOfPages,
-    setCurrentPage
+    setCurrentPage,
+    resetStyles
   } = props;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
     className: "site-editor-tutorial__page-control",
@@ -425,7 +427,10 @@ function PageControl(props) {
     icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icons__WEBPACK_IMPORTED_MODULE_3__.PageControlIcon, null),
     "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.sprintf)( /* translators: 1: current page number 2: total number of pages */
     (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Page %1$d of %2$d'), page + 1, numberOfPages),
-    onClick: () => setCurrentPage(page)
+    onClick: () => {
+      setCurrentPage(page);
+      resetStyles();
+    }
   }))));
 }
 
@@ -1308,14 +1313,16 @@ function SiteEditorTutorialFooter(props) {
     canGoForward,
     goBack,
     goForward,
-    onFinish
+    onFinish,
+    resetStyles
   } = props;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "site-editor-tutorial__footer"
   }, pages.length > 1 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_page_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
     currentPage: currentPage,
     numberOfPages: pages.length,
-    setCurrentPage: setCurrentPage
+    setCurrentPage: setCurrentPage,
+    resetStyles: resetStyles
   }), ",", canGoBack && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     className: "site-editor-tutorial__back-button",
     variant: "tertiary",

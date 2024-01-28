@@ -272,6 +272,7 @@ function SiteEditorTutorial() {
 					goBack={ goBack }
 					goForward={ goForward }
 					onFinish={ onFinish }
+					resetStyles={ resetStyles }
 				/>
 			</div>
 		</Modal>
