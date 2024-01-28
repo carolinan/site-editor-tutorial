@@ -1,5 +1,5 @@
 /**
- * This file contains the content for the Navigation pages in the Site Editor welcome guide.
+ * This file contains the content for the single (details) Navigation pages in the Site Editor welcome guide.
  */
 
 /**
@@ -7,7 +7,7 @@
  */
 import { __ } from '@wordpress/i18n';
 
-export const navigationPages = [
+export const navigationDetailsPages = [
 	{
 		anchor: '.edit-site-layout__sidebar-region',
 		verticalplacement: 'top',
@@ -20,13 +20,12 @@ export const navigationPages = [
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">
-					{ __( 'Navigation' ) }
+					{ __( 'Navigation Details' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'This navigation menu shows different options depending on how many menus you have on your site.' ) }
-					<br/>
-					{ __( 'It will either show a list of menus, or the details of your main menu, including the menu name, links, and blocks.' ) }
-					<br/>
+					{ __( 'This panel shows the name of your menu, and a list of all its blocks.' ) }
+					<br />
+					{ __( 'Here you can rename, duplicate and delete your menu, and move and remove the blocks. To add new blocks you need to select the Edit option.' ) }
 				</p>
 			</>
 		),
@@ -50,6 +49,8 @@ export const navigationPages = [
 			</>
 		),
 	},
+
+
 	{
 		anchor: '.edit-site-sidebar-navigation-screen__title',
 		verticalplacement: 'bottom',
@@ -64,7 +65,7 @@ export const navigationPages = [
 					{ __( 'Menu name' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'If you have more than one menu on your site, this is the name of the menu you are editing.' ) }
+					{ __( 'This is the name of the menu you are editing.' ) }
 				</p>
 			</>
 		),
@@ -84,14 +85,15 @@ export const navigationPages = [
 				</h1>
 				<p className="edit-site-welcome-guide__text">
 					{ __( 'Under the three dot menu, also known as the actions menu, you can rename, duplicate or delete your menu.' ) }
-					<br />
-					{ __( 'Deleting a menu does not remove the navigation block from your content. Navigation blocks that used the deleted menu are not visible on the front.' ) }
+					<br /><br />
+					{ __( 'When you delete a menu, it is no longer visible on the front of your site.' ) }
 				</p>
 			</>
 		),
 	},
 	{
 		anchor: '.edit-site-sidebar-button',
+		nth: 1,
 		verticalplacement: 'bottom',
 		horizontalplacement: 'none',
 		offsetX: 10,
@@ -104,14 +106,16 @@ export const navigationPages = [
 					{ __( 'Edit' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'Select the edit link (the pen icon) to manage your navigation block settings in the editor.' ) }
+					{ __( 'Select the edit button (the pen icon) to open the navigation block in the editor.' ) }
+					<br />
+					{ __( 'Use this option to change styles or to add new blocks to your menu.' ) }
 				</p>
 			</>
 		),
 	},
 	{
-		anchor: '.block-editor-list-view-block-select-button',
-		verticalplacement: 'bottom',
+		anchor: '.edit-site-sidebar-navigation-screen-navigation-menus__content',
+		verticalplacement: 'top',
 		horizontalplacement: 'right',
 		offsetX: 10,
 		offsetY: 10,
@@ -123,14 +127,35 @@ export const navigationPages = [
 					{ __( 'Menu items' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'These are your menu items. They represent a block or a link to a post or page.' ) }
+					{ __( 'This is the list of all the blocks that you have added to your menu.' ) }
+				</p>
+			</>
+		),
+	},
+	{
+		anchor: '.block-editor-list-view-block-select-button',
+		verticalplacement: 'top',
+		horizontalplacement: 'right',
+		offsetX: -10,
+		offsetY: 10,
+		highlight: true,
+		showArrow: true,
+		content: (
+			<>
+				<h1 className="edit-site-welcome-guide__heading">
+					{ __( 'Menu item' ) }
+				</h1>
+				<p className="edit-site-welcome-guide__text">
+					{ __( 'Each menu item is a block. The icon on the left shows the block type, for example post, page, custom link, or site logo.' ) }
 					<br />
-					{ __( 'An example block that can be placed inside your menu is the site logo.' ) }
+					{ __( 'The text matches the link text in the menu on the front of your site. For example the page title.' ) }
 				</p>
 				<p className="edit-site-welcome-guide__text">
 					{ __( 'You can click and hold the block to move it to another position.' ) }
 					<br />
 					{ __( 'Or, you can use the three dot menu to move or remove the block.' ) }
+					<br /><br />
+					{ __( 'You can expand submenus by clicking on the arrow before the icon.' ) }
 				</p>
 			</>
 		),

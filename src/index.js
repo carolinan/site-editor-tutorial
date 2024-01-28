@@ -10,19 +10,14 @@ import { useState, useEffect, useRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { Modal } from '@wordpress/components';
 import { registerPlugin } from '@wordpress/plugins';
+import { useEntityRecords } from '@wordpress/core-data';
 
 /**
  * Internal dependencies
  */
 import './style.scss';
 import SiteEditorTutorialFooter from './tutorial-footer';
-import { entryPages } from './pages/entry-pages';
-import { navigationPages } from './pages/navigation-pages';
-import { stylesPages } from './pages/styles-pages';
-import { pagesPages } from './pages/pages-pages';
-import { templatesPages } from './pages/templates-pages';
-import { patternsPages } from './pages/patterns-pages';
-import { editorCanvasPages } from './pages/editor-canvas-pages';
+import * as Pages from './pages';
 
 function SiteEditorTutorial() {
 	const ref = useRef( null );
@@ -32,7 +27,7 @@ function SiteEditorTutorial() {
 	const [ styleAttr, setStyleAttributes ] = useState( { opacity: '0' } );
 
 	// Locate the tutorial pages based on the URL.
-	let pages = entryPages;
+	let pages = Pages.entryPages;
 	const href = window.location.href;
 	const path = window.location.pathname;
 
@@ -76,7 +71,21 @@ function SiteEditorTutorial() {
 			 * edit page for a menu that matches the post id.
 			 * It currently loads the default tutorial page which is incorrect.
 			 */
-			pages = navigationPages;
+			const { records, isResolving } = useEntityRecords( 'postType', 'wp_navigation' );
+			let count = 0;
+
+			if ( isResolving ) {
+				pages = Pages.navigationPages;
+			} else if ( records ) {
+				count = records.length;
+				// If there is more than one menu, show the list of menus
+				if ( count > 1 ) {
+					pages = Pages.navigationPages;
+				} else {
+					// If there is only one menu, show the details of the menu.
+					pages = Pages.navigationDetailsPages;
+				}
+			}
 			break;
 		case '/wp_global_styles':
 			/**
@@ -85,26 +94,26 @@ function SiteEditorTutorial() {
 			 * 
 			 * /wp_global_styles is the page with the left hand menu where you preview style variations.
 			 */
-			pages = stylesPages;
+			pages = Pages.stylesPages;
 			break;
 		case '/page':
 			// /page is the page previews and the site editor menu with the list of pages.
 			// /pageedit is the editor page for a page.
-			pages = pagesPages;
+			pages = Pages.pagesPages;
 			break;
 		case '/wp_template':
 			// /wp_templateedit is the editor page for a template.
 			// /wp_template is the preview page for a template.
-			pages = templatesPages;
+			pages = Pages.templatesPages;
 			break;
 		case '/patterns':
-			pages = patternsPages;
+			pages = Pages.patternsPages;
 			break;
 		case 'edit':
-			pages = editorCanvasPages;
+			pages = Pages.editorCanvasPages;
 			break;
 		default:
-			pages = entryPages;
+			pages = Pages.entryPages;
 			break;
 	}
 
