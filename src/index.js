@@ -221,6 +221,7 @@ function SiteEditorTutorial() {
 
 	const onFinish = () => {
 		setIsOpen( false );
+		resetStyles();
 	};
 
 	if ( pages.length === 0 || ! isOpen || path !== '/wp-admin/site-editor.php' ) {
