@@ -495,6 +495,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _command_palette_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../command-palette-button */ "./src/command-palette-button.js");
+/* harmony import */ var _next_steps__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./next-steps */ "./src/pages/next-steps.js");
 
 /**
  * This file contains the content for the initial tutorial pages in the Site Editor welcome guide.
@@ -510,6 +511,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Internal dependencies
  */
+
 
 const entryPages = [{
   anchor: '.interface-interface-skeleton__header',
@@ -773,37 +775,7 @@ const entryPages = [{
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Status messages')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Status messages show information about unsaved changes that are pending review. For example changes to page content, templates or styles.'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(' If the message reads "Saved" then you do not need to take action.')))
-}, {
-  anchor: '.interface-interface-skeleton__header',
-  verticalplacement: 'bottom',
-  horizontalplacement: 'none',
-  offsetX: 40,
-  offsetY: 40,
-  highlight: false,
-  showArrow: false,
-  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
-    className: "edit-site-welcome-guide__heading"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Next steps')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Choose your next tutorial:')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "edit-site-welcome-guide__text"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: "/wp-admin/site-editor.php?path=%2Fnavigation",
-    className: "components-button is-primary"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation')), "\xA0", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: "/wp-admin/site-editor.php?path=%2Fwp_global_styles",
-    className: "components-button is-primary"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Styles')), "\xA0", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: "/wp-admin/site-editor.php?path=%2Fpage",
-    className: "components-button is-primary"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Pages')), "\xA0", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: "/wp-admin/site-editor.php?path=%2Fwp_template",
-    className: "components-button is-primary"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Templates')), "\xA0", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: "/wp-admin/site-editor.php?path=%2Fpatterns",
-    className: "components-button is-primary"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Patterns')), "\xA0"))
-}];
+}, _next_steps__WEBPACK_IMPORTED_MODULE_4__.nextSteps];
 
 /***/ }),
 
@@ -1108,6 +1080,60 @@ const navigationPages = [{
     className: "edit-site-welcome-guide__text"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can click and hold the block to move it to another position.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Or, you can use the three dot menu to move or remove the block.')))
 }];
+
+/***/ }),
+
+/***/ "./src/pages/next-steps.js":
+/*!*********************************!*\
+  !*** ./src/pages/next-steps.js ***!
+  \*********************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   nextSteps: function() { return /* binding */ nextSteps; }
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+
+/**
+ * WordPress dependencies
+ */
+
+const nextSteps = {
+  anchor: '.interface-interface-skeleton__header',
+  verticalplacement: 'bottom',
+  horizontalplacement: 'none',
+  offsetX: 40,
+  offsetY: 40,
+  highlight: false,
+  showArrow: false,
+  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "edit-site-welcome-guide__heading"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Next steps')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Choose your next tutorial:')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "/wp-admin/site-editor.php?path=%2Fnavigation",
+    className: "components-button is-primary"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation')), "\xA0", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "/wp-admin/site-editor.php?path=%2Fwp_global_styles",
+    className: "components-button is-primary"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Styles')), "\xA0", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "/wp-admin/site-editor.php?path=%2Fpage",
+    className: "components-button is-primary"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Pages')), "\xA0", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "/wp-admin/site-editor.php?path=%2Fwp_template",
+    className: "components-button is-primary"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Templates')), "\xA0", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "/wp-admin/site-editor.php?path=%2Fpatterns",
+    className: "components-button is-primary"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Patterns')), "\xA0"))
+};
 
 /***/ }),
 
