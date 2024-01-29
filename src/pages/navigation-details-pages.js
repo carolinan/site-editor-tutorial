@@ -39,10 +39,11 @@ export const navigationDetailsPages = [
 		anchor: '.edit-site-sidebar-button',
 		verticalplacement: 'bottom',
 		horizontalplacement: 'none',
-		offsetX: 10,
+		offsetX: 0,
 		offsetY: 10,
 		highlight: true,
 		showArrow: true,
+		arrowPosition: 'top-left',
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">
@@ -54,16 +55,15 @@ export const navigationDetailsPages = [
 			</>
 		),
 	},
-
-
 	{
 		anchor: '.edit-site-sidebar-navigation-screen__title',
 		verticalplacement: 'bottom',
 		horizontalplacement: 'none',
 		offsetX: 10,
-		offsetY: 10,
+		offsetY: 20,
 		highlight: true,
 		showArrow: true,
+		arrowPosition: 'top-left',
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">
@@ -79,10 +79,11 @@ export const navigationDetailsPages = [
 		anchor: '.sidebar-navigation__more-menu button',
 		verticalplacement: 'bottom',
 		horizontalplacement: 'none',
-		offsetX: 10,
-		offsetY: 10,
+		offsetX: -3,
+		offsetY: 20,
 		highlight: true,
 		showArrow: true,
+		arrowPosition: 'top-left',
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">
@@ -101,10 +102,11 @@ export const navigationDetailsPages = [
 		nth: 1,
 		verticalplacement: 'bottom',
 		horizontalplacement: 'none',
-		offsetX: 10,
-		offsetY: 10,
+		offsetX: -3,
+		offsetY: 20,
 		highlight: true,
 		showArrow: true,
+		arrowPosition: 'top-left',
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">
@@ -126,6 +128,7 @@ export const navigationDetailsPages = [
 		offsetY: 10,
 		highlight: true,
 		showArrow: true,
+		arrowPosition: 'left',
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">
@@ -138,13 +141,14 @@ export const navigationDetailsPages = [
 		),
 	},
 	{
-		anchor: '.block-editor-list-view-block-select-button',
+		anchor: '.block-editor-list-view-leaf',
 		verticalplacement: 'top',
 		horizontalplacement: 'right',
-		offsetX: -10,
-		offsetY: 10,
+		offsetX: 30,
+		offsetY: 0,
 		highlight: true,
 		showArrow: true,
+		arrowPosition: 'left',
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">
@@ -161,6 +165,27 @@ export const navigationDetailsPages = [
 					{ __( 'Or, you can use the three dot menu to move or remove the block.' ) }
 					<br /><br />
 					{ __( 'You can expand submenus by clicking on the arrow before the icon.' ) }
+				</p>
+			</>
+		),
+	},
+	{
+		anchor: '.edit-site-save-hub',
+		verticalplacement: 'top',
+		horizontalplacement: 'left',
+		offsetX: 10,
+		offsetY: -220,
+		highlight: true,
+		showArrow: true,
+		arrowPosition: 'bottom-left',
+		content: (
+			<>
+				<h1 className="edit-site-welcome-guide__heading">
+					{ __( 'Status messages' ) }
+				</h1>
+				<p className="edit-site-welcome-guide__text">
+					{ __( 'Status messages show information about unsaved changes that are pending review. For example if you have moved a menu item.' ) }
+					{ __( ' If the message reads "Saved" then you do not need to take action.' ) }
 				</p>
 			</>
 		),

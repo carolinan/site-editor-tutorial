@@ -256,7 +256,11 @@ function SiteEditorTutorial() {
     } else if (highlightType === 'boxShadow') {
       anchor.style.boxShadow = `inset 0 0 0 6px ${borderColor}`;
     }
+    //anchor.style.position = 'relative'; // Add position: relative
+    //anchor.style.zIndex = '2147483647'; // Change the z-index to move the element up
+    //anchor.setAttribute('tabindex', '1'); // Add tabindex dynamically
   }
+
   const resetStyles = () => {
     let anchor = document.querySelector(pages[currentPage].anchor);
     const nth = pages[currentPage].nth;
@@ -869,10 +873,11 @@ const navigationDetailsPages = [{
   anchor: '.edit-site-sidebar-button',
   verticalplacement: 'bottom',
   horizontalplacement: 'none',
-  offsetX: 10,
+  offsetX: 0,
   offsetY: 10,
   highlight: true,
   showArrow: true,
+  arrowPosition: 'top-left',
   content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('The back button')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
@@ -883,9 +888,10 @@ const navigationDetailsPages = [{
   verticalplacement: 'bottom',
   horizontalplacement: 'none',
   offsetX: 10,
-  offsetY: 10,
+  offsetY: 20,
   highlight: true,
   showArrow: true,
+  arrowPosition: 'top-left',
   content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Menu name')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
@@ -895,10 +901,11 @@ const navigationDetailsPages = [{
   anchor: '.sidebar-navigation__more-menu button',
   verticalplacement: 'bottom',
   horizontalplacement: 'none',
-  offsetX: 10,
-  offsetY: 10,
+  offsetX: -3,
+  offsetY: 20,
   highlight: true,
   showArrow: true,
+  arrowPosition: 'top-left',
   content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation Actions menu')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
@@ -909,10 +916,11 @@ const navigationDetailsPages = [{
   nth: 1,
   verticalplacement: 'bottom',
   horizontalplacement: 'none',
-  offsetX: 10,
-  offsetY: 10,
+  offsetX: -3,
+  offsetY: 20,
   highlight: true,
   showArrow: true,
+  arrowPosition: 'top-left',
   content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Edit')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
@@ -926,19 +934,21 @@ const navigationDetailsPages = [{
   offsetY: 10,
   highlight: true,
   showArrow: true,
+  arrowPosition: 'left',
   content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Menu items')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This is the list of all the blocks that you have added to your menu.')))
 }, {
-  anchor: '.block-editor-list-view-block-select-button',
+  anchor: '.block-editor-list-view-leaf',
   verticalplacement: 'top',
   horizontalplacement: 'right',
-  offsetX: -10,
-  offsetY: 10,
+  offsetX: 30,
+  offsetY: 0,
   highlight: true,
   showArrow: true,
+  arrowPosition: 'left',
   content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Menu item')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
@@ -946,6 +956,20 @@ const navigationDetailsPages = [{
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Each menu item is a block. The icon on the left shows the block type, for example post, page, custom link, or site logo.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('The text matches the link text in the menu on the front of your site. For example the page title.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can click and hold the block to move it to another position.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Or, you can use the three dot menu to move or remove the block.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can expand submenus by clicking on the arrow before the icon.')))
+}, {
+  anchor: '.edit-site-save-hub',
+  verticalplacement: 'top',
+  horizontalplacement: 'left',
+  offsetX: 10,
+  offsetY: -220,
+  highlight: true,
+  showArrow: true,
+  arrowPosition: 'bottom-left',
+  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "edit-site-welcome-guide__heading"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Status messages')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Status messages show information about unsaved changes that are pending review. For example if you have moved a menu item.'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(' If the message reads "Saved" then you do not need to take action.')))
 }, _next_steps__WEBPACK_IMPORTED_MODULE_2__.nextSteps];
 
 /***/ }),
@@ -987,74 +1011,35 @@ const navigationPages = [{
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This navigation menu shows different options depending on how many menus you have on your site.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('It will either show a list of menus, or the details of your main menu, including the menu name, links, and blocks.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null)))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This panel shows a list of all the menus on your site.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Your menus are separate from your navigation blocks. A menu can be used in more than one navigation block.')))
 }, {
   anchor: '.edit-site-sidebar-button',
   verticalplacement: 'bottom',
   horizontalplacement: 'none',
-  offsetX: 10,
+  offsetX: 0,
   offsetY: 10,
   highlight: true,
   showArrow: true,
+  arrowPosition: 'top-left',
   content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('The back button')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This button takes you back one level in the sidebar menu.')))
 }, {
-  anchor: '.edit-site-sidebar-navigation-screen__title',
-  verticalplacement: 'bottom',
-  horizontalplacement: 'none',
-  offsetX: 10,
-  offsetY: 10,
-  highlight: true,
-  showArrow: true,
-  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
-    className: "edit-site-welcome-guide__heading"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Menu name')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('If you have more than one menu on your site, this is the name of the menu you are editing.')))
-}, {
-  anchor: '.sidebar-navigation__more-menu button',
-  verticalplacement: 'bottom',
-  horizontalplacement: 'none',
-  offsetX: 10,
-  offsetY: 10,
-  highlight: true,
-  showArrow: true,
-  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
-    className: "edit-site-welcome-guide__heading"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation Actions menu')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Under the three dot menu, also known as the actions menu, you can rename, duplicate or delete your menu.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Deleting a menu does not remove the navigation block from your content. Navigation blocks that used the deleted menu are not visible on the front.')))
-}, {
-  anchor: '.edit-site-sidebar-button',
-  verticalplacement: 'bottom',
-  horizontalplacement: 'none',
-  offsetX: 10,
-  offsetY: 10,
-  highlight: true,
-  showArrow: true,
-  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
-    className: "edit-site-welcome-guide__heading"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Edit')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Select the edit link (the pen icon) to manage your navigation block settings in the editor.')))
-}, {
-  anchor: '.block-editor-list-view-block-select-button',
-  verticalplacement: 'bottom',
+  anchor: '.components-item-group',
+  verticalplacement: 'top',
   horizontalplacement: 'right',
   offsetX: 10,
   offsetY: 10,
   highlight: true,
   showArrow: true,
+  arrowPosition: 'left',
   content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     className: "edit-site-welcome-guide__heading"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Menu items')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Menus')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('These are your menu items. They represent a block or a link to a post or page.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('An example block that can be placed inside your menu is the site logo.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can click and hold the block to move it to another position.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Or, you can use the three dot menu to move or remove the block.')))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('These are your menus. Click on a menu to open it.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null)))
 }];
 
 /***/ }),

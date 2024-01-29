@@ -23,10 +23,9 @@ export const navigationPages = [
 					{ __( 'Navigation' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'This navigation menu shows different options depending on how many menus you have on your site.' ) }
-					<br/>
-					{ __( 'It will either show a list of menus, or the details of your main menu, including the menu name, links, and blocks.' ) }
-					<br/>
+					{ __( 'This panel shows a list of all the menus on your site.' ) }
+					<br /><br />
+					{ __( 'Your menus are separate from your navigation blocks. A menu can be used in more than one navigation block.' ) }
 				</p>
 			</>
 		),
@@ -35,10 +34,11 @@ export const navigationPages = [
 		anchor: '.edit-site-sidebar-button',
 		verticalplacement: 'bottom',
 		horizontalplacement: 'none',
-		offsetX: 10,
+		offsetX: 0,
 		offsetY: 10,
 		highlight: true,
 		showArrow: true,
+		arrowPosition: 'top-left',
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">
@@ -51,86 +51,22 @@ export const navigationPages = [
 		),
 	},
 	{
-		anchor: '.edit-site-sidebar-navigation-screen__title',
-		verticalplacement: 'bottom',
-		horizontalplacement: 'none',
-		offsetX: 10,
-		offsetY: 10,
-		highlight: true,
-		showArrow: true,
-		content: (
-			<>
-				<h1 className="edit-site-welcome-guide__heading">
-					{ __( 'Menu name' ) }
-				</h1>
-				<p className="edit-site-welcome-guide__text">
-					{ __( 'If you have more than one menu on your site, this is the name of the menu you are editing.' ) }
-				</p>
-			</>
-		),
-	},
-	{
-		anchor: '.sidebar-navigation__more-menu button',
-		verticalplacement: 'bottom',
-		horizontalplacement: 'none',
-		offsetX: 10,
-		offsetY: 10,
-		highlight: true,
-		showArrow: true,
-		content: (
-			<>
-				<h1 className="edit-site-welcome-guide__heading">
-					{ __( 'Navigation Actions menu' ) }
-				</h1>
-				<p className="edit-site-welcome-guide__text">
-					{ __( 'Under the three dot menu, also known as the actions menu, you can rename, duplicate or delete your menu.' ) }
-					<br />
-					{ __( 'Deleting a menu does not remove the navigation block from your content. Navigation blocks that used the deleted menu are not visible on the front.' ) }
-				</p>
-			</>
-		),
-	},
-	{
-		anchor: '.edit-site-sidebar-button',
-		verticalplacement: 'bottom',
-		horizontalplacement: 'none',
-		offsetX: 10,
-		offsetY: 10,
-		highlight: true,
-		showArrow: true,
-		content: (
-			<>
-				<h1 className="edit-site-welcome-guide__heading">
-					{ __( 'Edit' ) }
-				</h1>
-				<p className="edit-site-welcome-guide__text">
-					{ __( 'Select the edit link (the pen icon) to manage your navigation block settings in the editor.' ) }
-				</p>
-			</>
-		),
-	},
-	{
-		anchor: '.block-editor-list-view-block-select-button',
-		verticalplacement: 'bottom',
+		anchor: '.components-item-group',
+		verticalplacement: 'top',
 		horizontalplacement: 'right',
 		offsetX: 10,
 		offsetY: 10,
 		highlight: true,
 		showArrow: true,
+		arrowPosition: 'left',
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">
-					{ __( 'Menu items' ) }
+					{ __( 'Menus' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'These are your menu items. They represent a block or a link to a post or page.' ) }
+					{ __( 'These are your menus. Click on a menu to open it.' ) }
 					<br />
-					{ __( 'An example block that can be placed inside your menu is the site logo.' ) }
-				</p>
-				<p className="edit-site-welcome-guide__text">
-					{ __( 'You can click and hold the block to move it to another position.' ) }
-					<br />
-					{ __( 'Or, you can use the three dot menu to move or remove the block.' ) }
 				</p>
 			</>
 		),
