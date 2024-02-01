@@ -26,7 +26,10 @@ function SiteEditorTutorial() {
 	// Set opacity to 0 to prevent layout shifts:
 	const [ styleAttr, setStyleAttributes ] = useState( { opacity: '0' } );
 
-	// Locate the tutorial pages based on the URL.
+	/*
+	 * This would have been easier if I could have just used useLocation() but its private.
+	 * Locate the tutorial pages based on the URL.
+	 */
 	let pages = Pages.entryPages;
 	const href = window.location.href;
 	const path = window.location.pathname;
@@ -222,9 +225,11 @@ function SiteEditorTutorial() {
 
 				setStyleAttributes( newStyle );
 
+				/*
 				if ( pages[ currentPage ]?.name == 'navigationPages' ) {
 					removeOverlay();
 				}
+				*/
 			} else {
 				// If the anchor is not found, try waiting a little longer...
 				setTimeout( createStyleAttributes, 100 );
