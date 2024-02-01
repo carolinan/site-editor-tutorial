@@ -20,8 +20,8 @@ export const entryPages = [
 		anchor: '.interface-interface-skeleton__header',
 		verticalplacement: 'bottom',
 		horizontalplacement: 'none',
-		offsetX: 40,
-		offsetY: 40,
+		offsetX: 20,
+		offsetY: 20,
 		highlight: false,
 		showArrow: false,
 		content: (

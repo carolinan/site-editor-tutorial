@@ -24,7 +24,7 @@ function SiteEditorTutorial() {
 	const [ isOpen, setIsOpen ] = useState( true );
 	const [ currentPage, setCurrentPage ] = useState( 0 );
 	// Set opacity to 0 to prevent layout shifts:
-	const [ styleAttr, setStyleAttributes ] = useState( { opacity: '0' } );
+	const [ styleAttr, setStyleAttributes ] = useState( { opacity: '1', display: 'block' } );
 
 	/*
 	 * This would have been easier if I could have just used useLocation() but its private.
@@ -204,37 +204,32 @@ function SiteEditorTutorial() {
 		};
 
 		const createStyleAttributes = () => {
-			const anchor = getAnchorElement();
-			// Position the modal based on the anchor element.
-			if ( anchor ) {
-				const { offsetX, offsetY } = pages[ currentPage ];
-				const { top, left } = getPosition( anchor, offsetX, offsetY );
-
-				const newStyle = {
-					position: 'absolute',
-					opacity: '1', // Set opacity back to 1.
-					top,
-					left,
-				};
-
-				// Add border or box shadow styles to highlight the targeted element.
-				if ( pages[ currentPage ].highlightborder || pages[ currentPage ].highlight ) {
-					const styleProperty = pages[ currentPage ].highlightborder ? 'border' : 'boxShadow';
-					applyStyles( anchor, styleProperty );
+			const updateStyles = () => {
+				const anchor = getAnchorElement();
+			
+				if ( anchor ) {
+					const { offsetX, offsetY } = pages[ currentPage ];
+					const { top, left } = getPosition( anchor, offsetX, offsetY );
+			
+					const newStyle = {
+						position: 'absolute',
+						top,
+						left,
+					};
+			
+					// Add border or box shadow styles to highlight the targeted element.
+					if ( pages[ currentPage ].highlightborder || pages[ currentPage ].highlight ) {
+						const styleProperty = pages[ currentPage ].highlightborder ? 'border' : 'boxShadow';
+						applyStyles( anchor, styleProperty );
+					}
+			
+					setStyleAttributes( newStyle );
 				}
+			};
 
-				setStyleAttributes( newStyle );
-
-				/*
-				if ( pages[ currentPage ]?.name == 'navigationPages' ) {
-					removeOverlay();
-				}
-				*/
-			} else {
-				// If the anchor is not found, try waiting a little longer...
-				setTimeout( createStyleAttributes, 100 );
-			}
+			requestAnimationFrame( updateStyles );
 		};
+
 		createStyleAttributes();
 	}, [ currentPage, pages ] );
 

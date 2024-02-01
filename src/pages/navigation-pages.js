@@ -11,7 +11,7 @@ export const navigationPages = [
 	{
 		anchor: '.edit-site-layout__sidebar-region',
 		name: 'navigationPages',
-		verticalplacement: 'top',
+		verticalplacement: 'middle',
 		horizontalplacement: 'right',
 		offsetX: 10,
 		offsetY: 10,

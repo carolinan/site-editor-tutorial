@@ -135,7 +135,8 @@ function SiteEditorTutorial() {
   const [currentPage, setCurrentPage] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)(0);
   // Set opacity to 0 to prevent layout shifts:
   const [styleAttr, setStyleAttributes] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)({
-    opacity: '0'
+    opacity: '1',
+    display: 'block'
   });
 
   /*
@@ -303,41 +304,32 @@ function SiteEditorTutorial() {
       };
     };
     const createStyleAttributes = () => {
-      const anchor = getAnchorElement();
-      // Position the modal based on the anchor element.
-      if (anchor) {
-        const {
-          offsetX,
-          offsetY
-        } = pages[currentPage];
-        const {
-          top,
-          left
-        } = getPosition(anchor, offsetX, offsetY);
-        const newStyle = {
-          position: 'absolute',
-          opacity: '1',
-          // Set opacity back to 1.
-          top,
-          left
-        };
+      const updateStyles = () => {
+        const anchor = getAnchorElement();
+        if (anchor) {
+          const {
+            offsetX,
+            offsetY
+          } = pages[currentPage];
+          const {
+            top,
+            left
+          } = getPosition(anchor, offsetX, offsetY);
+          const newStyle = {
+            position: 'absolute',
+            top,
+            left
+          };
 
-        // Add border or box shadow styles to highlight the targeted element.
-        if (pages[currentPage].highlightborder || pages[currentPage].highlight) {
-          const styleProperty = pages[currentPage].highlightborder ? 'border' : 'boxShadow';
-          applyStyles(anchor, styleProperty);
+          // Add border or box shadow styles to highlight the targeted element.
+          if (pages[currentPage].highlightborder || pages[currentPage].highlight) {
+            const styleProperty = pages[currentPage].highlightborder ? 'border' : 'boxShadow';
+            applyStyles(anchor, styleProperty);
+          }
+          setStyleAttributes(newStyle);
         }
-        setStyleAttributes(newStyle);
-
-        /*
-        if ( pages[ currentPage ]?.name == 'navigationPages' ) {
-        	removeOverlay();
-        }
-        */
-      } else {
-        // If the anchor is not found, try waiting a little longer...
-        setTimeout(createStyleAttributes, 100);
-      }
+      };
+      requestAnimationFrame(updateStyles);
     };
     createStyleAttributes();
   }, [currentPage, pages]);
@@ -535,8 +527,8 @@ const entryPages = [{
   anchor: '.interface-interface-skeleton__header',
   verticalplacement: 'bottom',
   horizontalplacement: 'none',
-  offsetX: 40,
-  offsetY: 40,
+  offsetX: 20,
+  offsetY: 20,
   highlight: false,
   showArrow: false,
   content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
@@ -1016,7 +1008,7 @@ __webpack_require__.r(__webpack_exports__);
 const navigationPages = [{
   anchor: '.edit-site-layout__sidebar-region',
   name: 'navigationPages',
-  verticalplacement: 'top',
+  verticalplacement: 'middle',
   horizontalplacement: 'right',
   offsetX: 10,
   offsetY: 10,
