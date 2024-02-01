@@ -161,6 +161,7 @@ function SiteEditorTutorial() {
    * in the preview mode where the navigation menu is shown.
   */
   const canvasParam = getQueryParamValue(href, 'canvas') || '';
+  const postIDParam = getQueryParamValue(href, 'postId') || '';
 
   // Combine the parameters
   const pageSelector = pathParam + postTypeParam + canvasParam;
@@ -169,31 +170,32 @@ function SiteEditorTutorial() {
   console.log('pathParam: ', pathParam);
   console.log('postTypeParam: ', postTypeParam);
   console.log('canvasParam: ', canvasParam);
+  console.log('postIDParam: ', postIDParam);
   console.log('pageSelector: ', pageSelector);
   switch (pageSelector) {
     case '/navigation':
-      /**
-       * /navigation is the page with the left hand menu where you manage menus.
-       *
-       * TODO: // wp-admin/site-editor.php?postId=906&postType=wp_navigation is the 
-       * edit page for a menu that matches the post id.
-       * It currently loads the default tutorial page which is incorrect.
-       */
-      const {
-        records,
-        isResolving
-      } = (0,_wordpress_core_data__WEBPACK_IMPORTED_MODULE_6__.useEntityRecords)('postType', 'wp_navigation');
-      let count = 0;
-      if (isResolving) {
-        pages = _pages__WEBPACK_IMPORTED_MODULE_9__.navigationPages;
-      } else if (records) {
-        count = records.length;
-        // If there is more than one menu, show the list of menus
-        if (count > 1) {
+    case 'wp_navigation':
+      if (postIDParam) {
+        // If the post id is set, we are in the editor for a specific menu.
+        console.log('postIDParam: ', postIDParam);
+        pages = _pages__WEBPACK_IMPORTED_MODULE_9__.navigationDetailsPages;
+      } else {
+        const {
+          records,
+          isResolving
+        } = (0,_wordpress_core_data__WEBPACK_IMPORTED_MODULE_6__.useEntityRecords)('postType', 'wp_navigation');
+        let count = 0;
+        if (isResolving) {
           pages = _pages__WEBPACK_IMPORTED_MODULE_9__.navigationPages;
-        } else {
-          // If there is only one menu, show the details of the menu.
-          pages = _pages__WEBPACK_IMPORTED_MODULE_9__.navigationDetailsPages;
+        } else if (records) {
+          count = records.length;
+          // If there is more than one menu, show the list of menus
+          if (count > 1) {
+            pages = _pages__WEBPACK_IMPORTED_MODULE_9__.navigationPages;
+          } else {
+            // If there is only one menu, show the details of the menu.
+            pages = _pages__WEBPACK_IMPORTED_MODULE_9__.navigationDetailsPages;
+          }
         }
       }
       break;
@@ -223,6 +225,7 @@ function SiteEditorTutorial() {
       pages = _pages__WEBPACK_IMPORTED_MODULE_9__.editorCanvasPages;
       break;
     default:
+      console.log('default');
       pages = _pages__WEBPACK_IMPORTED_MODULE_9__.entryPages;
       break;
   }
@@ -256,11 +259,7 @@ function SiteEditorTutorial() {
     } else if (highlightType === 'boxShadow') {
       anchor.style.boxShadow = `inset 0 0 0 6px ${borderColor}`;
     }
-    //anchor.style.position = 'relative'; // Add position: relative
-    //anchor.style.zIndex = '2147483647'; // Change the z-index to move the element up
-    //anchor.setAttribute('tabindex', '1'); // Add tabindex dynamically
   }
-
   const resetStyles = () => {
     let anchor = document.querySelector(pages[currentPage].anchor);
     const nth = pages[currentPage].nth;
@@ -276,6 +275,12 @@ function SiteEditorTutorial() {
         anchor.style.border = '';
         anchor.style.boxShadow = '';
       }
+    }
+  };
+  const removeOverlay = () => {
+    const overlay = document.querySelector('.components-modal__screen-overlay:has(.site-editor-tutorial)');
+    if (overlay) {
+      overlay.style.position = 'initial';
     }
   };
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
@@ -320,6 +325,9 @@ function SiteEditorTutorial() {
           applyStyles(anchor, styleProperty);
         }
         setStyleAttributes(newStyle);
+        if (pages[currentPage]?.name == 'navigationPages') {
+          removeOverlay();
+        }
       } else {
         // If the anchor is not found, try waiting a little longer...
         setTimeout(createStyleAttributes, 100);
@@ -857,6 +865,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const navigationDetailsPages = [{
   anchor: '.edit-site-layout__sidebar-region',
+  name: 'navigationDetailsPages',
   verticalplacement: 'top',
   horizontalplacement: 'right',
   offsetX: 10,
@@ -1000,6 +1009,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const navigationPages = [{
   anchor: '.edit-site-layout__sidebar-region',
+  name: 'navigationPages',
   verticalplacement: 'top',
   horizontalplacement: 'right',
   offsetX: 10,
@@ -1011,35 +1021,7 @@ const navigationPages = [{
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This panel shows a list of all the menus on your site.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Your menus are separate from your navigation blocks. A menu can be used in more than one navigation block.')))
-}, {
-  anchor: '.edit-site-sidebar-button',
-  verticalplacement: 'bottom',
-  horizontalplacement: 'none',
-  offsetX: 0,
-  offsetY: 10,
-  highlight: true,
-  showArrow: true,
-  arrowPosition: 'top-left',
-  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
-    className: "edit-site-welcome-guide__heading"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('The back button')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This button takes you back one level in the sidebar menu.')))
-}, {
-  anchor: '.components-item-group',
-  verticalplacement: 'top',
-  horizontalplacement: 'right',
-  offsetX: 10,
-  offsetY: 10,
-  highlight: true,
-  showArrow: true,
-  arrowPosition: 'left',
-  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
-    className: "edit-site-welcome-guide__heading"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Menus')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('These are your menus. Click on a menu to open it.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null)))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This panel shows a list of all the menus on your site.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Your menus are separate from your navigation blocks. A menu can be used in more than one navigation block.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Click on a menu to open it.')))
 }];
 
 /***/ }),

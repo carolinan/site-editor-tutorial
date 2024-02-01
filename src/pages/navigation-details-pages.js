@@ -15,6 +15,7 @@ import { nextSteps } from './next-steps';
 export const navigationDetailsPages = [
 	{
 		anchor: '.edit-site-layout__sidebar-region',
+		name: 'navigationDetailsPages',
 		verticalplacement: 'top',
 		horizontalplacement: 'right',
 		offsetX: 10,

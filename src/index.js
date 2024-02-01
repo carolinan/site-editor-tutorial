@@ -51,6 +51,8 @@ function SiteEditorTutorial() {
 	*/
 	const canvasParam = getQueryParamValue( href, 'canvas' ) || '';
 
+	const postIDParam = getQueryParamValue( href, 'postId' ) || '';
+
 	// Combine the parameters
 	const pageSelector = pathParam + postTypeParam + canvasParam;
 
@@ -59,31 +61,31 @@ function SiteEditorTutorial() {
 	console.log( 'pathParam: ', pathParam );
 	console.log( 'postTypeParam: ', postTypeParam );
 	console.log( 'canvasParam: ', canvasParam );
-
+	console.log( 'postIDParam: ', postIDParam );
 	console.log( 'pageSelector: ', pageSelector );
 
 	switch ( pageSelector ) {
 		case '/navigation':
-			/**
-			 * /navigation is the page with the left hand menu where you manage menus.
-			 *
-			 * TODO: // wp-admin/site-editor.php?postId=906&postType=wp_navigation is the 
-			 * edit page for a menu that matches the post id.
-			 * It currently loads the default tutorial page which is incorrect.
-			 */
-			const { records, isResolving } = useEntityRecords( 'postType', 'wp_navigation' );
-			let count = 0;
+		case 'wp_navigation':
+			if ( postIDParam ) {
+				// If the post id is set, we are in the editor for a specific menu.
+				console.log( 'postIDParam: ', postIDParam );
+				pages = Pages.navigationDetailsPages;
+			} else {
+				const { records, isResolving } = useEntityRecords( 'postType', 'wp_navigation' );
+				let count = 0;
 
-			if ( isResolving ) {
-				pages = Pages.navigationPages;
-			} else if ( records ) {
-				count = records.length;
-				// If there is more than one menu, show the list of menus
-				if ( count > 1 ) {
+				if ( isResolving ) {
 					pages = Pages.navigationPages;
-				} else {
-					// If there is only one menu, show the details of the menu.
-					pages = Pages.navigationDetailsPages;
+				} else if ( records ) {
+					count = records.length;
+					// If there is more than one menu, show the list of menus
+					if ( count > 1 ) {
+						pages = Pages.navigationPages;
+					} else {
+						// If there is only one menu, show the details of the menu.
+						pages = Pages.navigationDetailsPages;
+					}
 				}
 			}
 			break;
@@ -113,6 +115,7 @@ function SiteEditorTutorial() {
 			pages = Pages.editorCanvasPages;
 			break;
 		default:
+			console.log( 'default' );
 			pages = Pages.entryPages;
 			break;
 	}
@@ -169,6 +172,13 @@ function SiteEditorTutorial() {
 		}
 	};
 
+	const removeOverlay = () => {
+		const overlay = document.querySelector( '.components-modal__screen-overlay:has(.site-editor-tutorial)' );
+		if ( overlay ) {
+			overlay.style.position = 'initial';
+		}
+	};
+
 	useEffect( () => {
 		const getAnchorElement = () => {
 			const anchor = document.querySelector( pages[ currentPage ].anchor );
@@ -211,6 +221,10 @@ function SiteEditorTutorial() {
 				}
 
 				setStyleAttributes( newStyle );
+
+				if ( pages[ currentPage ]?.name == 'navigationPages' ) {
+					removeOverlay();
+				}
 			} else {
 				// If the anchor is not found, try waiting a little longer...
 				setTimeout( createStyleAttributes, 100 );
