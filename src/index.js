@@ -206,17 +206,17 @@ function SiteEditorTutorial() {
 		const createStyleAttributes = () => {
 			const updateStyles = () => {
 				const anchor = getAnchorElement();
-			
+
 				if ( anchor ) {
 					const { offsetX, offsetY } = pages[ currentPage ];
 					const { top, left } = getPosition( anchor, offsetX, offsetY );
-			
+
 					const newStyle = {
 						position: 'absolute',
 						top,
 						left,
 					};
-			
+
 					// Add border or box shadow styles to highlight the targeted element.
 					if ( pages[ currentPage ].highlightborder || pages[ currentPage ].highlight ) {
 						const styleProperty = pages[ currentPage ].highlightborder ? 'border' : 'boxShadow';
@@ -224,6 +224,12 @@ function SiteEditorTutorial() {
 					}
 			
 					setStyleAttributes( newStyle );
+
+					// Remove the overlay when the navigationPages are shown.
+					if ( pages[ currentPage ]?.name == 'navigationPages' ) {
+						removeOverlay();
+					}
+				
 				}
 			};
 

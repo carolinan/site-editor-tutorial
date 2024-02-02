@@ -327,6 +327,11 @@ function SiteEditorTutorial() {
             applyStyles(anchor, styleProperty);
           }
           setStyleAttributes(newStyle);
+
+          // Remove the overlay when the navigationPages are shown.
+          if (pages[currentPage]?.name == 'navigationPages') {
+            removeOverlay();
+          }
         }
       };
       requestAnimationFrame(updateStyles);
