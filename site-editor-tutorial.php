@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Site Editor Tutorial
  * Description:       A tutorial for the Site Editor.
- * Requires at least: 6.1
+ * Requires at least: 6.4
  * Requires PHP:      7.0
  * Version:           0.1.0
  * Author:            Carolina
@@ -12,12 +12,6 @@
  *
  * @package           create-block
  */
-
-/*
-https://floating-ui.com/docs/react#positioning
-/gutenberg/packages/components/src/popover/index.tsx
-https://github.com/WordPress/gutenberg/pull/43691
-*/
 
 function site_editor_tutorial_scripts_and_styles() {
 	wp_enqueue_script(
