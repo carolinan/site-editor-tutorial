@@ -1,32 +1,56 @@
+/**
+ * WordPress dependencies
+ */
+// Note: Unlocking private API's require using the current version of Gutenberg!
+// See src/unlock.js for more information.
+import { privateApis as routerPrivateApis } from '@wordpress/router';
+import { unlock } from './unlock';
+const { useLocation } = unlock( routerPrivateApis );
 
-export const selectPages = ( Pages, pageSelector, postIDParam, records, isResolving ) => {
-	/*
-	* This would have been easier if I could have just used useLocation()
-	* and useHistory() but they are private.
-	* Locate the tutorial pages based on the URL.
-	*/
-	let pages = '';
+export const selectPages = ( Pages, records, isResolving ) => {
+	
+	let screen = '';
+	let tutorials = '';
 
-	switch ( pageSelector ) {
+	 // Get the current location
+	const location = useLocation();
+	const search = location.search;
+	const params = new URLSearchParams(search);
+	const postID = params.get('postId');
+	const canvas = params.get('canvas');
+	let path = params.get('path');
+
+	// Currently unused, but likely to be needed when more tutorials pages are added.
+	// const postType = params.get('postType');
+	// const pathname = location.pathname;
+
+	if ( ! path && ! canvas ) {
+		console.log(' page-selector.js: No path or canvas');
+		path = 'entryPages';
+	}
+
+	switch ( path ) {
 		case '/navigation':
 		case 'wp_navigation':
-			if ( postIDParam ) {
+			if ( postID ) {
 				// If the post id is set, we are in the editor for a specific menu.
-				pages = Pages.navigationDetailsPages;
+				tutorials = Pages.navigationDetailsPages;
+				screen = 'navigationDetailsPages';
 			} else {
-				let count = 0;
-
 				if ( isResolving ) {
-					pages = Pages.navigationPages;
+					tutorials = Pages.navigationPages;
+					screen = 'navigationPages';
 				} else if (records && records.length !== undefined) {
-					count = records.length;
+					const count = records.length;
 					// If there is more than one menu, show the list of menus
-					if ( count > 1 ) {
-						pages = Pages.navigationPages;
-					} else {
+					if ( count === 1 ) {
 						// If there is only one menu, show the details of the menu.
-						pages = Pages.navigationDetailsPages;
+						tutorials = Pages.navigationDetailsPages;
+						screen = 'navigationDetailsPages';
 					}
+				} else { 
+					tutorials = Pages.navigationPages;
+					screen = 'navigationPages';
 				}
 			}
 			break;
@@ -37,26 +61,32 @@ export const selectPages = ( Pages, pageSelector, postIDParam, records, isResolv
 			 * 
 			 * /wp_global_styles is the page with the left hand menu where you preview style variations.
 			 */
-			pages = Pages.stylesPages;
+			tutorials = Pages.stylesPages;
+			screen = 'stylesPages';
 			break;
 		case '/page':
 			// /page is the page previews and the site editor menu with the list of pages.
 			// /pageedit is the editor page for a page.
-			pages = Pages.pagesPages;
+			tutorials = Pages.pagesPages;
+			screen = 'pagesPages';
 			break;
 		case '/wp_template':
 			// /wp_templateedit is the editor page for a template.
 			// /wp_template is the preview page for a template.
-			pages = Pages.templatesPages;
+			tutorials = Pages.templatesPages;
+			screen = 'templatesPages';
 			break;
 		case '/patterns':
-			pages = Pages.patternsPages;
+			tutorials = Pages.patternsPages;
+			screen = 'patternsPages';
 			break;
 		case 'edit':
-			pages = Pages.editorCanvasPages;
+			tutorials = Pages.editorCanvasPages;
+			screen = 'editorCanvasPages';
 			break;
 		case 'entryPages':
-			pages = Pages.entryPages;
+			tutorials = Pages.entryPages;
+			screen = 'entryPages';
 	}
-	return pages;
+	return { tutorials, screen };
 }

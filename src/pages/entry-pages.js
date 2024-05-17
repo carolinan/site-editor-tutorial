@@ -27,13 +27,26 @@ export const entryPages = [
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">
-					{ __( 'Welcome to the Site Editor Playground' ) }
+					{ __( 'Welcome to the Site Editor Tutorial' ) }
 				</h1>
+				<h2 className="edit-site-welcome-guide__heading">
+					{ __( 'What is the Site Editor?' ) }
+				</h2>
 				<p className="edit-site-welcome-guide__text">
 					{
-						__( 'In the Site editor you can design your entire site with blocks. Here you can choose between premade designs, add custom color palettes and fonts, and manage your templates and patterns.' )
+						__( 'The Site Editor is a WordPress feature where you can view, edit and create templates and patterns that you can use to change the design and layout of your site.' )
 					}
 					<br /><br />
+					{
+						__( 'Here you can choose between premade designs, add custom color palettes and fonts.' )
+					}
+					<br /><br />
+					<a href="https://wordpress.org/documentation/article/site-editor/" target="_new">{ __( 'Read more about the Site Editor in the official documentation.' ) }</a>
+				</p>
+				<h2 className="edit-site-welcome-guide__heading">
+					{ __( 'How does the Site Editor tutorial work?' ) }
+				</h2>
+				<p className="edit-site-welcome-guide__text">
 					{
 						__( 'The Site Editor is split into several setting screens and panels.' )
 					}
@@ -47,8 +60,6 @@ export const entryPages = [
 					}
 					<br /><br />
 					{ __( 'You can close the tips with the Esc key, or use the close button.' ) }
-					<br /><br />
-					<a href="https://wordpress.org/documentation/article/site-editor/" target="_new">{ __( 'Read more about the Site Editor in the official documentation.' ) }</a>
 				</p>
 			</>
 		),

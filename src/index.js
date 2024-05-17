@@ -6,29 +6,37 @@ import { __ } from '@wordpress/i18n';
 import { registerPlugin } from '@wordpress/plugins';
 import { useEntityRecords } from '@wordpress/core-data';
 
+// Note: Unlocking private API's require using the current version of Gutenberg!
+// See src/unlock.js for more information.
+import { privateApis as routerPrivateApis } from '@wordpress/router';
+import { unlock } from './unlock';
+const { useLocation, useHistory } = unlock( routerPrivateApis );
+
 /**
  * Internal dependencies
  */
 import './style.scss';
 import * as Pages from './pages';
 import { TutorialModal } from './tutorial-modal';
-import { getPosition, getQueryParamValue } from './utils';
+import { getPosition } from './utils';
 import { Hint } from './hint';
 import { selectPages } from './page-selector';
 
 function SiteEditorTutorial() {
 	const ref = useRef( null );
+	const location = useLocation();
+	const history = useHistory();
 	const [ isOpen, setIsOpen ] = useState( true );
 	const [ currentPage, setCurrentPage ] = useState( 0 );
 	const [ activeAnchor, setActiveAnchor ] = useState( '.edit-site-layout__content' );
 	const [ modalPosition, setModalPosition ] = useState({ top: 20, left: 20 });
 	const [ buttons, setButtons ] = useState([]);
 	const [ processedAnchors, setProcessedAnchors ] = useState([]);
-
 	const [ currentHref, setCurrentHref ] = useState(window.location.href);
-	const postIDParam = getQueryParamValue( window.location.href, 'postId' );
 	const { records, isResolving } = useEntityRecords( 'postType', 'wp_navigation' );
-	
+	const { tutorials, screen } = selectPages( Pages, records, isResolving ) || {};
+	const page = tutorials ? tutorials[currentPage] : null;
+
 	const localStorageState = () => {
 		try {
 			const savedState = localStorage.getItem( 'site-editor-tutorial-shown' );
@@ -40,22 +48,9 @@ function SiteEditorTutorial() {
 			return {};
 		}
 	};
-	
+
 	/* Use local storage to keep track of which tutorial pages have been shown. */
 	const [ shownPages, setShownPages ] = useState( localStorageState );
-
-	const pageSelector = getPageSelectorFromUrl();
-	function getPageSelectorFromUrl() {
-		const postTypeParam = getQueryParamValue( window.location.href, 'postType' ) || '';
-		const canvasParam = getQueryParamValue( window.location.href, 'canvas' ) || '';
-		const pathParam = getQueryParamValue( window.location.href, 'path' ) || '';
-		const params = pathParam + postTypeParam + canvasParam;
-		if ( params ) {
-			return params
-		} else {
-			return 'entryPages';
-		}
-	}
 
 	/**
 	 * Close the modal when the user uses the close button, or clicks outside the modal.
@@ -79,8 +74,7 @@ function SiteEditorTutorial() {
 		const buttonId = `site-editor-tutorial-button-${currentPage}`;
 		const button = document.getElementById( buttonId );
 		if ( button ) {
-		//	button.remove();
-			//document.getElementById(buttonId).style.display = 'none';
+			document.getElementById( buttonId ).style.display = 'none';
 		}
 	};
 
@@ -111,32 +105,19 @@ function SiteEditorTutorial() {
 		};
 	}, [ isOpen, activeAnchor ] );
 
-	const generateButtons = ( customUrl ) => {
-		// The customUrl is needed to fake the url when the editor canvas iframe is clicked.
-		const urlToUse = customUrl || window.location.href;
-		const postTypeParam = getQueryParamValue( urlToUse, 'postType' ) || '';
-		const canvasParam = getQueryParamValue( urlToUse, 'canvas' ) || '';
-		const pathParam = getQueryParamValue( urlToUse, 'path' ) || '';
-		const postIDParam = getQueryParamValue( urlToUse, 'postId' ) || '';
-
-		let params = pathParam + postTypeParam + canvasParam;
-		if ( ! params ) {
-			params = 'entryPages';
-		}
-
-		if ( ! selectPages(Pages, params, postIDParam) || selectPages(Pages, params, postIDParam).length === 0 ) {
-			//console.error(`No pages found for ${params}`);
-			setButtons([]);
+	const generateButtons = () => {
+		const tutorialList = Pages[screen];
+		if ( ! tutorialList ) {
 			return;
 		}
-
-		const newButtons = selectPages( Pages, params, postIDParam ).reduce( (acc, page, index) => {
-			if ( shownPages && shownPages[index] ) {
-				// If the page has been shown, skip adding a button for it.
-				return acc;
-			}
-	
-			setTimeout(() => {
+		const newButtons = tutorialList.reduce( (acc, page, index) => {
+			// Skip tutorial pages that have been shown.
+			// This is temporarily disabled during development,
+			// so that the buttons can be tested witohut having to reset the local storage.
+			//if ( shownPages[index] ) {
+			//	return acc;
+			//}
+			setTimeout( () => {
 				let anchor = page.anchor;
 				// If the anchor is an ID, use getElementById./
 				if ( page.anchor.startsWith('#') ) {
@@ -153,7 +134,8 @@ function SiteEditorTutorial() {
 				}
 
 				if ( ! anchor ) {
-					// console.error( `No anchor found for ${page.anchor}` );
+					// If there is a list of tutorial pages, but the anchor is not found, return early.
+					//console.error( `No anchor found for ${page.anchor}` );
 					return;
 				}
 		
@@ -178,10 +160,10 @@ function SiteEditorTutorial() {
 				acc.push( {
 					id: `site-editor-tutorial-button-${index}`,
 					...buttonProps,
-				});
+				} );
 			}, 1000 );
 			return acc;
-		}, []);
+		}, [] );
 		setButtons( newButtons );
 	};
 
@@ -193,7 +175,7 @@ function SiteEditorTutorial() {
 	}, []);
 
 	// If the href changes, generate new buttons for the correct page.
-	useEffect(() => {
+	useEffect( () => {
 		const checkHrefChangeOnClick = ( event ) => {
 			const isClassFoundInParents = ( target, className ) => {
 				while ( target && target !== document ) {
@@ -210,54 +192,57 @@ function SiteEditorTutorial() {
 				return;
 			}
 
-			setTimeout(() => {
+			setTimeout( () => {
 				const newHref = window.location.href;
 				if ( newHref !== currentHref ) {
 					setCurrentHref( newHref );
 					onFinish();
 					generateButtons();
 				}
-			}, 0);
+			}, 0 );
 		};
 
 		document.addEventListener( 'click', checkHrefChangeOnClick );
 
 		return () => document.removeEventListener( 'click', checkHrefChangeOnClick );
-	}, [ currentHref ]);
+	}, [ currentHref, location ]);
 
-	// If the iframe, the editor canvas, is focused or clicked on, 
-	// generate new buttons for the correct page.
-	window.addEventListener('blur', () => {
-		setTimeout(() => { // Use setTimeout to push to the end of the event queue
-			const iframe = document.querySelector( 'iframe.edit-site-visual-editor__editor-canvas' );
-			if ( document.activeElement === iframe ) {
-				const newHref = window.location.href + '?canvas=edit';
+	// If the iframe is clicked, generate new buttons for the correct page.
+	useEffect( () => {
+		const handleBlur = () => {
+			setTimeout( () => { // Use setTimeout to push to the end of the event queue
+				const iframe = document.querySelector( 'iframe.edit-site-visual-editor__editor-canvas' );
+				if ( document.activeElement === iframe ) {
+					const newHref = location.pathname + location.search + '?canvas=edit';
 
-				setTimeout(() => {
-					if ( newHref !== currentHref ) {
-						setCurrentHref( newHref );
-						onFinish();
-						generateButtons( newHref);
-						//console.log( 'ny href: ', currentHref );
-					}
-				}, 0);
-			}
-		}, 0);
-	});
+					setTimeout( () => {
+						if ( newHref !== currentHref ) {
+							setCurrentHref( newHref );
+							onFinish();
+							generateButtons();
+							history.push( newHref );
+						}
+					}, 0 );
+				}
+			}, 0 );
+		};
 
-	const page = selectPages( Pages, pageSelector, postIDParam, records, isResolving ) ? 
-		selectPages( Pages, pageSelector, postIDParam, records, isResolving ) [currentPage] : null;
+		window.addEventListener( 'blur', handleBlur );
+
+		return () => window.removeEventListener( 'blur', handleBlur );
+	}, [ currentHref, history, location.pathname, location.search ]);
+
+	// Return early if the tutorial page is not found.
+	if ( ! page ) {
+		return;
+	}
 
 	return (
 		<>
 			{ buttons.map( ( buttonProps ) => {
-				// Don't render the button if the modal has already been shown.
-				if ( shownPages && shownPages[buttonProps.index] ) {
-					return null;
-				}
 				return <Hint key={buttonProps.id} {...buttonProps} />;
 			} ) }
-			{ activeAnchor && page &&
+			{ activeAnchor &&
 			<TutorialModal
 				page={ page }
 				onFinish={ onFinish }
