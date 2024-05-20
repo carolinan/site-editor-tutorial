@@ -12,11 +12,11 @@
  */
 import { __ } from '@wordpress/i18n';
 
-export const navigationPages = [
+export const Navigation = [
 	{
 		anchor: '.edit-site-sidebar-navigation-screen__content', // Required
 		label: __( 'Navigation' ),
-		name: 'navigationPages',
+		name: 'Navigation',
 		showArrow: false,
 		content: (
 			<>

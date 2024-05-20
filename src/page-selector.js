@@ -26,7 +26,7 @@ export const selectPages = ( Pages, records ) => {
 
 	if ( ! path && ! canvas && ! postID ) {
 		console.log(' page-selector.js: No path or canvas');
-		path = 'entryPages';
+		path = 'Entry';
 	}
 
 	switch ( path ) {
@@ -35,12 +35,12 @@ export const selectPages = ( Pages, records ) => {
 			// If postID is set, or there is only one menu,
 			// show the tutorial for the navigation details.
 			if ( postID || ( Array.isArray( records ) && records.length === 1 ) ) {
-				tutorials = Pages.navigationDetailsPages;
-				screen = 'navigationDetailsPages';
+				tutorials = Pages.NavigationDetails;
+				screen = 'NavigationDetails';
 			} else {
 				// Otherwise, show the tutorial for the navigation screen, with the list of menus.
-				tutorials = Pages.navigationPages;
-				screen = 'navigationPages';
+				tutorials = Pages.Navigation;
+				screen = 'Navigation';
 			}
 			break;
 		case '/wp_global_styles':
@@ -50,14 +50,14 @@ export const selectPages = ( Pages, records ) => {
 			 * 
 			 * /wp_global_styles is the page with the left hand menu where you preview style variations.
 			 */
-			tutorials = Pages.stylesPages;
-			screen = 'stylesPages';
+			tutorials = Pages.Styles;
+			screen = 'Styles';
 			break;
 		case '/page':
 			// /page is the page previews and the site editor menu with the list of pages.
 			// /pageedit is the editor page for a page.
-			tutorials = Pages.pagesPages;
-			screen = 'pagesPages';
+			tutorials = Pages.Pages;
+			screen = 'Pages';
 			break;
 		case '/wp_template':
 			// /wp_templateedit is the editor page for a template.
@@ -73,9 +73,9 @@ export const selectPages = ( Pages, records ) => {
 			tutorials = Pages.editorCanvasPages;
 			screen = 'editorCanvasPages';
 			break;
-		case 'entryPages':
-			tutorials = Pages.entryPages;
-			screen = 'entryPages';
+		case 'Entry':
+			tutorials = Pages.Entry;
+			screen = 'Entry';
 	}
 	return { tutorials, screen };
 }

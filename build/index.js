@@ -394,7 +394,7 @@ const selectPages = (Pages, records) => {
 
   if (!path && !canvas && !postID) {
     console.log(' page-selector.js: No path or canvas');
-    path = 'entryPages';
+    path = 'Entry';
   }
   switch (path) {
     case '/navigation':
@@ -402,12 +402,12 @@ const selectPages = (Pages, records) => {
       // If postID is set, or there is only one menu,
       // show the tutorial for the navigation details.
       if (postID || Array.isArray(records) && records.length === 1) {
-        tutorials = Pages.navigationDetailsPages;
-        screen = 'navigationDetailsPages';
+        tutorials = Pages.NavigationDetails;
+        screen = 'NavigationDetails';
       } else {
         // Otherwise, show the tutorial for the navigation screen, with the list of menus.
-        tutorials = Pages.navigationPages;
-        screen = 'navigationPages';
+        tutorials = Pages.Navigation;
+        screen = 'Navigation';
       }
       break;
     case '/wp_global_styles':
@@ -417,14 +417,14 @@ const selectPages = (Pages, records) => {
        * 
        * /wp_global_styles is the page with the left hand menu where you preview style variations.
        */
-      tutorials = Pages.stylesPages;
-      screen = 'stylesPages';
+      tutorials = Pages.Styles;
+      screen = 'Styles';
       break;
     case '/page':
       // /page is the page previews and the site editor menu with the list of pages.
       // /pageedit is the editor page for a page.
-      tutorials = Pages.pagesPages;
-      screen = 'pagesPages';
+      tutorials = Pages.Pages;
+      screen = 'Pages';
       break;
     case '/wp_template':
       // /wp_templateedit is the editor page for a template.
@@ -440,9 +440,9 @@ const selectPages = (Pages, records) => {
       tutorials = Pages.editorCanvasPages;
       screen = 'editorCanvasPages';
       break;
-    case 'entryPages':
-      tutorials = Pages.entryPages;
-      screen = 'entryPages';
+    case 'Entry':
+      tutorials = Pages.Entry;
+      screen = 'Entry';
   }
   return {
     tutorials,
@@ -522,7 +522,7 @@ const TutorialModal = ({
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   entryPages: () => (/* binding */ entryPages)
+/* harmony export */   Entry: () => (/* binding */ Entry)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -550,7 +550,7 @@ __webpack_require__.r(__webpack_exports__);
  * Internal dependencies
  */
 
-const entryPages = [{
+const Entry = [{
   anchor: '.edit-site-layout__content',
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Site Editor tutorial intro'),
   showArrow: false,
@@ -795,16 +795,22 @@ const entryPages = [{
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   entryPages: () => (/* reexport safe */ _entry__WEBPACK_IMPORTED_MODULE_0__.entryPages),
-/* harmony export */   navigationDetailsPages: () => (/* reexport safe */ _navigation_details__WEBPACK_IMPORTED_MODULE_2__.navigationDetailsPages),
-/* harmony export */   navigationPages: () => (/* reexport safe */ _navigation__WEBPACK_IMPORTED_MODULE_1__.navigationPages)
+/* harmony export */   Entry: () => (/* reexport safe */ _entry__WEBPACK_IMPORTED_MODULE_0__.Entry),
+/* harmony export */   Navigation: () => (/* reexport safe */ _navigation__WEBPACK_IMPORTED_MODULE_1__.Navigation),
+/* harmony export */   NavigationDetails: () => (/* reexport safe */ _navigation_details__WEBPACK_IMPORTED_MODULE_2__.NavigationDetails),
+/* harmony export */   Pages: () => (/* reexport safe */ _pages__WEBPACK_IMPORTED_MODULE_4__.Pages),
+/* harmony export */   Styles: () => (/* reexport safe */ _styles__WEBPACK_IMPORTED_MODULE_3__.Styles)
 /* harmony export */ });
 /* harmony import */ var _entry__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./entry */ "./src/tutorials/entry.js");
 /* harmony import */ var _navigation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./navigation */ "./src/tutorials/navigation.js");
 /* harmony import */ var _navigation_details__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./navigation-details */ "./src/tutorials/navigation-details.js");
+/* harmony import */ var _styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles */ "./src/tutorials/styles.js");
+/* harmony import */ var _pages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages */ "./src/tutorials/pages.js");
 /**
- * Export all pages.
+ * Export all tutorial pages.
  */
+
+
 
 
 
@@ -821,7 +827,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   navigationDetailsPages: () => (/* binding */ navigationDetailsPages)
+/* harmony export */   NavigationDetails: () => (/* binding */ NavigationDetails)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -846,7 +852,7 @@ __webpack_require__.r(__webpack_exports__);
  * WordPress dependencies
  */
 
-const navigationDetailsPages = [{
+const NavigationDetails = [{
   anchor: '.edit-site-sidebar-navigation-screen__content',
   // Required
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation Details'),
@@ -920,7 +926,7 @@ const navigationDetailsPages = [{
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   navigationPages: () => (/* binding */ navigationPages)
+/* harmony export */   Navigation: () => (/* binding */ Navigation)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -940,11 +946,11 @@ __webpack_require__.r(__webpack_exports__);
  * WordPress dependencies
  */
 
-const navigationPages = [{
+const Navigation = [{
   anchor: '.edit-site-sidebar-navigation-screen__content',
   // Required
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation'),
-  name: 'navigationPages',
+  name: 'Navigation',
   showArrow: false,
   content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     className: "edit-site-welcome-guide__heading"
@@ -972,6 +978,214 @@ const navigationPages = [{
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This panel shows a list of all the menus on your site.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Click on a menu to open it.')))
+}];
+
+/***/ }),
+
+/***/ "./src/tutorials/pages.js":
+/*!********************************!*\
+  !*** ./src/tutorials/pages.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Pages: () => (/* binding */ Pages)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+
+/**
+ * This file contains the content for the Pages screen in the Site Editor,
+ * the screen with the list of pages and related options.
+ * Example: hwp-admin/site-editor.php?path=%2Fpage
+ *
+ * The first item is displayed automatically if the page is the point of entry,
+ * or when the page is refreshed.
+ * 
+ * TODO: The documentation on .org should be updated to match the 6.6 release.
+ */
+
+/**
+ * WordPress dependencies
+ */
+
+const Pages = [{
+  anchor: '.edit-site-layout__content',
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Pages'),
+  name: 'Pages',
+  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "edit-site-welcome-guide__heading"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Manage Pages')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Here you can create new pages or edit the content of your existing pages inside the Site Editor itself.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can preview your page with a page template to see what the page will look like on the front of your site.'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(' If your theme has included optional templates, you can also swap your page template and choose a different design.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "https://wordpress.org/documentation/article/site-editor-pages/",
+    target: "_new"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Read more about the Site Editor Pages in the documentation.'))))
+}, {
+  anchor: '.edit-site-sidebar-navigation-screen__content',
+  verticalplacement: 'middle',
+  horizontalplacement: 'right',
+  offsetX: 10,
+  offsetY: -40,
+  showArrow: true,
+  arrowPosition: 'left-middle',
+  hintType: 'button',
+  hintOffsetX: 0,
+  hintOffsetY: 0,
+  hintSize: 16,
+  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "edit-site-welcome-guide__heading"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Page filters')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This panel has quick links for displaying your pages according to three default filters: All pages, drafts, and trashed pages.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can select a filter by clicking on it, or, you can select "All pages" and add your own custom filter.')))
+}, {
+  // This only shows when layout: List is used.
+  anchor: '.dataviews-view-list',
+  verticalplacement: 'top',
+  horizontalplacement: 'right',
+  offsetX: -70,
+  offsetY: -30,
+  showArrow: true,
+  arrowPosition: 'left-middle',
+  hintType: 'button',
+  hintOffsetX: -90,
+  hintOffsetY: -30,
+  hintSize: 40,
+  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "edit-site-welcome-guide__heading"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('List of pages')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This is the list of pages, sorted according to your filter.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Close this tutorial window and hover over the page title to see the additional options:.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Click on the page title or the pen icon to open the page in the editor.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Click on the Actions menu (the three dots menu) to acess options to duplicate, rename or trash the page.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Select "View" in the Actions menu to view the page on the front of the site. The page opens in a new tab.')))
+}, {
+  // This only shows when layout: List is used.
+  anchor: '.edit-site-visual-editor ',
+  verticalplacement: 'middle',
+  horizontalplacement: 'none',
+  offsetX: 10,
+  offsetY: 10,
+  hintType: 'button',
+  hintOffsetX: 10,
+  hintOffsetY: 10,
+  hintSize: 40,
+  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "edit-site-welcome-guide__heading"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Page preview')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This frame is a preview of your page. The preview is only available when you are using the list layout.')))
+}, {
+  anchor: '.dataviews-filters__view-actions button',
+  verticalplacement: 'top',
+  horizontalplacement: 'right',
+  offsetX: 10,
+  offsetY: -10,
+  showArrow: true,
+  arrowPosition: 'left',
+  hintType: 'button',
+  hintOffsetX: 0,
+  hintOffsetY: 0,
+  hintSize: 14,
+  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "edit-site-welcome-guide__heading"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Filters')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add a custom filter here to filter pages by author or status.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null)))
+}];
+
+/***/ }),
+
+/***/ "./src/tutorials/styles.js":
+/*!*********************************!*\
+  !*** ./src/tutorials/styles.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Styles: () => (/* binding */ Styles)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+
+/**
+ * This file contains the content for the Styles screen in the Site Editor,
+ * the screen with the list of global style variations.
+ * Example: wp-admin/site-editor.php?path=%2Fwp_global_styles
+ *
+ * The first item is displayed automatically if the page is the point of entry,
+ * or when the page is refreshed.
+ */
+
+/**
+ * WordPress dependencies
+ */
+
+const Styles = [{
+  anchor: '.edit-site-layout__content',
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Styles'),
+  name: 'Styles',
+  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "edit-site-welcome-guide__heading"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Styles')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Styles can change the look and feel of your site with a single setting, by switching color palettes and fonts.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Style presets are optional and included in your block theme. Because of that, the styles and the number of options to choose from varies from theme to theme.')))
+}, {
+  anchor: '.edit-site-sidebar-navigation-screen__actions button',
+  verticalplacement: 'bottom',
+  horizontalplacement: 'none',
+  offsetX: 0,
+  offsetY: 10,
+  showArrow: true,
+  arrowPosition: 'top-left',
+  hintType: 'button',
+  hintOffsetX: 10,
+  hintOffsetY: 0,
+  hintSize: 14,
+  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "edit-site-welcome-guide__heading"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Style Book')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('The eye icon opens the Style book, a preview of what a the most common blocks will look like with a style variation applied.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Click on the icon again to see the preview of the site instead.')))
+}, {
+  anchor: '.edit-site-sidebar-navigation-screen__actions button',
+  verticalplacement: 'bottom',
+  horizontalplacement: 'none',
+  offsetX: 36,
+  offsetY: 10,
+  showArrow: true,
+  arrowPosition: 'top-left',
+  hintType: 'button',
+  hintOffsetX: 46,
+  hintOffsetY: 0,
+  hintSize: 14,
+  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "edit-site-welcome-guide__heading"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Edit Styles')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('If you click on the pen icon (Edit styles), you will close the side panel and open the Site Editor with the Style settings opened.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('That is where you can change the site wide color palette, typography, and spacing.')))
+}, {
+  anchor: '.edit-site-global-styles-variation-container',
+  verticalplacement: 'middle',
+  horizontalplacement: 'right',
+  offsetX: 60,
+  offsetY: -80,
+  showArrow: true,
+  arrowPosition: 'left-middle',
+  hintType: 'button',
+  hintOffsetX: 0,
+  hintOffsetY: 0,
+  hintSize: 40,
+  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "edit-site-welcome-guide__heading"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Style Variations (presets)')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This list shows the style variations enabled for your theme. Click on a preset to preview it'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('There are three types of style presets: General; which can change both colors, typography and spacing. Colors, and Typography.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can mix all types of presets.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Next, if you have selectes a style that you want to save, click on the large "Save" button at the bottom of the panel.')))
 }];
 
 /***/ }),

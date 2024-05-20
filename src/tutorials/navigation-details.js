@@ -17,7 +17,7 @@
  */
 import { __ } from '@wordpress/i18n';
 
-export const navigationDetailsPages = [
+export const NavigationDetails = [
 	{
 		anchor: '.edit-site-sidebar-navigation-screen__content', // Required
 		label: __( 'Navigation Details' ),

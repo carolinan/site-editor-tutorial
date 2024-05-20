@@ -17,7 +17,7 @@ import { createInterpolateElement } from '@wordpress/element';
  */
 import { CommandPaletteButton } from '../utils.js';
 
-export const entryPages = [
+export const Entry = [
 	{
 		anchor: '.edit-site-layout__content',
 		label: __( 'Site Editor tutorial intro' ),
