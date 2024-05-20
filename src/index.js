@@ -16,7 +16,7 @@ const { useLocation, useHistory } = unlock( routerPrivateApis );
  * Internal dependencies
  */
 import './style.scss';
-import * as Pages from './pages';
+import * as Pages from './tutorials';
 import { TutorialModal } from './tutorial-modal';
 import { getPosition } from './utils';
 import { Hint } from './hint';
@@ -29,12 +29,13 @@ function SiteEditorTutorial() {
 	const [ isOpen, setIsOpen ] = useState( true );
 	const [ currentPage, setCurrentPage ] = useState( 0 );
 	const [ activeAnchor, setActiveAnchor ] = useState( '.edit-site-layout__content' );
-	const [ modalPosition, setModalPosition ] = useState({ top: 20, left: 20 });
+	const [ modalPosition, setModalPosition ] = useState({ top: 20, left: 400 });
 	const [ buttons, setButtons ] = useState([]);
 	const [ processedAnchors, setProcessedAnchors ] = useState([]);
 	const [ currentHref, setCurrentHref ] = useState(window.location.href);
 	const { records, isResolving } = useEntityRecords( 'postType', 'wp_navigation' );
 	const { tutorials, screen } = selectPages( Pages, records, isResolving ) || {};
+
 	const page = tutorials ? tutorials[currentPage] : null;
 
 	const localStorageState = () => {
@@ -67,7 +68,7 @@ function SiteEditorTutorial() {
 		try {
 			localStorage.setItem( 'site-editor-tutorial-shown', JSON.stringify( newShownPages ) );
 		} catch (error) {
-			// console.error( "Error writing to localStorage", error );
+			console.error( "Error writing to localStorage", error );
 		}
 		setShownPages( newShownPages );
 
@@ -107,7 +108,8 @@ function SiteEditorTutorial() {
 
 	const generateButtons = () => {
 		const tutorialList = Pages[screen];
-		if ( ! tutorialList ) {
+		if ( ! tutorialList || ! page ) {
+			console.error( `No tutorial list found for ${screen}` );
 			return;
 		}
 		const newButtons = tutorialList.reduce( (acc, page, index) => {
@@ -135,7 +137,7 @@ function SiteEditorTutorial() {
 
 				if ( ! anchor ) {
 					// If there is a list of tutorial pages, but the anchor is not found, return early.
-					//console.error( `No anchor found for ${page.anchor}` );
+					console.error( `No anchor found for ${page.anchor}` );
 					return;
 				}
 		
@@ -168,11 +170,11 @@ function SiteEditorTutorial() {
 	};
 
 	// Generate the first set of buttons.
-	useEffect(() => {
+	useEffect( () => {
 		if ( buttons.length === 0 ) {
 			generateButtons();
 		}
-	}, []);
+	}, [] );
 
 	// If the href changes, generate new buttons for the correct page.
 	useEffect( () => {
@@ -205,7 +207,7 @@ function SiteEditorTutorial() {
 		document.addEventListener( 'click', checkHrefChangeOnClick );
 
 		return () => document.removeEventListener( 'click', checkHrefChangeOnClick );
-	}, [ currentHref, location ]);
+	}, [ currentHref, location ] );
 
 	// If the iframe is clicked, generate new buttons for the correct page.
 	useEffect( () => {
@@ -230,7 +232,7 @@ function SiteEditorTutorial() {
 		window.addEventListener( 'blur', handleBlur );
 
 		return () => window.removeEventListener( 'blur', handleBlur );
-	}, [ currentHref, history, location.pathname, location.search ]);
+	}, [ currentHref, history, location.pathname, location.search ] );
 
 	// Return early if the tutorial page is not found.
 	if ( ! page ) {

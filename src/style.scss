@@ -7,7 +7,7 @@
 @import "arrows.scss";
 
 // Trick the Site Editor into showing the plugin render.
-.edit-site div:nth-child(3) {
+.edit-site > div:nth-child(3) {
 	display: block !important;;
 }
 

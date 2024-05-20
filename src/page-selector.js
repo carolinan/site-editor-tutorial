@@ -7,7 +7,7 @@ import { privateApis as routerPrivateApis } from '@wordpress/router';
 import { unlock } from './unlock';
 const { useLocation } = unlock( routerPrivateApis );
 
-export const selectPages = ( Pages, records, isResolving ) => {
+export const selectPages = ( Pages, records ) => {
 	
 	let screen = '';
 	let tutorials = '';
@@ -24,7 +24,7 @@ export const selectPages = ( Pages, records, isResolving ) => {
 	// const postType = params.get('postType');
 	// const pathname = location.pathname;
 
-	if ( ! path && ! canvas ) {
+	if ( ! path && ! canvas && ! postID ) {
 		console.log(' page-selector.js: No path or canvas');
 		path = 'entryPages';
 	}
@@ -32,26 +32,15 @@ export const selectPages = ( Pages, records, isResolving ) => {
 	switch ( path ) {
 		case '/navigation':
 		case 'wp_navigation':
-			if ( postID ) {
-				// If the post id is set, we are in the editor for a specific menu.
+			// If postID is set, or there is only one menu,
+			// show the tutorial for the navigation details.
+			if ( postID || ( Array.isArray( records ) && records.length === 1 ) ) {
 				tutorials = Pages.navigationDetailsPages;
 				screen = 'navigationDetailsPages';
 			} else {
-				if ( isResolving ) {
-					tutorials = Pages.navigationPages;
-					screen = 'navigationPages';
-				} else if (records && records.length !== undefined) {
-					const count = records.length;
-					// If there is more than one menu, show the list of menus
-					if ( count === 1 ) {
-						// If there is only one menu, show the details of the menu.
-						tutorials = Pages.navigationDetailsPages;
-						screen = 'navigationDetailsPages';
-					}
-				} else { 
-					tutorials = Pages.navigationPages;
-					screen = 'navigationPages';
-				}
+				// Otherwise, show the tutorial for the navigation screen, with the list of menus.
+				tutorials = Pages.navigationPages;
+				screen = 'navigationPages';
 			}
 			break;
 		case '/wp_global_styles':

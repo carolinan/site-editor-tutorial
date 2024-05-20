@@ -1,6 +1,9 @@
 /**
- * This file contains the content for the initial tutorial pages in the Site Editor welcome guide.
- * It needs to be split further as the content increases.
+ * This file contains the content for the initial tutorial pages.
+ * Example: /wp-admin/site-editor.php
+ *
+ * The first item is displayed automatically if the page is the point of entry,
+ * or when the page is refreshed.
  */
 
 /**
@@ -18,12 +21,7 @@ export const entryPages = [
 	{
 		anchor: '.edit-site-layout__content',
 		label: __( 'Site Editor tutorial intro' ),
-		verticalplacement: 'bottom',
-		horizontalplacement: 'none',
-		offsetX: 20,
-		offsetY: 20,
 		showArrow: false,
-		hintType: 'none',
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">

@@ -72,7 +72,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_router__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_router__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _unlock__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./unlock */ "./src/unlock.js");
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
-/* harmony import */ var _pages__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages */ "./src/pages/index.js");
+/* harmony import */ var _tutorials__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./tutorials */ "./src/tutorials/index.js");
 /* harmony import */ var _tutorial_modal__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./tutorial-modal */ "./src/tutorial-modal.js");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./utils */ "./src/utils.js");
 /* harmony import */ var _hint__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./hint */ "./src/hint.js");
@@ -113,7 +113,7 @@ function SiteEditorTutorial() {
   const [activeAnchor, setActiveAnchor] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)('.edit-site-layout__content');
   const [modalPosition, setModalPosition] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({
     top: 20,
-    left: 20
+    left: 400
   });
   const [buttons, setButtons] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
   const [processedAnchors, setProcessedAnchors] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
@@ -125,7 +125,7 @@ function SiteEditorTutorial() {
   const {
     tutorials,
     screen
-  } = (0,_page_selector__WEBPACK_IMPORTED_MODULE_12__.selectPages)(_pages__WEBPACK_IMPORTED_MODULE_8__, records, isResolving) || {};
+  } = (0,_page_selector__WEBPACK_IMPORTED_MODULE_12__.selectPages)(_tutorials__WEBPACK_IMPORTED_MODULE_8__, records, isResolving) || {};
   const page = tutorials ? tutorials[currentPage] : null;
   const localStorageState = () => {
     try {
@@ -160,7 +160,7 @@ function SiteEditorTutorial() {
     try {
       localStorage.setItem('site-editor-tutorial-shown', JSON.stringify(newShownPages));
     } catch (error) {
-      // console.error( "Error writing to localStorage", error );
+      console.error("Error writing to localStorage", error);
     }
     setShownPages(newShownPages);
     const buttonId = `site-editor-tutorial-button-${currentPage}`;
@@ -198,8 +198,9 @@ function SiteEditorTutorial() {
     };
   }, [isOpen, activeAnchor]);
   const generateButtons = () => {
-    const tutorialList = _pages__WEBPACK_IMPORTED_MODULE_8__[screen];
-    if (!tutorialList) {
+    const tutorialList = _tutorials__WEBPACK_IMPORTED_MODULE_8__[screen];
+    if (!tutorialList || !page) {
+      console.error(`No tutorial list found for ${screen}`);
       return;
     }
     const newButtons = tutorialList.reduce((acc, page, index) => {
@@ -226,7 +227,7 @@ function SiteEditorTutorial() {
         }
         if (!anchor) {
           // If there is a list of tutorial pages, but the anchor is not found, return early.
-          //console.error( `No anchor found for ${page.anchor}` );
+          console.error(`No anchor found for ${page.anchor}`);
           return;
         }
         const {
@@ -375,7 +376,7 @@ __webpack_require__.r(__webpack_exports__);
 const {
   useLocation
 } = (0,_unlock__WEBPACK_IMPORTED_MODULE_1__.unlock)(_wordpress_router__WEBPACK_IMPORTED_MODULE_0__.privateApis);
-const selectPages = (Pages, records, isResolving) => {
+const selectPages = (Pages, records) => {
   let screen = '';
   let tutorials = '';
 
@@ -391,33 +392,22 @@ const selectPages = (Pages, records, isResolving) => {
   // const postType = params.get('postType');
   // const pathname = location.pathname;
 
-  if (!path && !canvas) {
+  if (!path && !canvas && !postID) {
     console.log(' page-selector.js: No path or canvas');
     path = 'entryPages';
   }
   switch (path) {
     case '/navigation':
     case 'wp_navigation':
-      if (postID) {
-        // If the post id is set, we are in the editor for a specific menu.
+      // If postID is set, or there is only one menu,
+      // show the tutorial for the navigation details.
+      if (postID || Array.isArray(records) && records.length === 1) {
         tutorials = Pages.navigationDetailsPages;
         screen = 'navigationDetailsPages';
       } else {
-        if (isResolving) {
-          tutorials = Pages.navigationPages;
-          screen = 'navigationPages';
-        } else if (records && records.length !== undefined) {
-          const count = records.length;
-          // If there is more than one menu, show the list of menus
-          if (count === 1) {
-            // If there is only one menu, show the details of the menu.
-            tutorials = Pages.navigationDetailsPages;
-            screen = 'navigationDetailsPages';
-          }
-        } else {
-          tutorials = Pages.navigationPages;
-          screen = 'navigationPages';
-        }
+        // Otherwise, show the tutorial for the navigation screen, with the list of menus.
+        tutorials = Pages.navigationPages;
+        screen = 'navigationPages';
       }
       break;
     case '/wp_global_styles':
@@ -462,10 +452,71 @@ const selectPages = (Pages, records, isResolving) => {
 
 /***/ }),
 
-/***/ "./src/pages/entry-pages.js":
-/*!**********************************!*\
-  !*** ./src/pages/entry-pages.js ***!
-  \**********************************/
+/***/ "./src/tutorial-modal.js":
+/*!*******************************!*\
+  !*** ./src/tutorial-modal.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   TutorialModal: () => (/* binding */ TutorialModal)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+
+/**
+ * External dependencies
+ */
+
+
+/**
+ * WordPress dependencies
+ */
+
+
+const TutorialModal = ({
+  modalPosition,
+  page,
+  onFinish,
+  ref
+}) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Modal, {
+  className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('site-editor-tutorial', {
+    'site-editor-tutorial-arrow': page.showArrow,
+    [`site-editor-tutorial-arrow-${page.arrowPosition}`]: page.showArrow
+  }),
+  shouldCloseOnEsc: true,
+  shouldCloseOnClickOutside: true,
+  style: {
+    position: 'absolute',
+    top: modalPosition.top,
+    left: modalPosition.left,
+    opacity: 1,
+    display: 'block'
+  },
+  contentLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Site Editor Tutorial'),
+  isDismissible: true,
+  onRequestClose: onFinish,
+  ref: ref
+}, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  className: "site-editor-tutorial__container"
+}, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  className: "site-editor-tutorial__page"
+}, page.image, page.content)));
+
+/***/ }),
+
+/***/ "./src/tutorials/entry.js":
+/*!********************************!*\
+  !*** ./src/tutorials/entry.js ***!
+  \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -482,8 +533,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils.js */ "./src/utils.js");
 
 /**
- * This file contains the content for the initial tutorial pages in the Site Editor welcome guide.
- * It needs to be split further as the content increases.
+ * This file contains the content for the initial tutorial pages.
+ * Example: /wp-admin/site-editor.php
+ *
+ * The first item is displayed automatically if the page is the point of entry,
+ * or when the page is refreshed.
  */
 
 /**
@@ -499,12 +553,7 @@ __webpack_require__.r(__webpack_exports__);
 const entryPages = [{
   anchor: '.edit-site-layout__content',
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Site Editor tutorial intro'),
-  verticalplacement: 'bottom',
-  horizontalplacement: 'none',
-  offsetX: 20,
-  offsetY: 20,
   showArrow: false,
-  hintType: 'none',
   content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Welcome to the Site Editor Tutorial')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
@@ -737,22 +786,22 @@ const entryPages = [{
 
 /***/ }),
 
-/***/ "./src/pages/index.js":
-/*!****************************!*\
-  !*** ./src/pages/index.js ***!
-  \****************************/
+/***/ "./src/tutorials/index.js":
+/*!********************************!*\
+  !*** ./src/tutorials/index.js ***!
+  \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   entryPages: () => (/* reexport safe */ _entry_pages__WEBPACK_IMPORTED_MODULE_0__.entryPages),
-/* harmony export */   navigationDetailsPages: () => (/* reexport safe */ _navigation_details_pages__WEBPACK_IMPORTED_MODULE_2__.navigationDetailsPages),
-/* harmony export */   navigationPages: () => (/* reexport safe */ _navigation_pages__WEBPACK_IMPORTED_MODULE_1__.navigationPages)
+/* harmony export */   entryPages: () => (/* reexport safe */ _entry__WEBPACK_IMPORTED_MODULE_0__.entryPages),
+/* harmony export */   navigationDetailsPages: () => (/* reexport safe */ _navigation_details__WEBPACK_IMPORTED_MODULE_2__.navigationDetailsPages),
+/* harmony export */   navigationPages: () => (/* reexport safe */ _navigation__WEBPACK_IMPORTED_MODULE_1__.navigationPages)
 /* harmony export */ });
-/* harmony import */ var _entry_pages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./entry-pages */ "./src/pages/entry-pages.js");
-/* harmony import */ var _navigation_pages__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./navigation-pages */ "./src/pages/navigation-pages.js");
-/* harmony import */ var _navigation_details_pages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./navigation-details-pages */ "./src/pages/navigation-details-pages.js");
+/* harmony import */ var _entry__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./entry */ "./src/tutorials/entry.js");
+/* harmony import */ var _navigation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./navigation */ "./src/tutorials/navigation.js");
+/* harmony import */ var _navigation_details__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./navigation-details */ "./src/tutorials/navigation-details.js");
 /**
  * Export all pages.
  */
@@ -763,10 +812,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/pages/navigation-details-pages.js":
-/*!***********************************************!*\
-  !*** ./src/pages/navigation-details-pages.js ***!
-  \***********************************************/
+/***/ "./src/tutorials/navigation-details.js":
+/*!*********************************************!*\
+  !*** ./src/tutorials/navigation-details.js ***!
+  \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -780,7 +829,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 
 /**
- * This file contains the content for the single (details) Navigation pages in the Site Editor welcome guide.
+ * This file contains the content for the Navigation details screen in the Site Editor,
+ * the screen with the information about the specific menu.
+ * This URL contains the post id for the menu.
+ * Example: wp-admin/site-editor.php?postId=4&path=%2Fnavigation
+ *
+ * The first item is displayed automatically if the page is the point of entry,
+ * or when the page is refreshed.
+ * 
+ * TODO: When user deletes all menus, WP creates a placeholder menu that does not have a title,
+ * and the hint about the menu name is displayed, when it should not.
+ * See if there is another anchor that could be used.
  */
 
 /**
@@ -788,106 +847,74 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 const navigationDetailsPages = [{
-  anchor: '.edit-site-sidebar-navigation-screen-navigation-menus__content',
+  anchor: '.edit-site-sidebar-navigation-screen__content',
+  // Required
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation Details'),
   name: 'navigationDetailsPages',
-  verticalplacement: 'top',
-  horizontalplacement: 'right',
-  offsetX: 10,
-  offsetY: 10,
-  highlight: true,
-  showArrow: true,
-  arrowPosition: 'left-middle',
-  hintType: 'button',
-  hintOffsetX: 22,
-  hintOffsetY: -10,
-  hintSize: 18,
   content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation Details')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This panel shows the name of your menu, and a list of all its blocks.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Here you can rename, duplicate and delete your menu, and move and remove the blocks. To add new blocks you need to select the Edit option.')))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This screen shows the name of your chosen menu, and a list of all blocks that you have placed inside it.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Here you can rename, duplicate and delete your menu, and move and remove the blocks. To add new blocks you need to select the Edit option.')))
 }, {
   anchor: '.edit-site-sidebar-navigation-screen__title',
   verticalplacement: 'bottom',
   horizontalplacement: 'none',
-  offsetX: 10,
-  offsetY: 20,
-  highlight: true,
+  offsetX: -10,
+  offsetY: 10,
   showArrow: true,
   arrowPosition: 'top-left',
+  hintType: 'button',
+  hintOffsetX: 0,
+  hintOffsetY: 0,
+  hintSize: 16,
   content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Menu name')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This is the name of the menu you are editing.')))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This is the name of the menu you are editing.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('To rename the menu, select the option in the Actions menu.')))
 }, {
   anchor: '.sidebar-navigation__more-menu button',
   verticalplacement: 'bottom',
   horizontalplacement: 'none',
-  offsetX: -3,
+  offsetX: 0,
   offsetY: 20,
-  highlight: true,
   showArrow: true,
   arrowPosition: 'top-left',
+  hintType: 'button',
+  hintOffsetX: 10,
+  hintOffsetY: 0,
+  hintSize: 16,
   content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation Actions menu')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Under the three dot menu, also known as the actions menu, you can rename, duplicate or delete your menu.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('When you delete a menu, it is no longer visible on the front of your site.')))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Under the three dot menu, also known as the Actions menu, you can rename, duplicate or delete your menu.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Here you can also access the Edit option, which opens the menu in the editor. From there, you can add new blocks to your menu.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('When you delete a menu, it is no longer visible on the front of your site.')))
 }, {
-  anchor: '.edit-site-sidebar-button',
-  nth: 1,
-  verticalplacement: 'bottom',
-  horizontalplacement: 'none',
-  offsetX: -3,
-  offsetY: 20,
-  highlight: true,
-  showArrow: true,
-  arrowPosition: 'top-left',
-  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
-    className: "edit-site-welcome-guide__heading"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Edit')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Select the edit button (the pen icon) to open the navigation block in the editor.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Use this option to change styles or to add new blocks to your menu.')))
-}, {
-  anchor: '.edit-site-sidebar-navigation-screen-navigation-menus__content',
-  verticalplacement: 'top',
+  anchor: '.block-editor-list-view-leaf',
+  verticalplacement: 'middle',
   horizontalplacement: 'right',
-  offsetX: 10,
-  offsetY: 10,
-  highlight: true,
+  offsetX: 30,
+  offsetY: -80,
   showArrow: true,
-  arrowPosition: 'left',
+  arrowPosition: 'left-middle',
+  hintType: 'button',
+  hintOffsetX: 0,
+  hintOffsetY: 0,
+  hintSize: 40,
   content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Menu items')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This is the list of all the blocks that you have added to your menu.')))
-}, {
-  anchor: '.block-editor-list-view-leaf',
-  verticalplacement: 'top',
-  horizontalplacement: 'right',
-  offsetX: 30,
-  offsetY: 0,
-  highlight: true,
-  showArrow: true,
-  arrowPosition: 'left',
-  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
-    className: "edit-site-welcome-guide__heading"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Menu item')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Each menu item is a block. The icon on the left shows the block type, for example post, page, custom link, or site logo.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('The text matches the link text in the menu on the front of your site. For example the page title.')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can click and hold the block to move it to another position.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Or, you can use the three dot menu to move or remove the block.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can expand submenus by clicking on the arrow before the icon.')))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Each menu item is a block. The icon on the left shows the block type, for example post, page, page list, custom link, or site logo.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('An arrow icon before the block indicates that the block has a submenu. Clicking on the arrow expands the submenu.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can click and hold to drag the block to move it to another position in the menu.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Each block has an Options menu where you can remove the block from the menu or move it up or down. Page blocks also have links for opening the page in the Site Editor.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('To see the Options menu, you must first close this tutorial window and hover over the block.')))
 }];
 
 /***/ }),
 
-/***/ "./src/pages/navigation-pages.js":
-/*!***************************************!*\
-  !*** ./src/pages/navigation-pages.js ***!
-  \***************************************/
+/***/ "./src/tutorials/navigation.js":
+/*!*************************************!*\
+  !*** ./src/tutorials/navigation.js ***!
+  \*************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -901,7 +928,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 
 /**
- * This file contains the content for the Navigation pages in the Site Editor welcome guide.
+ * This file contains the content for the Navigation screen in the Site Editor,
+ * the screen with the list of menus.
+ * Example: wp-admin/site-editor.php?path=%2Fnavigation
+ *
+ * The first item is displayed automatically if the page is the point of entry,
+ * or when the page is refreshed.
  */
 
 /**
@@ -910,86 +942,37 @@ __webpack_require__.r(__webpack_exports__);
 
 const navigationPages = [{
   anchor: '.edit-site-sidebar-navigation-screen__content',
+  // Required
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation'),
   name: 'navigationPages',
-  verticalplacement: 'middle',
-  horizontalplacement: 'right',
-  offsetX: 10,
-  offsetY: 10,
-  highlight: true,
-  showArrow: true,
-  arrowPosition: 'left-middle',
-  hintType: 'button',
-  hintOffsetX: 22,
-  hintOffsetY: -10,
-  hintSize: 18,
+  showArrow: false,
   content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This panel shows a list of all the menus on your site.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Your menus are separate from your navigation blocks. A menu can be used in more than one navigation block.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Click on a menu to open it.')))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('The Navigation screen is where you can browse and edit your menus.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('- Menus decide which links and blocks should show in your menu. A menu can be used inside one or more navigation blocks.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('- The navigation block decides where and how your menu is displayed. For example, you can place a navigation block in your header, assign your menu, and change the colors, font size and font family.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "https://wordpress.org/documentation/article/site-editor-navigation/",
+    target: "_new"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Read more about the Site Editor Navigation in the documentation.'))))
+}, {
+  anchor: '.edit-site-sidebar-navigation-screen__content',
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation'),
+  verticalplacement: 'middle',
+  horizontalplacement: 'right',
+  offsetX: 10,
+  offsetY: 0,
+  showArrow: true,
+  arrowPosition: 'left',
+  hintType: 'button',
+  hintOffsetX: -50,
+  hintOffsetY: 10,
+  hintSize: 16,
+  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "edit-site-welcome-guide__heading"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Navigation')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This panel shows a list of all the menus on your site.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Click on a menu to open it.')))
 }];
-
-/***/ }),
-
-/***/ "./src/tutorial-modal.js":
-/*!*******************************!*\
-  !*** ./src/tutorial-modal.js ***!
-  \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   TutorialModal: () => (/* binding */ TutorialModal)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
-
-/**
- * External dependencies
- */
-
-
-/**
- * WordPress dependencies
- */
-
-
-const TutorialModal = ({
-  modalPosition,
-  page,
-  onFinish,
-  ref
-}) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Modal, {
-  className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('site-editor-tutorial', {
-    'site-editor-tutorial-arrow': page.showArrow,
-    [`site-editor-tutorial-arrow-${page.arrowPosition}`]: page.showArrow
-  }),
-  shouldCloseOnEsc: true,
-  shouldCloseOnClickOutside: true,
-  style: {
-    position: 'absolute',
-    top: modalPosition.top,
-    left: modalPosition.left,
-    opacity: 1,
-    display: 'block'
-  },
-  contentLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Site Editor Tutorial'),
-  isDismissible: true,
-  onRequestClose: onFinish,
-  ref: ref
-}, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-  className: "site-editor-tutorial__container"
-}, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-  className: "site-editor-tutorial__page"
-}, page.image, page.content)));
 
 /***/ }),
 

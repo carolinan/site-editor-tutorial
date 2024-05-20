@@ -178,7 +178,7 @@
   left: -10px;
 }
 
-.edit-site div:nth-child(3) {
+.edit-site > div:nth-child(3) {
   display: block !important;
 }
 
