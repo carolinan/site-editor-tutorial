@@ -111,7 +111,7 @@ export const NavigationDetails = [
 					<br /><br />
 					{ __( 'You can click and hold to drag the block to move it to another position in the menu.' ) }
 					<br /><br />
-					{ __( 'Each block has an Options menu where you can remove the block from the menu or move it up or down. Page blocks also have links for opening the page in the Site Editor.' ) }
+					{ __( 'Each block has an Options menu where you can move or remove the block. Page blocks also have links that opens the page in the Site Editor.' ) }
 					<br />
 					{ __( 'To see the Options menu, you must first close this tutorial window and hover over the block.' ) }
 				</p>

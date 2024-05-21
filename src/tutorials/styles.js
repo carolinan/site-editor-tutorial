@@ -98,13 +98,38 @@ export const Styles = [
 					{ __( 'Style Variations (presets)' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'This list shows the style variations enabled for your theme. Click on a preset to preview it' ) }
+					{ __( 'This list shows the style variations enabled for your theme.' ) }
 					<br/>
-					{ __( 'There are three types of style presets: General; which can change both colors, typography and spacing. Colors, and Typography.' ) }
-					<br/>
-					{ __( 'You can mix all types of presets.' ) }
+					{ __( 'There are three types of style presets: General (which can change both colors, typography and spacing), Colors, and Typography. You may need to scroll to see all the presets.' ) }
+					<br/><br/>
+					{ __( 'Click on a preset to preview it. You can combine different presets to create a uniqe style.' ) }
 					<br/><br/>
 					{ __( 'Next, if you have selectes a style that you want to save, click on the large "Save" button at the bottom of the panel.' ) }
+				</p>
+			</>
+		),
+	},
+	{
+		anchor: '.edit-site-sidebar-navigation-screen-details-footer',
+		verticalplacement: 'middle',
+		horizontalplacement: 'right',
+		offsetX: 20,
+		offsetY: -95,
+		showArrow: true,
+		arrowPosition: 'left-middle',
+		hintType: 'button',
+		hintOffsetX: 0,
+		hintOffsetY: 0,
+		hintSize: 14,
+		content: (
+			<>
+				<h1 className="edit-site-welcome-guide__heading">
+					{ __( 'Style revisions' ) }
+				</h1>
+				<p className="edit-site-welcome-guide__text">
+					{ __( 'Here you can see when your styles were last modified.' ) }
+					<br/>
+					{ __( 'Click on the icon with the timer to open a timeline over your style changes.' ) }
 				</p>
 			</>
 		),

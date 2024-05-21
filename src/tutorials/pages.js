@@ -39,10 +39,10 @@ export const Pages = [
 		anchor: '.edit-site-sidebar-navigation-screen__content',
 		verticalplacement: 'middle',
 		horizontalplacement: 'right',
-		offsetX: 10,
-		offsetY: -40,
+		offsetX: 20,
+		offsetY: -14,
 		showArrow: true,
-		arrowPosition: 'left-middle',
+		arrowPosition: 'left',
 		hintType: 'button',
 		hintOffsetX: 0,
 		hintOffsetY: 0,
@@ -54,8 +54,8 @@ export const Pages = [
 				</h1>
 				<p className="edit-site-welcome-guide__text">
 					{ __( 'This panel has quick links for displaying your pages according to three default filters: All pages, drafts, and trashed pages.' ) }
-					<br />
-					{ __( 'You can select a filter by clicking on it, or, you can select "All pages" and add your own custom filter.' ) }
+					<br /><br />
+					{ __( 'You can select one of the filters in the panel, or, you can select "All pages" and add your own custom filter.' ) }
 				</p>
 			</>
 		),
@@ -68,7 +68,7 @@ export const Pages = [
 		offsetX: -70,
 		offsetY: -30,
 		showArrow: true,
-		arrowPosition: 'left-middle',
+		arrowPosition: 'left',
 		hintType: 'button',
 		hintOffsetX: -90,
 		hintOffsetY: -30,
@@ -81,13 +81,13 @@ export const Pages = [
 				<p className="edit-site-welcome-guide__text">
 					{ __( 'This is the list of pages, sorted according to your filter.' ) }
 					<br /><br />
-					{ __( 'Close this tutorial window and hover over the page title to see the additional options:.' ) }
-					<br /><br />
-					{ __( 'Click on the page title or the pen icon to open the page in the editor.' ) }
+					{ __( 'Close this tutorial window and hover over the page title to see the page options:' ) }
 					<br />
-					{ __( 'Click on the Actions menu (the three dots menu) to acess options to duplicate, rename or trash the page.' ) }
+					{ __( '- Click on the page title or the pen icon to open the page in the editor.' ) }
 					<br />
-					{ __( 'Select "View" in the Actions menu to view the page on the front of the site. The page opens in a new tab.' ) }
+					{ __( '- Click on the Actions menu (the three dots menu) to acess options to duplicate, rename or trash the page.' ) }
+					<br />
+					{ __( '- Select "View" in the Actions menu to view the page on the front of the site. The page opens in a new tab.' ) }
 				</p>
 			</>
 		),
@@ -110,6 +110,8 @@ export const Pages = [
 				</h1>
 				<p className="edit-site-welcome-guide__text">
 					{ __( 'This frame is a preview of your page. The preview is only available when you are using the list layout.' ) }
+					<br />
+					{ __( 'Click anywhere in the preview to open the page in the editor.' ) }
 				</p>
 			</>
 		),
@@ -118,8 +120,8 @@ export const Pages = [
 		anchor: '.dataviews-filters__view-actions button',
 		verticalplacement: 'top',
 		horizontalplacement: 'right',
-		offsetX: 10,
-		offsetY: -10,
+		offsetX: 16,
+		offsetY: -12,
 		showArrow: true,
 		arrowPosition: 'left',
 		hintType: 'button',
