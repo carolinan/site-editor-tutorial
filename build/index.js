@@ -37,7 +37,8 @@ function Hint({
     height: `${size}px`,
     cursor: 'pointer'
   };
-  // The button is not focusable
+  // The button is not focusable because it is printed at the bottom of the page,
+  // without context for keyboard users.
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     id: id,
     className: "site-editor-tutorial__hint",
@@ -376,6 +377,8 @@ __webpack_require__.r(__webpack_exports__);
 const {
   useLocation
 } = (0,_unlock__WEBPACK_IMPORTED_MODULE_1__.unlock)(_wordpress_router__WEBPACK_IMPORTED_MODULE_0__.privateApis);
+
+// Select the tutorial page based on the current location.
 const selectPages = (Pages, records) => {
   let screen = '';
   let tutorials = '';
@@ -393,7 +396,7 @@ const selectPages = (Pages, records) => {
   // const pathname = location.pathname;
 
   if (!path && !canvas && !postID) {
-    console.log(' page-selector.js: No path or canvas');
+    //console.log(' page-selector.js: No path or canvas');
     path = 'Entry';
   }
   switch (path) {
@@ -426,16 +429,16 @@ const selectPages = (Pages, records) => {
     case '/wp_template':
       // /wp_templateedit is the editor page for a template.
       // /wp_template is the preview page for a template.
-      tutorials = Pages.templatesPages;
-      screen = 'templatesPages';
+      tutorials = Pages.Templates;
+      screen = 'Templates';
       break;
     case '/patterns':
-      tutorials = Pages.patternsPages;
-      screen = 'patternsPages';
+      tutorials = Pages.Patterns;
+      screen = 'Patterns';
       break;
     case 'edit':
-      tutorials = Pages.editorCanvasPages;
-      screen = 'editorCanvasPages';
+      tutorials = Pages.editorCanvas;
+      screen = 'editorCanvas';
       break;
     case 'Entry':
       tutorials = Pages.Entry;
@@ -479,6 +482,11 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
+
+/**
+ * The tutorial modal component, which displays the tutorial content.
+ * See https://developer.wordpress.org/block-editor/reference-guides/components/modal/
+ */
 const TutorialModal = ({
   modalPosition,
   page,
@@ -1296,7 +1304,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-// Unlock for Gutenberg 18.3+ May 17 2024.
+// Unlock for Gutenberg 18.3+, May 17 2024.
 const {
   unlock
 } = (0,_wordpress_private_apis__WEBPACK_IMPORTED_MODULE_0__.__dangerousOptInToUnstableAPIsOnlyForCoreModules)('I know using unstable features means my theme or plugin will inevitably break in the next version of WordPress.', '@wordpress/edit-site');
@@ -1314,7 +1322,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   CommandPaletteButton: () => (/* binding */ CommandPaletteButton),
 /* harmony export */   getPosition: () => (/* binding */ getPosition),
-/* harmony export */   getQueryParamValue: () => (/* binding */ getQueryParamValue),
 /* harmony export */   localStorageState: () => (/* binding */ localStorageState)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
@@ -1335,6 +1342,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+// Get the position of the element,
+// so that the button and modal can be positioned relative to it.
 const getPosition = (anchor, offsetX, offsetY, verticalPlacement, horizontalPlacement) => {
   const rect = anchor.getBoundingClientRect();
   const top = verticalPlacement === 'bottom' ? `${rect.bottom + window.scrollY + offsetY}px` : `${rect.top + window.scrollY + offsetY}px`;
@@ -1343,10 +1353,6 @@ const getPosition = (anchor, offsetX, offsetY, verticalPlacement, horizontalPlac
     top,
     left
   };
-};
-const getQueryParamValue = (url, param) => {
-  const urlParams = new URLSearchParams(new URL(url).search);
-  return urlParams.get(param);
 };
 const localStorageState = () => {
   try {
@@ -1359,6 +1365,9 @@ const localStorageState = () => {
     return {};
   }
 };
+
+// A button that opens the command palette, used in the "Entry" tutorial page.
+// See https://developer.wordpress.org/block-editor/reference-guides/packages/packages-commands/
 const CommandPaletteButton = () => {
   const {
     open: openCommandCenter

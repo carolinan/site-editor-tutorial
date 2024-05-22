@@ -10,6 +10,10 @@ import classnames from 'classnames';
 import { Modal } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
+/**
+ * The tutorial modal component, which displays the tutorial content.
+ * See https://developer.wordpress.org/block-editor/reference-guides/components/modal/
+ */
 export const TutorialModal = ( { modalPosition, page, onFinish, ref } ) => (
 	<Modal
 		className={ classnames(

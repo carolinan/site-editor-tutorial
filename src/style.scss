@@ -6,6 +6,8 @@
 @import "../node_modules/@wordpress/base-styles/z-index";
 @import "arrows.scss";
 
+//TODO: Clean up unused CSS; including css used for the modal footer.
+
 // Trick the Site Editor into showing the plugin render.
 .edit-site > div:nth-child(3) {
 	display: block !important;;

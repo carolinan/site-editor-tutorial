@@ -7,6 +7,7 @@ import { privateApis as routerPrivateApis } from '@wordpress/router';
 import { unlock } from './unlock';
 const { useLocation } = unlock( routerPrivateApis );
 
+// Select the tutorial page based on the current location.
 export const selectPages = ( Pages, records ) => {
 	
 	let screen = '';
@@ -25,7 +26,7 @@ export const selectPages = ( Pages, records ) => {
 	// const pathname = location.pathname;
 
 	if ( ! path && ! canvas && ! postID ) {
-		console.log(' page-selector.js: No path or canvas');
+		//console.log(' page-selector.js: No path or canvas');
 		path = 'Entry';
 	}
 
@@ -59,16 +60,16 @@ export const selectPages = ( Pages, records ) => {
 		case '/wp_template':
 			// /wp_templateedit is the editor page for a template.
 			// /wp_template is the preview page for a template.
-			tutorials = Pages.templatesPages;
-			screen = 'templatesPages';
+			tutorials = Pages.Templates;
+			screen = 'Templates';
 			break;
 		case '/patterns':
-			tutorials = Pages.patternsPages;
-			screen = 'patternsPages';
+			tutorials = Pages.Patterns;
+			screen = 'Patterns';
 			break;
 		case 'edit':
-			tutorials = Pages.editorCanvasPages;
-			screen = 'editorCanvasPages';
+			tutorials = Pages.editorCanvas
+			screen = 'editorCanvas';
 			break;
 		case 'Entry':
 			tutorials = Pages.Entry;

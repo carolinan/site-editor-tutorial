@@ -6,6 +6,8 @@ import { useDispatch } from '@wordpress/data';
 import { store as commandsStore } from '@wordpress/commands';
 import { Button } from '@wordpress/components';
 
+// Get the position of the element,
+// so that the button and modal can be positioned relative to it.
 export const getPosition = ( anchor, offsetX, offsetY, verticalPlacement, horizontalPlacement ) => {
 	const rect = anchor.getBoundingClientRect();
 	const top =
@@ -19,11 +21,6 @@ export const getPosition = ( anchor, offsetX, offsetY, verticalPlacement, horizo
 	return { top, left };
 };
 
-export const getQueryParamValue = ( url, param ) => {
-	const urlParams = new URLSearchParams( new URL( url ).search );
-	return urlParams.get( param );
-}
-
 export const localStorageState = () => {
 	try {
 		const savedState = localStorage.getItem( 'site-editor-tutorial-shown' );
@@ -36,9 +33,10 @@ export const localStorageState = () => {
 	}
 };
 
+// A button that opens the command palette, used in the "Entry" tutorial page.
+// See https://developer.wordpress.org/block-editor/reference-guides/packages/packages-commands/
 export const CommandPaletteButton = () => {
 	const { open: openCommandCenter } = useDispatch( commandsStore );
-
 	return (
 		<Button
 			className="is-primary"
