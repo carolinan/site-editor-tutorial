@@ -9,6 +9,8 @@ The user selects which features they want to learn more about at their own pace 
 
 <img width="1509" alt="Screenshot of the tutorial activated on the Styles screen in the Site Editor" src="https://github.com/carolinan/site-editor-tutorial/assets/7422055/742798ca-04dd-478f-b909-7c7df087d8c5">
 
+<b>This plugin is not ready for use, only for initial testing of the proof of concept!</b>
+
 ## Installation
 
 <b>This plugin requires Gutenberg 18.3+.</b>
