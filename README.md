@@ -6,6 +6,9 @@ The plugin adds clickable "hints" to features, and activating the button opens a
 Some tutorial modals only have short information; others have links to the official WordPress user documentation.
 The user selects which features they want to learn more about at their own pace (The plugin does not have guided "paths" for the user to follow, but this can be considered in the future).
 
+
+<img width="1509" alt="Screenshot of the tutorial activated on the Styles screen in the Site Editor" src="https://github.com/carolinan/site-editor-tutorial/assets/7422055/742798ca-04dd-478f-b909-7c7df087d8c5">
+
 ## Installation
 
 <b>This plugin requires Gutenberg 18.3+.</b>
@@ -41,7 +44,6 @@ In src/page-selector.js, add the new screen as a `case` in the existing `switch`
 In src/tutorials/, duplicate an existing tutorial file, rename it, and update it as needed.
 Add the new file to the list of exports in src/tutorials/index.js.
 Build the changes and refresh the screen in the Site Editor.
-
 
 
 
