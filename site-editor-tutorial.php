@@ -2,23 +2,20 @@
 /**
  * Plugin Name:       Site Editor Tutorial
  * Description:       A tutorial for the Site Editor.
- * Requires at least: 6.1
+ * Requires at least: 6.5
  * Requires PHP:      7.0
  * Version:           0.1.0
- * Author:            Carolina
+ * Author:            Carolina Nymark
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       site-editor-tutorial
  *
- * @package           create-block
+ * @package           site-editor-tutorial
  */
 
-/*
-https://floating-ui.com/docs/react#positioning
-/gutenberg/packages/components/src/popover/index.tsx
-https://github.com/WordPress/gutenberg/pull/43691
-*/
-
+ /**
+  * Enqueue the JavaScript and CSS for the Site Editor "plugin".
+  */
 function site_editor_tutorial_scripts_and_styles() {
 	wp_enqueue_script(
 		'site-editor-tutorial',
@@ -35,5 +32,4 @@ function site_editor_tutorial_scripts_and_styles() {
 		filemtime( plugin_dir_path( __FILE__ ) . 'build/style-index.css' )
 	); 
 }
-
 add_action( 'enqueue_block_editor_assets', 'site_editor_tutorial_scripts_and_styles' );

@@ -1,6 +1,9 @@
 /**
- * This file contains the content for the initial tutorial pages in the Site Editor welcome guide.
- * It needs to be split further as the content increases.
+ * This file contains the content for the initial tutorial pages.
+ * Example: /wp-admin/site-editor.php
+ *
+ * The first item is displayed automatically if the page is the point of entry,
+ * or when the page is refreshed.
  */
 
 /**
@@ -12,97 +15,90 @@ import { createInterpolateElement } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import { CommandPaletteButton } from '../command-palette-button';
-import { nextSteps } from './next-steps';
+import { CommandPaletteButton } from '../utils.js';
 
-export const entryPages = [
+export const Entry = [
 	{
-		anchor: '.interface-interface-skeleton__header',
-		verticalplacement: 'bottom',
-		horizontalplacement: 'none',
-		offsetX: 20,
-		offsetY: 20,
-		highlight: false,
+		anchor: '.edit-site-layout__content',
+		label: __( 'Site Editor tutorial intro' ),
 		showArrow: false,
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">
-					{ __( 'Welcome to the Site Editor tutorial' ) }
+					{ __( 'Welcome to the Site Editor Tutorial' ) }
 				</h1>
+				<h2 className="edit-site-welcome-guide__heading">
+					{ __( 'What is the Site Editor?' ) }
+				</h2>
 				<p className="edit-site-welcome-guide__text">
 					{
-						__( 'This walkthrough will introduce the Site Editor interface and features.' )
-					}
-					<br /><br></br>
-					{	__( 'While the tutorial is open, you will not be able to interact with any other elements on the page.' )
+						__( 'The Site Editor is a WordPress feature where you can view, edit and create templates and patterns that you can use to change the design and layout of your site.' )
 					}
 					<br /><br />
 					{
-						__( 'You can close the tutorial by clicking the close button (X) in the top corner, or with the Esc key.' )
+						__( 'Here you can choose between premade designs, add custom color palettes and fonts.' )
 					}
-					&nbsp;
-					{
-						__( 'You can also navigate to the next or previous tutorial page with the left and right arrow keys.' )
-					}
+					<br /><br />
+					<a href="https://wordpress.org/documentation/article/site-editor/" target="_new">{ __( 'Read more about the Site Editor in the official documentation.' ) }</a>
 				</p>
-				<br />
+				<h2 className="edit-site-welcome-guide__heading">
+					{ __( 'How does the Site Editor tutorial work?' ) }
+				</h2>
+				<p className="edit-site-welcome-guide__text">
+					{
+						__( 'The Site Editor is split into several setting screens and panels.' )
+					}
+					<br />
+					{
+						__( 'With this guide, you can navigate freely between the Site Editor screens and read helpful hints and tips to get started.' )
+					}
+					<br />
+					{ 
+						__( 'Click on the purple hints to find out more about the interface or a feature.' )
+					}
+					<br /><br />
+					{ __( 'You can close the tips with the Esc key, or use the close button.' ) }
+				</p>
 			</>
 		),
 	},
 	{
 		anchor: '.edit-site-layout__canvas',
+		label: __( 'The site preview' ),
 		verticalplacement: 'top',
 		horizontalplacement: 'none',
 		offsetX: 40,
 		offsetY: 40,
-		highlight: false,
-		highlightborder: true,
 		showArrow: false,
+		hintType: 'button',
+		hintOffsetX: 22,
+		hintOffsetY: 100,
+		hintSize: 40,
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">{ __( 'The site preview' ) }</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'The main content of the Site Editor entry screen is a preview of your site.' ) }
-					<br />
-					{ __( 'The preview changes depending on which template or page you have selected.' ) }
+					{ __( 'The main content of the Site Editor entry screen is a live preview that matches the front of your site.' ) }
+					{ __( ' You can use it to preview your homepage, pages, templates, menus, and template parts.' ) }
 					<br /><br />
-					{ __( 'Clicking anywhere on the preview will open the template and make it available for editing. This feature is disabled during this step of the tutorial.' ) }
+					{ __( 'Clicking anywhere on the preview will open it in the editor where you can customize your design and add new blocks and patterns.' ) }
 				</p>
-			</>
-		),
-	},
-	{
-		anchor: '.edit-site-layout__sidebar-region',
-		verticalplacement: 'top',
-		horizontalplacement: 'right',
-		offsetX: 10,
-		offsetY: 10,
-		highlight: true,
-		showArrow: true,
-		arrowPosition: 'left-middle',
-		content: (
-			<>
-				<h1 className="edit-site-welcome-guide__heading">{ __( 'The Siter Editor Menu' ) }</h1>
-				<p className="edit-site-welcome-guide__text">
-					{ __( 'You can use the menu to navigate to different settings screens.' ) }
-					<br />
-					{ __( 'Positioned at the top, you will find shortcuts and a button that opens the Command Palette.' ) }
-					<br />
-					{ __( 'Below the menu, there is a status area where you will be notified if you have unsaved changes.' ) }
-				</p>
-
 			</>
 		),
 	},
 	{
 		anchor: '.edit-site-layout__view-mode-toggle',
+		label: __( 'The Dashboard link' ),
 		verticalplacement: 'bottom',
 		horizontalplacement: 'none',
 		offsetX: 10,
 		offsetY: 10,
-		highlight: true,
 		showArrow: true,
 		arrowPosition: 'top-left',
+		hintType: 'button',
+		hintOffsetX: 22,
+		hintOffsetY: -10,
+		hintSize: 18,
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">{ __( 'The Dashboard link' ) }</h1>
@@ -129,36 +125,18 @@ export const entryPages = [
 		),
 	},
 	{
-		anchor: '.edit-site-site-hub__site-title',
-		verticalplacement: 'bottom',
-		horizontalplacement: 'left',
-		offsetX: 0,
-		offsetY: 20,
-		highlight: true,
-		showArrow: true,
-		arrowPosition: 'top-left',
-		content: (
-			<>
-				<h1 className="edit-site-welcome-guide__heading">
-					{ __( 'Site title' ) }
-				</h1>
-				<p className="edit-site-welcome-guide__text">
-					{ __(
-						'This is your site title.'
-					) }
-				</p>
-			</>
-		),
-	},
-	{
 		anchor: '.edit-site-site-hub__site-view-link',
+		label: __( 'Shortcut to the front of your site' ),
 		verticalplacement: 'bottom',
 		horizontalplacement: 'none',
 		offsetX: -4,
 		offsetY: 20,
-		highlight: true,
 		showArrow: true,
 		arrowPosition: 'top-left',
+		hintType: 'button',
+		hintOffsetX: 6,
+		hintOffsetY: 0,
+		hintSize: 18,
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">
@@ -174,13 +152,17 @@ export const entryPages = [
 	},
 	{
 		anchor: '.edit-site-site-hub_toggle-command-center',
+		label: __( 'Command Palette' ),
 		verticalplacement: 'bottom',
 		horizontalplacement: 'none',
 		offsetX: -4,
 		offsetY: 20,
-		highlight: true,
 		showArrow: true,
 		arrowPosition: 'top-left',
+		hintType: 'button',
+		hintOffsetX: 7,
+		hintOffsetY: 0,
+		hintSize: 18,
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">
@@ -192,28 +174,30 @@ export const entryPages = [
 					{ __( 'The button with the maginfying glass opens the Command Palette.' ) }
 					<br />
 					{ __( 'You can also open the Command Palette by pressing Command/Ctrl + K.' ) }
-				</p>
-				<p className="edit-site-welcome-guide__text">
+					<br /><br />
 					{ __( 'Go ahead and open the Command Palette and try it out by typing "view site" in the search field:' ) }
-				</p>
-				<p className="edit-site-welcome-guide__text">
+					<br /><br />
 					<CommandPaletteButton />
-				</p>
-				<p className="edit-site-welcome-guide__text">
-					<a href="https://wordpress.org/documentation/article/site-editor-command-palette/" target="_new">{ __( 'Read more in the documentation.' ) }</a>
+					<br /><br />
+					<a href="https://wordpress.org/documentation/article/site-editor-command-palette/" target="_new">{ __( 'Read more in the Command Palette documentation.' ) }</a>
 				</p>
 			</>
+			
 		),
 	},
 	{
 		anchor: '.edit-site-sidebar-button',
+		label: __( 'The back button' ),
 		verticalplacement: 'bottom',
 		horizontalplacement: 'none',
 		offsetX: 0,
 		offsetY: 10,
-		highlight: true,
 		showArrow: true,
 		arrowPosition: 'top-left',
+		hintType: 'button',
+		hintOffsetX: 14,
+		hintOffsetY: -5,
+		hintSize: 12,
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">
@@ -226,42 +210,48 @@ export const entryPages = [
 		),
 	},
 	{
-		anchor: '.edit-site-sidebar-navigation-item',
-		nth: 0,
+		anchor: '#/navigation',
+		label: __( 'Navigation' ),
 		verticalplacement: 'top',
 		horizontalplacement: 'right',
 		offsetX: 10,
 		offsetY: 0,
-		highlight: true,
 		showArrow: true,
 		arrowPosition: 'left',
+		hintType: 'button',
+		hintOffsetX: -50,
+		hintOffsetY: 10,
+		hintSize: 16,
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">
 					{ __( 'Navigation' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'Allows you to browse and edit your menus and make changes such as adding, re-ordering or removing links and blocks.' ) }
-				</p>
-				<p className="edit-site-welcome-guide__text">
-					<a href="https://wordpress.org/documentation/article/site-editor-navigation/" target="_new">{ __( 'Read more in the documentation.' ) }</a>
-				</p>
-				<p className="edit-site-welcome-guide__text">
-					<a href="/wp-admin/site-editor.php?path=%2Fnavigation" className="components-button is-primary">{ __( 'Skip ahead to the Navigation tutorial' ) }</a>
+					{ __( 'This menu item takes you to the Navigation screen where you can browse and edit your menus.' ) }
+					<br /><br />
+					{ __( '- Menus decide which links and blocks should show in your menu. A menu can be used inside one or more navigation blocks.' ) }
+					<br /><br />
+					{ __( '- The navigation block decides where and how your menu is displayed. For example, you can place a navigation block in your header, assign your menu, and change the colors, font size and font family.' ) }
+					<br /><br />
+					<a href="https://wordpress.org/documentation/article/site-editor-navigation/" target="_new">{ __( 'Read more about the Site Editor Navigation in the documentation.' ) }</a>
 				</p>
 			</>
 		),
 	},
 	{
-		anchor: '.edit-site-sidebar-navigation-item',
-		nth: 1,
+		anchor: '#/wp_global_styles',
+		label: __( 'Styles' ),
 		verticalplacement: 'top',
 		horizontalplacement: 'right',
 		offsetX: 10,
-		offsetY: 0,
-		highlight: true,
+		offsetY: -80,
 		showArrow: true,
-		arrowPosition: 'left',
+		arrowPosition: 'left-middle',
+		hintType: 'button',
+		hintOffsetX: -50,
+		hintOffsetY: 10,
+		hintSize: 16,
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">
@@ -269,53 +259,56 @@ export const entryPages = [
 				</h1>
 				<p className="edit-site-welcome-guide__text">
 					{ __( 'Styles can change the look and feel of your site with a single setting, by switching color palettes and fonts.' ) }
-				</p>
-				<p className="edit-site-welcome-guide__text">
-					{ __( 'This menu provides direct access to previewing, selecting and editing your site’s style variations.' ) }
-				</p>
-				<p className="edit-site-welcome-guide__text">
-					<a href="/wp-admin/site-editor.php?path=%2Fwp_global_styles" className="components-button is-primary">{ __( 'Skip ahead to the Styles tutorial' ) }</a>
+					<br /><br />
+					{ __( 'Pre-made style variations are optional and included in your block theme. Because of that, the styles and the number of options to choose from varies from theme to theme.' ) }
+					<br /><br />
+					{ __( 'This menu item provides access to previewing, selecting and editing your site’s style variations.' ) }
 				</p>
 			</>
 		),
 	},
 	{
-		anchor: '.edit-site-sidebar-navigation-item',
-		nth: 2,
+		anchor: '#/page',
+		label: __( 'Pages' ),
 		verticalplacement: 'top',
 		horizontalplacement: 'right',
 		offsetX: 10,
 		offsetY: 0,
-		highlight: true,
 		showArrow: true,
 		arrowPosition: 'left',
+		hintType: 'button',
+		hintOffsetX: -50,
+		hintOffsetY: 10,
+		hintSize: 16,
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">
 					{ __( 'Pages' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'Edit the content of your pages inside the Site Editor itself.' ) }
-				</p>
-				<p className="edit-site-welcome-guide__text">
-					<a href="https://wordpress.org/documentation/article/site-editor-pages/" target="_new">{ __( 'Read more in the documentation.' ) }</a>
-				</p>
-				<p className="edit-site-welcome-guide__text">
-					<a href="/wp-admin/site-editor.php?path=%2Fpage" className="components-button is-primary">{ __( 'Skip ahead to the Page tutorial' ) }</a>
+					{ __( 'Here you can create new pages or edit the content of your existing pages inside the Site Editor itself.' ) }
+					<br /><br />
+					{ __( 'You can preview your page with a page template to see what the page will look like on the front of your site.' ) }
+					{ __( ' If your theme has included optional templates, you can also swap your page template and choose a different design.' ) }
+					<br /><br />
+					<a href="https://wordpress.org/documentation/article/site-editor-pages/" target="_new">{ __( 'Read more about the Site Editor Pages in the documentation.' ) }</a>
 				</p>
 			</>
 		),
 	},
 	{
-		anchor: '.edit-site-sidebar-navigation-item',
-		nth: 3,
+		anchor: '#/wp_template',
+		label: __( 'Templates' ),
 		verticalplacement: 'top',
 		horizontalplacement: 'right',
 		offsetX: 10,
 		offsetY: 0,
-		highlight: true,
 		showArrow: true,
 		arrowPosition: 'left',
+		hintType: 'button',
+		hintOffsetX: -50,
+		hintOffsetY: 10,
+		hintSize: 16,
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">
@@ -323,58 +316,61 @@ export const entryPages = [
 				</h1>
 				<p className="edit-site-welcome-guide__text">
 					{ __( 'Templates are used to create the layout and structure for everything that you see on the front of your site: from the front page to the single posts and the 404 page.' ) }
-				</p>
-				<p className="edit-site-welcome-guide__text">
-					{ __( 'Here you can manage the different layouts for your site and create new custom templates.' ) }
-				</p>
-				<p className="edit-site-welcome-guide__text">
-					<a href="/wp-admin/site-editor.php?path=%2Fwp_template" className="components-button is-primary">{ __( 'Skip ahead to the Template tutorial' ) }</a>
+					<br /><br />
+					{ __( 'Here you can create new custom templates and manage the different templates for your site.' ) }
+					<br />
+					{ __( 'You can filter and sort your existing templates, reset changes to theme templates, and rename and delete your custom templates.' ) }
 				</p>
 			</>
 		),
 	},
 	{
-		anchor: '.edit-site-sidebar-navigation-item',
-		nth: 4,
-		verticalplacement: 'top',
+		anchor: '#/patterns',
+		label: __( 'Patterns' ),
+		verticalplacement: 'middletop',
 		horizontalplacement: 'right',
 		offsetX: 10,
-		offsetY: 0,
-		highlight: true,
+		offsetY: -80,
 		showArrow: true,
-		arrowPosition: 'left',
+		arrowPosition: 'left-middle',
+		hintType: 'button',
+		hintOffsetX: -50,
+		hintOffsetY: 10,
+		hintSize: 16,
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">
 					{ __( 'Patterns' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'Patterns are blocks grouped together to create customizable design features. For example a gallery, FAQ, or pricing table. Patterns can be added to your content or your templates.' ) }
-				</p>
-				<p className="edit-site-welcome-guide__text">
-					{ __( 'Template parts can be used to display the site header and site footer in your templates.' ) }
-				</p>
-				<p className="edit-site-welcome-guide__text">
-					{ __( 'Manage your synced patterns and template parts here.' ) }
-				</p>
-				<p className="edit-site-welcome-guide__text">
+					{ __( 'From this menu you can access and manage your patterns and template parts.' ) }
+					<br /><br />
+					{ __( 'Patterns are blocks that are grouped together to create page sections and other resusable design features.' ) }
+					{ __( ' Here you can preview all your patterns by category, search for patterns, and create new patterns.' ) }
+					<br /><br />
+					{ __( 'Template parts are most commonly used to display your site headers and footers.' ) }
+					{ __( ' By using a header template part, you can edit and update the header of all your templates from one location.' ) }
+					<br />
+					{ __( 'Go here if you want to preview your header and footer designs, or create new ones from scratch.' ) }
+					<br /><br />
 					<a href="https://wordpress.org/documentation/article/site-editor-patterns/" target="_new">{ __( 'Read more in the documentation.' ) }</a>
-				</p>
-				<p className="edit-site-welcome-guide__text">
-					<a href="/wp-admin/site-editor.php?path=%2Fpatterns" className="components-button is-primary">{ __( 'Skip ahead to the Pattern tutorial' ) }</a>
 				</p>
 			</>
 		),
 	},
 	{
 		anchor: '.edit-site-save-hub',
+		label: __( 'Status messages' ),
 		verticalplacement: 'top',
 		horizontalplacement: 'left',
 		offsetX: 10,
 		offsetY: -220,
-		highlight: true,
 		showArrow: true,
 		arrowPosition: 'bottom-left',
+		hintType: 'button',
+		hintOffsetX: 20,
+		hintOffsetY: -10,
+		hintSize: 16,
 		content: (
 			<>
 				<h1 className="edit-site-welcome-guide__heading">
@@ -387,5 +383,4 @@ export const entryPages = [
 			</>
 		),
 	},
-	nextSteps,
 ];

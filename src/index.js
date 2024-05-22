@@ -1,301 +1,258 @@
 /**
- * External dependencies
- */
-import classnames from 'classnames';
-
-/**
  * WordPress dependencies
  */
-import { useState, useEffect, useRef } from '@wordpress/element';
+import { useState, useRef, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { Modal } from '@wordpress/components';
 import { registerPlugin } from '@wordpress/plugins';
 import { useEntityRecords } from '@wordpress/core-data';
+
+// Note: Unlocking private API's require using the current version of Gutenberg!
+// See src/unlock.js for more information.
+import { privateApis as routerPrivateApis } from '@wordpress/router';
+import { unlock } from './unlock';
+const { useLocation, useHistory } = unlock( routerPrivateApis );
 
 /**
  * Internal dependencies
  */
 import './style.scss';
-import SiteEditorTutorialFooter from './tutorial-footer';
-import * as Pages from './pages';
+import * as Pages from './tutorials';
+import { TutorialModal } from './tutorial-modal';
+import { getPosition } from './utils';
+import { Hint } from './hint';
+import { selectPages } from './page-selector';
 
 function SiteEditorTutorial() {
 	const ref = useRef( null );
+	const location = useLocation();
+	const history = useHistory();
 	const [ isOpen, setIsOpen ] = useState( true );
 	const [ currentPage, setCurrentPage ] = useState( 0 );
-	// Set opacity to 0 to prevent layout shifts:
-	const [ styleAttr, setStyleAttributes ] = useState( { opacity: '1', display: 'block' } );
+	const [ activeAnchor, setActiveAnchor ] = useState( '.edit-site-layout__content' );
+	const [ modalPosition, setModalPosition ] = useState({ top: 20, left: 400 });
+	const [ buttons, setButtons ] = useState([]);
+	const [ processedAnchors, setProcessedAnchors ] = useState([]);
+	const [ currentHref, setCurrentHref ] = useState(window.location.href);
+	const { records, isResolving } = useEntityRecords( 'postType', 'wp_navigation' );
+	const { tutorials, screen } = selectPages( Pages, records, isResolving ) || {};
 
-	/*
-	 * This would have been easier if I could have just used useLocation() but its private.
-	 * Locate the tutorial pages based on the URL.
-	 */
-	let pages = Pages.entryPages;
-	const href = window.location.href;
-	const path = window.location.pathname;
+	const page = tutorials ? tutorials[currentPage] : null;
 
-	function getQueryParamValue( url, param ) {
-		const urlParams = new URLSearchParams( new URL( url ).search );
-		return urlParams.get( param );
-	}
-	/**
-	 * The path determines which Site Editor screen is shown.
-	 * Example: wp-admin/site-editor.php?path=%2Fpage
-	*/
-	const pathParam = getQueryParamValue(href, 'path') || '';
-	/**
-	 * The post type parameter is used to determine which post type that is being viewed,
-	 * for example post, page, pattern.
-	 */
-	const postTypeParam = getQueryParamValue( href, 'postType'  ) || '';
-	/**
-	 * If the canvas parameter is set, we are in the actual editor and not
-	 * in the preview mode where the navigation menu is shown.
-	*/
-	const canvasParam = getQueryParamValue( href, 'canvas' ) || '';
-
-	const postIDParam = getQueryParamValue( href, 'postId' ) || '';
-
-	// Combine the parameters
-	const pageSelector = pathParam + postTypeParam + canvasParam;
-
-	console.log( 'href: ', href );
-	console.log( 'path: ', path );
-	console.log( 'pathParam: ', pathParam );
-	console.log( 'postTypeParam: ', postTypeParam );
-	console.log( 'canvasParam: ', canvasParam );
-	console.log( 'postIDParam: ', postIDParam );
-	console.log( 'pageSelector: ', pageSelector );
-
-	switch ( pageSelector ) {
-		case '/navigation':
-		case 'wp_navigation':
-			if ( postIDParam ) {
-				// If the post id is set, we are in the editor for a specific menu.
-				console.log( 'postIDParam: ', postIDParam );
-				pages = Pages.navigationDetailsPages;
-			} else {
-				const { records, isResolving } = useEntityRecords( 'postType', 'wp_navigation' );
-				let count = 0;
-
-				if ( isResolving ) {
-					pages = Pages.navigationPages;
-				} else if ( records ) {
-					count = records.length;
-					// If there is more than one menu, show the list of menus
-					if ( count > 1 ) {
-						pages = Pages.navigationPages;
-					} else {
-						// If there is only one menu, show the details of the menu.
-						pages = Pages.navigationDetailsPages;
-					}
-				}
+	const localStorageState = () => {
+		try {
+			const savedState = localStorage.getItem( 'site-editor-tutorial-shown' );
+			if ( savedState ) {
+				return JSON.parse( savedState );
 			}
-			break;
-		case '/wp_global_styles':
-			/**
-			 * Note: /wp_global_stylesedit is an exception because it does not open with
-			 * the select styles, just the editor.
-			 * 
-			 * /wp_global_styles is the page with the left hand menu where you preview style variations.
-			 */
-			pages = Pages.stylesPages;
-			break;
-		case '/page':
-			// /page is the page previews and the site editor menu with the list of pages.
-			// /pageedit is the editor page for a page.
-			pages = Pages.pagesPages;
-			break;
-		case '/wp_template':
-			// /wp_templateedit is the editor page for a template.
-			// /wp_template is the preview page for a template.
-			pages = Pages.templatesPages;
-			break;
-		case '/patterns':
-			pages = Pages.patternsPages;
-			break;
-		case 'edit':
-			pages = Pages.editorCanvasPages;
-			break;
-		default:
-			console.log( 'default' );
-			pages = Pages.entryPages;
-			break;
-	}
-
-	useEffect( () => {
-		// Place focus at the top of the modal on mount and when the page changes.
-		// This focus management needs to be separate from the "focusOnMOunt" modal property
-		// because of the pagination.
-		const frame = ref.current?.querySelector( '.site-editor-tutorial' );
-		if ( frame instanceof HTMLElement ) {
-			frame.focus();
-		}
-	}, [ currentPage ] );
-
-	const canGoBack = currentPage > 0;
-	const canGoForward = currentPage < pages.length - 1;
-	const goBack = () => {
-		if ( canGoBack ) {
-			resetStyles();
-			setCurrentPage( currentPage - 1 );
-		}
-	};
-	const goForward = () => {
-		if ( canGoForward ) {
-			resetStyles();
-			setCurrentPage( currentPage + 1 );
+		} catch ( error ) {
+			console.error( "Error reading from localStorage", error );
+			return {};
 		}
 	};
 
-	function applyStyles( anchor, highlightType ) {
-		const borderColor = 'var(--wp-block-synced-color)';
-		if ( highlightType === 'border' ) {
-			anchor.style.border = `6px solid ${ borderColor }`;
-		} else if ( highlightType === 'boxShadow' ) {
-			anchor.style.boxShadow = `inset 0 0 0 6px ${ borderColor }`;
-		}
-	}
+	/* Use local storage to keep track of which tutorial pages have been shown. */
+	const [ shownPages, setShownPages ] = useState( localStorageState );
 
-	const resetStyles = () => {
-		let anchor = document.querySelector( pages[ currentPage ].anchor );
-		const nth = pages[ currentPage ].nth;
-		if ( anchor ) {
-			if ( nth >= 0 ) {
-				anchor = document.querySelectorAll( pages[ currentPage ].anchor );
-				const nthElement = anchor[ nth ];
-				if ( nthElement ) {
-					nthElement.style.border = '';
-					nthElement.style.boxShadow = '';
-				}
-			} else {
-				anchor.style.border = '';
-				anchor.style.boxShadow = '';
-			}
-		}
-	};
-
-	const removeOverlay = () => {
-		const overlay = document.querySelector( '.components-modal__screen-overlay:has(.site-editor-tutorial)' );
-		if ( overlay ) {
-			overlay.style.position = 'initial';
-		}
-	};
-
-	useEffect( () => {
-		const getAnchorElement = () => {
-			const anchor = document.querySelector( pages[ currentPage ].anchor );
-			// Some of the elements are node lists, so we need to use querySelectorAll.
-			const nth = pages[ currentPage ].nth;
-			return nth >= 0 ? document.querySelectorAll( pages[ currentPage ].anchor )[ nth ] : anchor;
-		};
-
-		const getPosition = ( anchor, offsetX, offsetY ) => {
-			const rect = anchor.getBoundingClientRect();
-			const top =
-				pages[ currentPage ].verticalplacement === 'bottom'
-					? `${ rect.bottom + window.scrollY + offsetY }px`
-					: `${ rect.top + window.scrollY + offsetY }px`;
-			const left =
-				pages[ currentPage ].horizontalplacement === 'right'
-					? `${ rect.right + window.scrollX + offsetX }px`
-					: `${ rect.left + window.scrollX + offsetX }px`;
-			return { top, left };
-		};
-
-		const createStyleAttributes = () => {
-			const updateStyles = () => {
-				const anchor = getAnchorElement();
-
-				if ( anchor ) {
-					const { offsetX, offsetY } = pages[ currentPage ];
-					const { top, left } = getPosition( anchor, offsetX, offsetY );
-
-					const newStyle = {
-						position: 'absolute',
-						top,
-						left,
-					};
-
-					// Add border or box shadow styles to highlight the targeted element.
-					if ( pages[ currentPage ].highlightborder || pages[ currentPage ].highlight ) {
-						const styleProperty = pages[ currentPage ].highlightborder ? 'border' : 'boxShadow';
-						applyStyles( anchor, styleProperty );
-					}
-			
-					setStyleAttributes( newStyle );
-
-					// Remove the overlay when the navigationPages are shown.
-					if ( pages[ currentPage ]?.name == 'navigationPages' ) {
-						removeOverlay();
-					}
-				
-				}
-			};
-
-			requestAnimationFrame( updateStyles );
-		};
-
-		createStyleAttributes();
-	}, [ currentPage, pages ] );
-
+	/**
+	 * Close the modal when the user uses the close button, or clicks outside the modal.
+	 * Register that the modal has been shown, so that it doesn't show again,
+	 * and remove the button that activates the modal.
+	 */
 	const onFinish = () => {
+		// Wihout these two resets, the modal does not close.
 		setIsOpen( false );
-		resetStyles();
+		setActiveAnchor( null );
+
+		// Register that the modal has been shown, so that it doesn't show again.
+		const newShownPages = { ...shownPages, [currentPage]: true };
+		try {
+			localStorage.setItem( 'site-editor-tutorial-shown', JSON.stringify( newShownPages ) );
+		} catch (error) {
+			console.error( "Error writing to localStorage", error );
+		}
+		setShownPages( newShownPages );
+
+		const buttonId = `site-editor-tutorial-button-${currentPage}`;
+		const button = document.getElementById( buttonId );
+		if ( button ) {
+			document.getElementById( buttonId ).style.display = 'none';
+		}
 	};
 
-	if ( pages.length === 0 || ! isOpen || path !== '/wp-admin/site-editor.php' ) {
-		return null;
+	// When the user clicks on a button, open the modal.
+	const onButtonClick = ( event, anchor, index, top, left) => {
+		event.stopPropagation();
+		setActiveAnchor( anchor );
+		setCurrentPage( index );
+		setIsOpen( true );
+		setModalPosition( { top, left } );
+	}
+
+	// Move focus to the anchor when the modal is closed.
+	useEffect( () => {
+		const focusAnchor = () => {
+			// If the anchor is for the first modal page, do not move focus.
+			if ( activeAnchor !== null && activeAnchor !== '.edit-site-layout__content' ) {
+				activeAnchor.focus();
+			}
+		};
+
+		if ( ! isOpen ) {
+			focusAnchor();
+		}
+
+		return () => {
+			focusAnchor();
+		};
+	}, [ isOpen, activeAnchor ] );
+
+	const generateButtons = () => {
+		const tutorialList = Pages[screen];
+		if ( ! tutorialList || ! page ) {
+			console.error( `No tutorial list found for ${screen}` );
+			return;
+		}
+		const newButtons = tutorialList.reduce( (acc, page, index) => {
+			// Skip tutorial pages that have been shown.
+			// This is temporarily disabled during development,
+			// so that the buttons can be tested witohut having to reset the local storage.
+			//if ( shownPages[index] ) {
+			//	return acc;
+			//}
+			setTimeout( () => {
+				let anchor = page.anchor;
+				// If the anchor is an ID, use getElementById./
+				if ( page.anchor.startsWith('#') ) {
+					anchor = document.getElementById( page.anchor.substring(1) );
+				} else {
+					anchor = document.querySelector( page.anchor );
+					if ( page.nth !== undefined ) {
+						const nth = page.nth;
+						const nthAnchor = document.querySelectorAll( page.anchor )[nth];
+						if ( nthAnchor ) {
+							anchor = nthAnchor;
+						}
+					}
+				}
+
+				if ( ! anchor ) {
+					// If there is a list of tutorial pages, but the anchor is not found, return early.
+					console.error( `No anchor found for ${page.anchor}` );
+					return;
+				}
+		
+				const { offsetX, offsetY, hintOffsetX, hintOffsetY, label, hintSize } = page;
+				const { top, left } = getPosition( anchor, offsetX, offsetY, page.verticalplacement, page.horizontalplacement );
+				const { top: hintTop, left: hintLeft } = getPosition( anchor, hintOffsetX, hintOffsetY, page.verticalplacement, page.horizontalplacement );
+				const buttonId = `site-editor-tutorial-button-${index}`;
+
+				setProcessedAnchors( prevProcessedAnchors => [ ...prevProcessedAnchors, anchor ] );
+
+				const buttonProps = {
+					id: buttonId,
+					top: hintTop,
+					left: hintLeft,
+					size: hintSize,
+					label,
+					index,
+					onClick( event ) {
+						onButtonClick( event, anchor, index, top, left);
+					}
+				};
+				acc.push( {
+					id: `site-editor-tutorial-button-${index}`,
+					...buttonProps,
+				} );
+			}, 1000 );
+			return acc;
+		}, [] );
+		setButtons( newButtons );
+	};
+
+	// Generate the first set of buttons.
+	useEffect( () => {
+		if ( buttons.length === 0 ) {
+			generateButtons();
+		}
+	}, [] );
+
+	// If the href changes, generate new buttons for the correct page.
+	useEffect( () => {
+		const checkHrefChangeOnClick = ( event ) => {
+			const isClassFoundInParents = ( target, className ) => {
+				while ( target && target !== document ) {
+					if ( target.classList.contains( className ) ) {
+						return true;
+					}
+					target = target.parentNode;
+				}
+				return false;
+			};
+	
+			// Check if the clicked element is inside the tutorial modal.
+			if ( isClassFoundInParents( event.target, 'site-editor-tutorial' ) ) {
+				return;
+			}
+
+			setTimeout( () => {
+				const newHref = window.location.href;
+				if ( newHref !== currentHref ) {
+					setCurrentHref( newHref );
+					onFinish();
+					generateButtons();
+				}
+			}, 0 );
+		};
+
+		document.addEventListener( 'click', checkHrefChangeOnClick );
+
+		return () => document.removeEventListener( 'click', checkHrefChangeOnClick );
+	}, [ currentHref, location ] );
+
+	// If the iframe is clicked, generate new buttons for the correct page.
+	useEffect( () => {
+		const handleBlur = () => {
+			setTimeout( () => { // Use setTimeout to push to the end of the event queue
+				const iframe = document.querySelector( 'iframe.edit-site-visual-editor__editor-canvas' );
+				if ( document.activeElement === iframe ) {
+					const newHref = location.pathname + location.search + '?canvas=edit';
+
+					setTimeout( () => {
+						if ( newHref !== currentHref ) {
+							setCurrentHref( newHref );
+							onFinish();
+							generateButtons();
+							history.push( newHref );
+						}
+					}, 0 );
+				}
+			}, 0 );
+		};
+
+		window.addEventListener( 'blur', handleBlur );
+
+		return () => window.removeEventListener( 'blur', handleBlur );
+	}, [ currentHref, history, location.pathname, location.search ] );
+
+	// Return early if the tutorial page is not found.
+	if ( ! page ) {
+		return;
 	}
 
 	return (
-		<Modal
-			className={ classnames(
-				'site-editor-tutorial',
-				'site-editor-tutorial-page-' + ( currentPage + 1 ),
-				{
-					'site-editor-tutorial-arrow': pages[ currentPage ].showArrow,
-					[ `site-editor-tutorial-arrow-${ pages[ currentPage ].arrowPosition }` ]:
-						pages[ currentPage ].showArrow,
-				}
-			) }
-			shouldCloseOnEsc={ true }
-			shouldCloseOnClickOutside={ false }
-			style={ styleAttr }
-			contentLabel={ __( 'Site Editor Tutorial' ) }
-			isDismissible={ pages.length > 1 }
-			onRequestClose={ onFinish }
-			onKeyDown={ ( event ) => {
-				if ( event.code === 'ArrowLeft' ) {
-					goBack();
-					// Do not scroll the modal's contents.
-					event.preventDefault();
-				} else if ( event.code === 'ArrowRight' ) {
-					goForward();
-					// Do not scroll the modal's contents.
-					event.preventDefault();
-				}
-			} }
-			ref={ ref }
-		>
-			<div className="site-editor-tutorial__container">
-				<div className="site-editor-tutorial__page">
-					{ pages[ currentPage ].image }
-					{ pages[ currentPage ].content }
-				</div>
-				<SiteEditorTutorialFooter
-					pages={ pages }
-					currentPage={ currentPage }
-					setCurrentPage={ setCurrentPage }
-					canGoBack={ canGoBack }
-					canGoForward={ canGoForward }
-					goBack={ goBack }
-					goForward={ goForward }
-					onFinish={ onFinish }
-					resetStyles={ resetStyles }
-				/>
-			</div>
-		</Modal>
+		<>
+			{ buttons.map( ( buttonProps ) => {
+				return <Hint key={buttonProps.id} {...buttonProps} />;
+			} ) }
+			{ activeAnchor &&
+			<TutorialModal
+				page={ page }
+				onFinish={ onFinish }
+				modalPosition={ modalPosition }
+				ref={ ref }
+			/>
+			}
+		</>
 	);
 }
 

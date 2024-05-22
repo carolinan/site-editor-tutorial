@@ -137,7 +137,7 @@
 }
 .site-editor-tutorial.site-editor-tutorial-arrow-top-right::before {
   margin-top: -10px;
-  left: 0%;
+  left: 90%;
   border-color: transparent transparent #ffffff transparent; /* Arrow color */
   border-width: 0 10px 10px 10px; /* Adjust the border-width for the arrow direction */
 }
@@ -178,16 +178,53 @@
   left: -10px;
 }
 
-/* Uncomment this part to make the rest of the UI clickable.
+.edit-site > div:nth-child(3) {
+  display: block !important;
+}
+
+/*
+* Uncomment this part to make the rest of the UI clickable.
+* Warning: will prevent closing the modal by clicking outside of it.
+
 .components-modal__screen-overlay:has(.site-editor-tutorial) {
 	position: initial;
 }
 */
-.edit-site-site-hub__site-view-link,
-.block-editor-list-view-leaf .block-editor-list-view-block__menu-cell > * {
-  opacity: 1 !important;
+.site-editor-tutorial__hint {
+  background: var(--wp-block-synced-color);
+  /* 
+   * Override specific border-radius styles that the Site Editor 
+   * adds to the first and last navigation items.
+   */
+  border-radius: 99999px !important;
+  z-index: 999999;
+  opacity: 1;
+  border: none;
+  padding: 0;
+  transition: all 0.2s ease-out;
+  box-shadow: 0 0 0 0 rgba(90, 153, 212, 0.5);
+  animation: pulse 2.6s infinite;
 }
 
+.site-editor-tutorial__hint:hover,
+.site-editor-tutorial__hint:focus,
+.site-editor-tutorial__hint:active {
+  animation: none;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.9);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 20px rgba(90, 153, 212, 0);
+  }
+  100% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(90, 153, 212, 0);
+  }
+}
 .site-editor-tutorial {
   overflow: initial;
 }
@@ -197,7 +234,9 @@
   }
 }
 .site-editor-tutorial .edit-site-welcome-guide__text {
-  font-size: 16px;
+  font-size: 1rem;
+  padding: 0 32px 32px 32px;
+  margin: 0;
 }
 .site-editor-tutorial .site-editor-tutorial__content {
   padding: 0;
