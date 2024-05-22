@@ -412,9 +412,6 @@ const selectPages = (Pages, records) => {
       break;
     case '/wp_global_styles':
       /**
-       * Note: /wp_global_stylesedit is an exception because it does not open with
-       * the select styles, just the editor.
-       * 
        * /wp_global_styles is the page with the left hand menu where you preview style variations.
        */
       tutorials = Pages.Styles;
@@ -422,7 +419,7 @@ const selectPages = (Pages, records) => {
       break;
     case '/page':
       // /page is the page previews and the site editor menu with the list of pages.
-      // /pageedit is the editor page for a page.
+      // Note that there is no "page details" tutorial because it is being removed from the site editor.
       tutorials = Pages.Pages;
       screen = 'Pages';
       break;
@@ -1021,7 +1018,7 @@ const Pages = [{
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Manage Pages')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Here you can create new pages or edit the content of your existing pages inside the Site Editor itself.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can preview your page with a page template to see what the page will look like on the front of your site.'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(' If your theme has included optional templates, you can also swap your page template and choose a different design.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Here you can see all your pages, create new pages, trash, rename and duplicate pages.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can also filter pages by status, author, or search for a specific page.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "https://wordpress.org/documentation/article/site-editor-pages/",
     target: "_new"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Read more about the Site Editor Pages in the documentation.'))))
@@ -1047,17 +1044,53 @@ const Pages = [{
   anchor: '.dataviews-view-list',
   verticalplacement: 'top',
   horizontalplacement: 'right',
-  offsetX: -70,
-  offsetY: -30,
+  offsetX: 10,
+  offsetY: 0,
   showArrow: true,
   arrowPosition: 'left',
   hintType: 'button',
-  hintOffsetX: -90,
-  hintOffsetY: -30,
+  hintOffsetX: -10,
+  hintOffsetY: -10,
   hintSize: 40,
   content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     className: "edit-site-welcome-guide__heading"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('List of pages')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Manage pages: List Layout')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This is the list of pages, sorted according to your filter.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Close this tutorial window and hover over the page title to see the page options:'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('- Click on the page title or the pen icon to open the page in the editor.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('- Click on the Actions menu (the three dots menu) to acess options to duplicate, rename or trash the page.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('- Select "View" in the Actions menu to view the page on the front of the site. The page opens in a new tab.')))
+}, {
+  // This only shows when layout: Grid is used.
+  anchor: '.dataviews-view-grid',
+  verticalplacement: 'top',
+  horizontalplacement: 'none',
+  offsetX: 330,
+  offsetY: 0,
+  showArrow: true,
+  arrowPosition: 'left',
+  hintType: 'button',
+  hintOffsetX: 300,
+  hintOffsetY: 0,
+  hintSize: 40,
+  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "edit-site-welcome-guide__heading"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Manage pages: Grid Layout')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This grid shows your pages, sorted according to your filter.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('If your page has a featured image, the image is shown in the grid.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Each page has an options menu (the three dot menu) where you can edit, view, duplicate, rename, and trash the page.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('The edit option opens the page in the editor where you can make changes. While the view option opens the page on the front of site, in a new browser tab.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Each page also has a check box before the title, by checking the boxes, you can trash multiple pages at once.')))
+}, {
+  // This only shows when layout: Table is used.
+  anchor: '.dataviews-view-table .dataviews-view-table__row',
+  verticalplacement: 'top',
+  horizontalplacement: 'none',
+  offsetX: 330,
+  offsetY: 0,
+  showArrow: true,
+  arrowPosition: 'left',
+  hintType: 'button',
+  hintOffsetX: 300,
+  hintOffsetY: 0,
+  hintSize: 40,
+  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "edit-site-welcome-guide__heading"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Manage pages: Table Layout')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This is the list of pages, sorted according to your filter.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Close this tutorial window and hover over the page title to see the page options:'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('- Click on the page title or the pen icon to open the page in the editor.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('- Click on the Actions menu (the three dots menu) to acess options to duplicate, rename or trash the page.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('- Select "View" in the Actions menu to view the page on the front of the site. The page opens in a new tab.')))
 }, {
@@ -1075,7 +1108,7 @@ const Pages = [{
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Page preview')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This frame is a preview of your page. The preview is only available when you are using the list layout.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Click anywhere in the preview to open the page in the editor.')))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This frame is a preview of your page. The preview is only available when you are using the list layout.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Click anywhere in the preview to open the page in the editor, where you can make changes to your content.')))
 }, {
   anchor: '.dataviews-filters__view-actions button',
   verticalplacement: 'top',
@@ -1092,7 +1125,45 @@ const Pages = [{
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Filters')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add a custom filter here to filter pages by author or status.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null)))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add a custom filter here to filter pages by author or status.')))
+}, {
+  //anchor: '.dataviews-filters__view-actions button',
+  //nth: 2, //The first button is the filter, the second is the actions.
+  anchor: '#:r3:',
+  verticalplacement: 'bottom',
+  horizontalplacement: 'left',
+  offsetX: -540,
+  offsetY: 20,
+  showArrow: true,
+  arrowPosition: 'top-right',
+  hintType: 'button',
+  hintOffsetX: 0,
+  hintOffsetY: 0,
+  hintSize: 16,
+  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "edit-site-welcome-guide__heading"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('View Options')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('With the view options you can customize how you want to display the page information.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can choose between a list, table or a grid layout, decide how many pages to show show at the time, and hide the author or publishing date, ')))
+}, {
+  anchor: '.dataviews-filters__view-actions button',
+  nth: 2,
+  // On the grid and table layout, the bulk edit is the second button.
+  verticalplacement: 'bottom',
+  horizontalplacement: 'left',
+  offsetX: -540,
+  offsetY: 20,
+  showArrow: true,
+  arrowPosition: 'top-right',
+  hintType: 'button',
+  hintOffsetX: 0,
+  hintOffsetY: 0,
+  hintSize: 16,
+  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "edit-site-welcome-guide__heading"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Bulk edit')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('When you have selected mulitple pages you can use bulk edit to trash them.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('If your pages are already trashed, you can use the bulk edito to restore them or delete them permanently.')))
 }];
 
 /***/ }),

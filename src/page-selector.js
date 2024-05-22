@@ -45,9 +45,6 @@ export const selectPages = ( Pages, records ) => {
 			break;
 		case '/wp_global_styles':
 			/**
-			 * Note: /wp_global_stylesedit is an exception because it does not open with
-			 * the select styles, just the editor.
-			 * 
 			 * /wp_global_styles is the page with the left hand menu where you preview style variations.
 			 */
 			tutorials = Pages.Styles;
@@ -55,7 +52,7 @@ export const selectPages = ( Pages, records ) => {
 			break;
 		case '/page':
 			// /page is the page previews and the site editor menu with the list of pages.
-			// /pageedit is the editor page for a page.
+			// Note that there is no "page details" tutorial because it is being removed from the site editor.
 			tutorials = Pages.Pages;
 			screen = 'Pages';
 			break;
