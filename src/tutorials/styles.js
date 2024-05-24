@@ -104,7 +104,7 @@ export const Styles = [
 					<br/><br/>
 					{ __( 'Click on a preset to preview it. You can combine different presets to create a uniqe style.' ) }
 					<br/><br/>
-					{ __( 'Next, if you have selectes a style that you want to save, click on the large "Save" button at the bottom of the panel.' ) }
+					{ __( 'Next, if you have selected a style that you want to save, click on the large "Save" button at the bottom of the panel.' ) }
 				</p>
 			</>
 		),
