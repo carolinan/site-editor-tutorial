@@ -1,4 +1,3 @@
-
 /**
  * External dependencies
  */
@@ -16,17 +15,15 @@ import { __ } from '@wordpress/i18n';
  */
 export const TutorialModal = ( { modalPosition, page, onFinish, ref } ) => (
 	<Modal
-		className={ classnames(
-		'site-editor-tutorial',
-		{
+		className={ classnames( 'site-editor-tutorial', {
 			'site-editor-tutorial-arrow': page.showArrow,
-			[`site-editor-tutorial-arrow-${page.arrowPosition}`]: page.showArrow,
-		}
-		) }
+			[ `site-editor-tutorial-arrow-${ page.arrowPosition }` ]:
+				page.showArrow,
+		} ) }
 		shouldCloseOnEsc={ true }
 		shouldCloseOnClickOutside={ true }
 		style={ {
-			position: 'absolute', 
+			position: 'absolute',
 			top: modalPosition.top,
 			left: modalPosition.left,
 			opacity: 1,
@@ -37,11 +34,11 @@ export const TutorialModal = ( { modalPosition, page, onFinish, ref } ) => (
 		onRequestClose={ onFinish }
 		ref={ ref }
 	>
-	<div className="site-editor-tutorial__container">
-		<div className="site-editor-tutorial__page">
-			{ page.image }
-			{ page.content }
+		<div className="site-editor-tutorial__container">
+			<div className="site-editor-tutorial__page">
+				{ page.image }
+				{ page.content }
+			</div>
 		</div>
-	</div>
 	</Modal>
 );

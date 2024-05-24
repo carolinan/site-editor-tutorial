@@ -5,7 +5,7 @@
  *
  * The first item is displayed automatically if the page is the point of entry,
  * or when the page is refreshed.
- * 
+ *
  * TODO: The documentation on .org should be updated to match the 6.6 release.
  */
 
@@ -25,11 +25,24 @@ export const Pages = [
 					{ __( 'Manage Pages' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'Here you can see all your pages, create new pages, trash, rename and duplicate pages.' ) }
-					<br /><br />
-					{ __( 'You can also filter pages by status, author, or search for a specific page.' ) }
-					<br /><br />
-					<a href="https://wordpress.org/documentation/article/site-editor-pages/" target="_new">{ __( 'Read more about the Site Editor Pages in the documentation.' ) }</a>
+					{ __(
+						'Here you can see all your pages, create new pages, trash, rename and duplicate pages.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'You can also filter pages by status, author, or search for a specific page.'
+					) }
+					<br />
+					<br />
+					<a
+						href="https://wordpress.org/documentation/article/site-editor-pages/"
+						target="_new"
+					>
+						{ __(
+							'Read more about the Site Editor Pages in the documentation.'
+						) }
+					</a>
 				</p>
 			</>
 		),
@@ -52,9 +65,14 @@ export const Pages = [
 					{ __( 'Page filters' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'This panel has quick links for displaying your pages according to three default filters: All pages, drafts, and trashed pages.' ) }
-					<br /><br />
-					{ __( 'You can select one of the filters in the panel, or, you can select "All pages" and add your own custom filter.' ) }
+					{ __(
+						'This panel has quick links for displaying your pages according to three default filters: All pages, drafts, and trashed pages.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'You can select one of the filters in the panel, or, you can select "All pages" and add your own custom filter.'
+					) }
 				</p>
 			</>
 		),
@@ -78,15 +96,26 @@ export const Pages = [
 					{ __( 'Manage pages: List Layout' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'This is the list of pages, sorted according to your filter.' ) }
-					<br /><br />
-					{ __( 'Close this tutorial window and hover over the page title to see the page options:' ) }
+					{ __(
+						'This is the list of pages, sorted according to your filter.'
+					) }
 					<br />
-					{ __( '- Click on the page title or the pen icon to open the page in the editor.' ) }
 					<br />
-					{ __( '- Click on the Actions menu (the three dots menu) to acess options to duplicate, rename or trash the page.' ) }
+					{ __(
+						'Close this tutorial window and hover over the page title to see the page options:'
+					) }
 					<br />
-					{ __( '- Select "View" in the Actions menu to view the page on the front of the site. The page opens in a new tab.' ) }
+					{ __(
+						'- Click on the page title or the pen icon to open the page in the editor.'
+					) }
+					<br />
+					{ __(
+						'- Click on the Actions menu (the three dots menu) to acess options to duplicate, rename or trash the page.'
+					) }
+					<br />
+					{ __(
+						'- Select "View" in the Actions menu to view the page on the front of the site. The page opens in a new tab.'
+					) }
 				</p>
 			</>
 		),
@@ -110,15 +139,27 @@ export const Pages = [
 					{ __( 'Manage pages: Grid Layout' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'This grid shows your pages, sorted according to your filter.' ) }
+					{ __(
+						'This grid shows your pages, sorted according to your filter.'
+					) }
 					<br />
-					{ __( 'If your page has a featured image, the image is shown in the grid.' ) }
-					<br /><br />
-					{ __( 'Each page has an options menu (the three dot menu) where you can edit, view, duplicate, rename, and trash the page.' ) }
+					{ __(
+						'If your page has a featured image, the image is shown in the grid.'
+					) }
 					<br />
-					{ __( 'The edit option opens the page in the editor where you can make changes. While the view option opens the page on the front of site, in a new browser tab.' ) }
-					<br /><br />
-					{ __( 'Each page also has a check box before the title, by checking the boxes, you can trash multiple pages at once.' ) }
+					<br />
+					{ __(
+						'Each page has an options menu (the three dot menu) where you can edit, view, duplicate, rename, and trash the page.'
+					) }
+					<br />
+					{ __(
+						'The edit option opens the page in the editor where you can make changes. While the view option opens the page on the front of site, in a new browser tab.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'Each page also has a check box before the title, by checking the boxes, you can trash multiple pages at once.'
+					) }
 				</p>
 			</>
 		),
@@ -142,15 +183,26 @@ export const Pages = [
 					{ __( 'Manage pages: Table Layout' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'This is the list of pages, sorted according to your filter.' ) }
-					<br /><br />
-					{ __( 'Close this tutorial window and hover over the page title to see the page options:' ) }
+					{ __(
+						'This is the list of pages, sorted according to your filter.'
+					) }
 					<br />
-					{ __( '- Click on the page title or the pen icon to open the page in the editor.' ) }
 					<br />
-					{ __( '- Click on the Actions menu (the three dots menu) to acess options to duplicate, rename or trash the page.' ) }
+					{ __(
+						'Close this tutorial window and hover over the page title to see the page options:'
+					) }
 					<br />
-					{ __( '- Select "View" in the Actions menu to view the page on the front of the site. The page opens in a new tab.' ) }
+					{ __(
+						'- Click on the page title or the pen icon to open the page in the editor.'
+					) }
+					<br />
+					{ __(
+						'- Click on the Actions menu (the three dots menu) to acess options to duplicate, rename or trash the page.'
+					) }
+					<br />
+					{ __(
+						'- Select "View" in the Actions menu to view the page on the front of the site. The page opens in a new tab.'
+					) }
 				</p>
 			</>
 		),
@@ -172,9 +224,13 @@ export const Pages = [
 					{ __( 'Page preview' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'This frame is a preview of your page. The preview is only available when you are using the list layout.' ) }
+					{ __(
+						'This frame is a preview of your page. The preview is only available when you are using the list layout.'
+					) }
 					<br />
-					{ __( 'Click anywhere in the preview to open the page in the editor, where you can make changes to your content.' ) }
+					{ __(
+						'Click anywhere in the preview to open the page in the editor, where you can make changes to your content.'
+					) }
 				</p>
 			</>
 		),
@@ -197,7 +253,9 @@ export const Pages = [
 					{ __( 'Filters' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'Add a custom filter here to filter pages by author or status.' ) }
+					{ __(
+						'Add a custom filter here to filter pages by author or status.'
+					) }
 				</p>
 			</>
 		),
@@ -222,9 +280,14 @@ export const Pages = [
 					{ __( 'View Options' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'With the view options you can customize how you want to display the page information.' ) }
-					<br /><br />
-					{ __( 'You can choose between a list, table or a grid layout, decide how many pages to show show at the time, and hide the author or publishing date, ' ) }
+					{ __(
+						'With the view options you can customize how you want to display the page information.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'You can choose between a list, table or a grid layout, decide how many pages to show show at the time, and hide the author or publishing date, '
+					) }
 				</p>
 			</>
 		),
@@ -248,9 +311,13 @@ export const Pages = [
 					{ __( 'Bulk edit' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'When you have selected mulitple pages you can use bulk edit to trash them.' ) }
+					{ __(
+						'When you have selected mulitple pages you can use bulk edit to trash them.'
+					) }
 					<br />
-					{ __( 'If your pages are already trashed, you can use the bulk edito to restore them or delete them permanently.' ) }
+					{ __(
+						'If your pages are already trashed, you can use the bulk edito to restore them or delete them permanently.'
+					) }
 				</p>
 			</>
 		),

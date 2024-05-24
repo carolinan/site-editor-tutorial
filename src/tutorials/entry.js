@@ -31,33 +31,45 @@ export const Entry = [
 					{ __( 'What is the Site Editor?' ) }
 				</h2>
 				<p className="edit-site-welcome-guide__text">
-					{
-						__( 'The Site Editor is a WordPress feature where you can view, edit and create templates and patterns that you can use to change the design and layout of your site.' )
-					}
-					<br /><br />
-					{
-						__( 'Here you can choose between premade designs, add custom color palettes and fonts.' )
-					}
-					<br /><br />
-					<a href="https://wordpress.org/documentation/article/site-editor/" target="_new">{ __( 'Read more about the Site Editor in the official documentation.' ) }</a>
+					{ __(
+						'The Site Editor is a WordPress feature where you can view, edit and create templates and patterns that you can use to change the design and layout of your site.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'Here you can choose between premade designs, add custom color palettes and fonts.'
+					) }
+					<br />
+					<br />
+					<a
+						href="https://wordpress.org/documentation/article/site-editor/"
+						target="_new"
+					>
+						{ __(
+							'Read more about the Site Editor in the official documentation.'
+						) }
+					</a>
 				</p>
 				<h2 className="edit-site-welcome-guide__heading">
 					{ __( 'How does the Site Editor tutorial work?' ) }
 				</h2>
 				<p className="edit-site-welcome-guide__text">
-					{
-						__( 'The Site Editor is split into several setting screens and panels.' )
-					}
+					{ __(
+						'The Site Editor is split into several setting screens and panels.'
+					) }
 					<br />
-					{
-						__( 'With this guide, you can navigate freely between the Site Editor screens and read helpful hints and tips to get started.' )
-					}
+					{ __(
+						'With this guide, you can navigate freely between the Site Editor screens and read helpful hints and tips to get started.'
+					) }
 					<br />
-					{ 
-						__( 'Click on the purple hints to find out more about the interface or a feature.' )
-					}
-					<br /><br />
-					{ __( 'You can close the tips with the Esc key, or use the close button.' ) }
+					{ __(
+						'Click on the purple hints to find out more about the interface or a feature.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'You can close the tips with the Esc key, or use the close button.'
+					) }
 				</p>
 			</>
 		),
@@ -76,12 +88,21 @@ export const Entry = [
 		hintSize: 40,
 		content: (
 			<>
-				<h1 className="edit-site-welcome-guide__heading">{ __( 'The site preview' ) }</h1>
+				<h1 className="edit-site-welcome-guide__heading">
+					{ __( 'The site preview' ) }
+				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'The main content of the Site Editor entry screen is a live preview that matches the front of your site.' ) }
-					{ __( ' You can use it to preview your homepage, pages, templates, menus, and template parts.' ) }
-					<br /><br />
-					{ __( 'Clicking anywhere on the preview will open it in the editor where you can customize your design and add new blocks and patterns.' ) }
+					{ __(
+						'The main content of the Site Editor entry screen is a live preview that matches the front of your site.'
+					) }
+					{ __(
+						' You can use it to preview your homepage, pages, templates, menus, and template parts.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'Clicking anywhere on the preview will open it in the editor where you can customize your design and add new blocks and patterns.'
+					) }
 				</p>
 			</>
 		),
@@ -101,7 +122,9 @@ export const Entry = [
 		hintSize: 18,
 		content: (
 			<>
-				<h1 className="edit-site-welcome-guide__heading">{ __( 'The Dashboard link' ) }</h1>
+				<h1 className="edit-site-welcome-guide__heading">
+					{ __( 'The Dashboard link' ) }
+				</h1>
 				<p className="edit-site-welcome-guide__text">
 					{ createInterpolateElement(
 						__(
@@ -116,10 +139,11 @@ export const Entry = [
 							),
 						}
 					) }
-					<br /><br />
-					{
-						__( 'Depending on which page you are on, the link may also open the Site Editor entry page.' )
-					}
+					<br />
+					<br />
+					{ __(
+						'Depending on which page you are on, the link may also open the Site Editor entry page.'
+					) }
 				</p>
 			</>
 		),
@@ -169,20 +193,38 @@ export const Entry = [
 					{ __( 'Command Palette' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'A command is a shortcut that you can use to perform common actions, such as opening or creating new posts and pages.' ) }
-					<br /><br />
-					{ __( 'The button with the maginfying glass opens the Command Palette.' ) }
+					{ __(
+						'A command is a shortcut that you can use to perform common actions, such as opening or creating new posts and pages.'
+					) }
 					<br />
-					{ __( 'You can also open the Command Palette by pressing Command/Ctrl + K.' ) }
-					<br /><br />
-					{ __( 'Go ahead and open the Command Palette and try it out by typing "view site" in the search field:' ) }
-					<br /><br />
+					<br />
+					{ __(
+						'The button with the maginfying glass opens the Command Palette.'
+					) }
+					<br />
+					{ __(
+						'You can also open the Command Palette by pressing Command/Ctrl + K.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'Go ahead and open the Command Palette and try it out by typing "view site" in the search field:'
+					) }
+					<br />
+					<br />
 					<CommandPaletteButton />
-					<br /><br />
-					<a href="https://wordpress.org/documentation/article/site-editor-command-palette/" target="_new">{ __( 'Read more in the Command Palette documentation.' ) }</a>
+					<br />
+					<br />
+					<a
+						href="https://wordpress.org/documentation/article/site-editor-command-palette/"
+						target="_new"
+					>
+						{ __(
+							'Read more in the Command Palette documentation.'
+						) }
+					</a>
 				</p>
 			</>
-			
 		),
 	},
 	{
@@ -204,7 +246,9 @@ export const Entry = [
 					{ __( 'The back button' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'This button takes you back one level in the menu.' ) }
+					{ __(
+						'This button takes you back one level in the menu.'
+					) }
 				</p>
 			</>
 		),
@@ -228,13 +272,29 @@ export const Entry = [
 					{ __( 'Navigation' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'This menu item takes you to the Navigation screen where you can browse and edit your menus.' ) }
-					<br /><br />
-					{ __( '- Menus decide which links and blocks should show in your menu. A menu can be used inside one or more navigation blocks.' ) }
-					<br /><br />
-					{ __( '- The navigation block decides where and how your menu is displayed. For example, you can place a navigation block in your header, assign your menu, and change the colors, font size and font family.' ) }
-					<br /><br />
-					<a href="https://wordpress.org/documentation/article/site-editor-navigation/" target="_new">{ __( 'Read more about the Site Editor Navigation in the documentation.' ) }</a>
+					{ __(
+						'This menu item takes you to the Navigation screen where you can browse and edit your menus.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'- Menus decide which links and blocks should show in your menu. A menu can be used inside one or more navigation blocks.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'- The navigation block decides where and how your menu is displayed. For example, you can place a navigation block in your header, assign your menu, and change the colors, font size and font family.'
+					) }
+					<br />
+					<br />
+					<a
+						href="https://wordpress.org/documentation/article/site-editor-navigation/"
+						target="_new"
+					>
+						{ __(
+							'Read more about the Site Editor Navigation in the documentation.'
+						) }
+					</a>
 				</p>
 			</>
 		),
@@ -258,11 +318,19 @@ export const Entry = [
 					{ __( 'Styles' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'Styles can change the look and feel of your site with a single setting, by switching color palettes and fonts.' ) }
-					<br /><br />
-					{ __( 'Pre-made style variations are optional and included in your block theme. Because of that, the styles and the number of options to choose from varies from theme to theme.' ) }
-					<br /><br />
-					{ __( 'This menu item provides access to previewing, selecting and editing your site’s style variations.' ) }
+					{ __(
+						'Styles can change the look and feel of your site with a single setting, by switching color palettes and fonts.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'Pre-made style variations are optional and included in your block theme. Because of that, the styles and the number of options to choose from varies from theme to theme.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'This menu item provides access to previewing, selecting and editing your site’s style variations.'
+					) }
 				</p>
 			</>
 		),
@@ -286,12 +354,27 @@ export const Entry = [
 					{ __( 'Pages' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'Here you can create new pages or edit the content of your existing pages inside the Site Editor itself.' ) }
-					<br /><br />
-					{ __( 'You can preview your page with a page template to see what the page will look like on the front of your site.' ) }
-					{ __( ' If your theme has included optional templates, you can also swap your page template and choose a different design.' ) }
-					<br /><br />
-					<a href="https://wordpress.org/documentation/article/site-editor-pages/" target="_new">{ __( 'Read more about the Site Editor Pages in the documentation.' ) }</a>
+					{ __(
+						'Here you can create new pages or edit the content of your existing pages inside the Site Editor itself.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'You can preview your page with a page template to see what the page will look like on the front of your site.'
+					) }
+					{ __(
+						' If your theme has included optional templates, you can also swap your page template and choose a different design.'
+					) }
+					<br />
+					<br />
+					<a
+						href="https://wordpress.org/documentation/article/site-editor-pages/"
+						target="_new"
+					>
+						{ __(
+							'Read more about the Site Editor Pages in the documentation.'
+						) }
+					</a>
 				</p>
 			</>
 		),
@@ -315,11 +398,18 @@ export const Entry = [
 					{ __( 'Templates' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'Templates are used to create the layout and structure for everything that you see on the front of your site: from the front page to the single posts and the 404 page.' ) }
-					<br /><br />
-					{ __( 'Here you can create new custom templates and manage the different templates for your site.' ) }
+					{ __(
+						'Templates are used to create the layout and structure for everything that you see on the front of your site: from the front page to the single posts and the 404 page.'
+					) }
 					<br />
-					{ __( 'You can filter and sort your existing templates, reset changes to theme templates, and rename and delete your custom templates.' ) }
+					<br />
+					{ __(
+						'Here you can create new custom templates and manage the different templates for your site.'
+					) }
+					<br />
+					{ __(
+						'You can filter and sort your existing templates, reset changes to theme templates, and rename and delete your custom templates.'
+					) }
 				</p>
 			</>
 		),
@@ -343,17 +433,37 @@ export const Entry = [
 					{ __( 'Patterns' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'From this menu you can access and manage your patterns and template parts.' ) }
-					<br /><br />
-					{ __( 'Patterns are blocks that are grouped together to create page sections and other resusable design features.' ) }
-					{ __( ' Here you can preview all your patterns by category, search for patterns, and create new patterns.' ) }
-					<br /><br />
-					{ __( 'Template parts are most commonly used to display your site headers and footers.' ) }
-					{ __( ' By using a header template part, you can edit and update the header of all your templates from one location.' ) }
+					{ __(
+						'From this menu you can access and manage your patterns and template parts.'
+					) }
 					<br />
-					{ __( 'Go here if you want to preview your header and footer designs, or create new ones from scratch.' ) }
-					<br /><br />
-					<a href="https://wordpress.org/documentation/article/site-editor-patterns/" target="_new">{ __( 'Read more in the documentation.' ) }</a>
+					<br />
+					{ __(
+						'Patterns are blocks that are grouped together to create page sections and other resusable design features.'
+					) }
+					{ __(
+						' Here you can preview all your patterns by category, search for patterns, and create new patterns.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'Template parts are most commonly used to display your site headers and footers.'
+					) }
+					{ __(
+						' By using a header template part, you can edit and update the header of all your templates from one location.'
+					) }
+					<br />
+					{ __(
+						'Go here if you want to preview your header and footer designs, or create new ones from scratch.'
+					) }
+					<br />
+					<br />
+					<a
+						href="https://wordpress.org/documentation/article/site-editor-patterns/"
+						target="_new"
+					>
+						{ __( 'Read more in the documentation.' ) }
+					</a>
 				</p>
 			</>
 		),
@@ -377,8 +487,12 @@ export const Entry = [
 					{ __( 'Status messages' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'Status messages show information about unsaved changes that are pending review. For example changes to page content, templates or styles.' ) }
-					{ __( ' If the message reads "Saved" then you do not need to take action.' ) }
+					{ __(
+						'Status messages show information about unsaved changes that are pending review. For example changes to page content, templates or styles.'
+					) }
+					{ __(
+						' If the message reads "Saved" then you do not need to take action.'
+					) }
 				</p>
 			</>
 		),

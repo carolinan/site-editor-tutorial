@@ -6,7 +6,7 @@
  *
  * The first item is displayed automatically if the page is the point of entry,
  * or when the page is refreshed.
- * 
+ *
  * TODO: When user deletes all menus, WP creates a placeholder menu that does not have a title,
  * and the hint about the menu name is displayed, when it should not.
  * See if there is another anchor that could be used.
@@ -28,9 +28,14 @@ export const NavigationDetails = [
 					{ __( 'Navigation Details' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'This screen shows the name of your chosen menu, and a list of all blocks that you have placed inside it.' ) }
-					<br /><br />
-					{ __( 'Here you can rename, duplicate and delete your menu, and move and remove the blocks. To add new blocks you need to select the Edit option.' ) }
+					{ __(
+						'This screen shows the name of your chosen menu, and a list of all blocks that you have placed inside it.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'Here you can rename, duplicate and delete your menu, and move and remove the blocks. To add new blocks you need to select the Edit option.'
+					) }
 				</p>
 			</>
 		),
@@ -54,8 +59,10 @@ export const NavigationDetails = [
 				</h1>
 				<p className="edit-site-welcome-guide__text">
 					{ __( 'This is the name of the menu you are editing.' ) }
-					<br/>
-					{ __( 'To rename the menu, select the option in the Actions menu.' ) }
+					<br />
+					{ __(
+						'To rename the menu, select the option in the Actions menu.'
+					) }
 				</p>
 			</>
 		),
@@ -78,11 +85,19 @@ export const NavigationDetails = [
 					{ __( 'Navigation Actions menu' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'Under the three dot menu, also known as the Actions menu, you can rename, duplicate or delete your menu.' ) }
-					<br /><br />
-					{ __( 'Here you can also access the Edit option, which opens the menu in the editor. From there, you can add new blocks to your menu.' ) }
-					<br /><br />
-					{ __( 'When you delete a menu, it is no longer visible on the front of your site.' ) }
+					{ __(
+						'Under the three dot menu, also known as the Actions menu, you can rename, duplicate or delete your menu.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'Here you can also access the Edit option, which opens the menu in the editor. From there, you can add new blocks to your menu.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'When you delete a menu, it is no longer visible on the front of your site.'
+					) }
 				</p>
 			</>
 		),
@@ -105,15 +120,28 @@ export const NavigationDetails = [
 					{ __( 'Menu items' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'Each menu item is a block. The icon on the left shows the block type, for example post, page, page list, custom link, or site logo.' ) }
-					<br /><br />
-					{ __( 'An arrow icon before the block indicates that the block has a submenu. Clicking on the arrow expands the submenu.' ) }
-					<br /><br />
-					{ __( 'You can click and hold to drag the block to move it to another position in the menu.' ) }
-					<br /><br />
-					{ __( 'Each block has an Options menu where you can move or remove the block. Page blocks also have links that opens the page in the Site Editor.' ) }
+					{ __(
+						'Each menu item is a block. The icon on the left shows the block type, for example post, page, page list, custom link, or site logo.'
+					) }
 					<br />
-					{ __( 'To see the Options menu, you must first close this tutorial window and hover over the block.' ) }
+					<br />
+					{ __(
+						'An arrow icon before the block indicates that the block has a submenu. Clicking on the arrow expands the submenu.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'You can click and hold to drag the block to move it to another position in the menu.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'Each block has an Options menu where you can move or remove the block. Page blocks also have links that opens the page in the Site Editor.'
+					) }
+					<br />
+					{ __(
+						'To see the Options menu, you must first close this tutorial window and hover over the block.'
+					) }
 				</p>
 			</>
 		),

@@ -24,13 +24,29 @@ export const Navigation = [
 					{ __( 'Navigation' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'The Navigation screen is where you can browse and edit your menus.' ) }
-					<br /><br />
-					{ __( '- Menus decide which links and blocks should show in your menu. A menu can be used inside one or more navigation blocks.' ) }
-					<br /><br />
-					{ __( '- The navigation block decides where and how your menu is displayed. For example, you can place a navigation block in your header, assign your menu, and change the colors, font size and font family.' ) }
-					<br /><br />
-					<a href="https://wordpress.org/documentation/article/site-editor-navigation/" target="_new">{ __( 'Read more about the Site Editor Navigation in the documentation.' ) }</a>
+					{ __(
+						'The Navigation screen is where you can browse and edit your menus.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'- Menus decide which links and blocks should show in your menu. A menu can be used inside one or more navigation blocks.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'- The navigation block decides where and how your menu is displayed. For example, you can place a navigation block in your header, assign your menu, and change the colors, font size and font family.'
+					) }
+					<br />
+					<br />
+					<a
+						href="https://wordpress.org/documentation/article/site-editor-navigation/"
+						target="_new"
+					>
+						{ __(
+							'Read more about the Site Editor Navigation in the documentation.'
+						) }
+					</a>
 				</p>
 			</>
 		),
@@ -54,7 +70,9 @@ export const Navigation = [
 					{ __( 'Navigation' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'This panel shows a list of all the menus on your site.' ) }
+					{ __(
+						'This panel shows a list of all the menus on your site.'
+					) }
 					<br />
 					{ __( 'Click on a menu to open it.' ) }
 				</p>

@@ -15,10 +15,8 @@
 		"start": "wp-scripts start"
 	},
 	"devDependencies": {
-		"@wordpress/base-styles": "^4.35.0",
-		"@wordpress/eslint-plugin": "^17.5.0",
-		"@wordpress/scripts": "^26.15.0",
-		"prettier": "^3.2.2"
+		"@wordpress/base-styles": "^4.49.0",
+		"@wordpress/scripts": "^27.9.0"
 	},
 	"dependencies": {
 		"classnames": "^2.3.2"

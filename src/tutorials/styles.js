@@ -23,9 +23,14 @@ export const Styles = [
 					{ __( 'Styles' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'Styles can change the look and feel of your site with a single setting, by switching color palettes and fonts.' ) }
-					<br /><br />
-					{ __( 'Style presets are optional and included in your block theme. Because of that, the styles and the number of options to choose from varies from theme to theme.' ) }
+					{ __(
+						'Styles can change the look and feel of your site with a single setting, by switching color palettes and fonts.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'Style presets are optional and included in your block theme. Because of that, the styles and the number of options to choose from varies from theme to theme.'
+					) }
 				</p>
 			</>
 		),
@@ -48,9 +53,13 @@ export const Styles = [
 					{ __( 'Style Book' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'The eye icon opens the Style book, a preview of what a the most common blocks will look like with a style variation applied.' ) }
-					<br/>
-					{ __( 'Click on the icon again to see the preview of the site instead.' ) }
+					{ __(
+						'The eye icon opens the Style book, a preview of what a the most common blocks will look like with a style variation applied.'
+					) }
+					<br />
+					{ __(
+						'Click on the icon again to see the preview of the site instead.'
+					) }
 				</p>
 			</>
 		),
@@ -73,9 +82,13 @@ export const Styles = [
 					{ __( 'Edit Styles' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'If you click on the pen icon (Edit styles), you will close the side panel and open the Site Editor with the Style settings opened.' ) }
-					<br/>
-					{ __( 'That is where you can change the site wide color palette, typography, and spacing.' ) }
+					{ __(
+						'If you click on the pen icon (Edit styles), you will close the side panel and open the Site Editor with the Style settings opened.'
+					) }
+					<br />
+					{ __(
+						'That is where you can change the site wide color palette, typography, and spacing.'
+					) }
 				</p>
 			</>
 		),
@@ -98,13 +111,23 @@ export const Styles = [
 					{ __( 'Style Variations (presets)' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'This list shows the style variations enabled for your theme.' ) }
-					<br/>
-					{ __( 'There are three types of style presets: General (which can change both colors, typography and spacing), Colors, and Typography. You may need to scroll to see all the presets.' ) }
-					<br/><br/>
-					{ __( 'Click on a preset to preview it. You can combine different presets to create a uniqe style.' ) }
-					<br/><br/>
-					{ __( 'Next, if you have selected a style that you want to save, click on the large "Save" button at the bottom of the panel.' ) }
+					{ __(
+						'This list shows the style variations enabled for your theme.'
+					) }
+					<br />
+					{ __(
+						'There are three types of style presets: General (which can change both colors, typography and spacing), Colors, and Typography. You may need to scroll to see all the presets.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'Click on a preset to preview it. You can combine different presets to create a uniqe style.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'Next, if you have selected a style that you want to save, click on the large "Save" button at the bottom of the panel.'
+					) }
 				</p>
 			</>
 		),
@@ -127,9 +150,13 @@ export const Styles = [
 					{ __( 'Style revisions' ) }
 				</h1>
 				<p className="edit-site-welcome-guide__text">
-					{ __( 'Here you can see when your styles were last modified.' ) }
-					<br/>
-					{ __( 'Click on the icon with the timer to open a timeline over your style changes.' ) }
+					{ __(
+						'Here you can see when your styles were last modified.'
+					) }
+					<br />
+					{ __(
+						'Click on the icon with the timer to open a timeline over your style changes.'
+					) }
 				</p>
 			</>
 		),

@@ -2,7 +2,6 @@
  * WordPress dependencies
  */
 import { useState, useRef, useEffect } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
 import { registerPlugin } from '@wordpress/plugins';
 import { useEntityRecords } from '@wordpress/core-data';
 
@@ -20,7 +19,7 @@ import * as Pages from './tutorials';
 import { TutorialModal } from './tutorial-modal';
 import { getPosition } from './utils';
 import { Hint } from './hint';
-import { selectPages } from './page-selector';
+import { SelectPages } from './page-selector';
 
 function SiteEditorTutorial() {
 	const ref = useRef( null );
@@ -28,24 +27,35 @@ function SiteEditorTutorial() {
 	const history = useHistory();
 	const [ isOpen, setIsOpen ] = useState( true );
 	const [ currentPage, setCurrentPage ] = useState( 0 );
-	const [ activeAnchor, setActiveAnchor ] = useState( '.edit-site-layout__content' );
-	const [ modalPosition, setModalPosition ] = useState({ top: 20, left: 400 });
-	const [ buttons, setButtons ] = useState([]);
-	const [ processedAnchors, setProcessedAnchors ] = useState([]);
-	const [ currentHref, setCurrentHref ] = useState(window.location.href);
-	const { records, isResolving } = useEntityRecords( 'postType', 'wp_navigation' );
-	const { tutorials, screen } = selectPages( Pages, records, isResolving ) || {};
+	const [ activeAnchor, setActiveAnchor ] = useState(
+		'.edit-site-layout__content'
+	);
+	const [ modalPosition, setModalPosition ] = useState( {
+		top: 20,
+		left: 400,
+	} );
+	const [ buttons, setButtons ] = useState( [] );
+	const [ processedAnchors, setProcessedAnchors ] = useState( [] );
+	const [ currentHref, setCurrentHref ] = useState( window.location.href );
+	const { records, isResolving } = useEntityRecords(
+		'postType',
+		'wp_navigation'
+	);
+	const { tutorials, screen } =
+		SelectPages( Pages, records, isResolving ) || {};
 
-	const page = tutorials ? tutorials[currentPage] : null;
+	const page = tutorials ? tutorials[ currentPage ] : null;
 
 	const localStorageState = () => {
 		try {
-			const savedState = localStorage.getItem( 'site-editor-tutorial-shown' );
+			const savedState = localStorage.getItem(
+				'site-editor-tutorial-shown'
+			);
 			if ( savedState ) {
 				return JSON.parse( savedState );
 			}
 		} catch ( error ) {
-			console.error( "Error reading from localStorage", error );
+			console.error( 'Error reading from localStorage', error );
 			return {};
 		}
 	};
@@ -64,15 +74,18 @@ function SiteEditorTutorial() {
 		setActiveAnchor( null );
 
 		// Register that the modal has been shown, so that it doesn't show again.
-		const newShownPages = { ...shownPages, [currentPage]: true };
+		const newShownPages = { ...shownPages, [ currentPage ]: true };
 		try {
-			localStorage.setItem( 'site-editor-tutorial-shown', JSON.stringify( newShownPages ) );
-		} catch (error) {
-			console.error( "Error writing to localStorage", error );
+			localStorage.setItem(
+				'site-editor-tutorial-shown',
+				JSON.stringify( newShownPages )
+			);
+		} catch ( error ) {
+			console.error( 'Error writing to localStorage', error );
 		}
 		setShownPages( newShownPages );
 
-		const buttonId = `site-editor-tutorial-button-${currentPage}`;
+		const buttonId = `site-editor-tutorial-button-${ currentPage }`;
 		const button = document.getElementById( buttonId );
 		if ( button ) {
 			document.getElementById( buttonId ).style.display = 'none';
@@ -80,19 +93,22 @@ function SiteEditorTutorial() {
 	};
 
 	// When the user clicks on a button, open the modal.
-	const onButtonClick = ( event, anchor, index, top, left) => {
+	const onButtonClick = ( event, anchor, index, top, left ) => {
 		event.stopPropagation();
 		setActiveAnchor( anchor );
 		setCurrentPage( index );
 		setIsOpen( true );
 		setModalPosition( { top, left } );
-	}
+	};
 
 	// Move focus to the anchor when the modal is closed.
 	useEffect( () => {
 		const focusAnchor = () => {
 			// If the anchor is for the first modal page, do not move focus.
-			if ( activeAnchor !== null && activeAnchor !== '.edit-site-layout__content' ) {
+			if (
+				activeAnchor !== null &&
+				activeAnchor !== '.edit-site-layout__content'
+			) {
 				activeAnchor.focus();
 			}
 		};
@@ -107,12 +123,12 @@ function SiteEditorTutorial() {
 	}, [ isOpen, activeAnchor ] );
 
 	const generateButtons = () => {
-		const tutorialList = Pages[screen];
+		const tutorialList = Pages[ screen ];
 		if ( ! tutorialList || ! page ) {
-			console.error( `No tutorial list found for ${screen}` );
+			console.error( `No tutorial list found for ${ screen }` );
 			return;
 		}
-		const newButtons = tutorialList.reduce( (acc, page, index) => {
+		const newButtons = tutorialList.reduce( ( acc, page, index ) => {
 			// Skip tutorial pages that have been shown.
 			// This is temporarily disabled during development,
 			// so that the buttons can be tested witohut having to reset the local storage.
@@ -122,13 +138,17 @@ function SiteEditorTutorial() {
 			setTimeout( () => {
 				let anchor = page.anchor;
 				// If the anchor is an ID, use getElementById./
-				if ( page.anchor.startsWith('#') ) {
-					anchor = document.getElementById( page.anchor.substring(1) );
+				if ( page.anchor.startsWith( '#' ) ) {
+					anchor = document.getElementById(
+						page.anchor.substring( 1 )
+					);
 				} else {
 					anchor = document.querySelector( page.anchor );
 					if ( page.nth !== undefined ) {
 						const nth = page.nth;
-						const nthAnchor = document.querySelectorAll( page.anchor )[nth];
+						const nthAnchor = document.querySelectorAll(
+							page.anchor
+						)[ nth ];
 						if ( nthAnchor ) {
 							anchor = nthAnchor;
 						}
@@ -137,16 +157,38 @@ function SiteEditorTutorial() {
 
 				if ( ! anchor ) {
 					// If there is a list of tutorial pages, but the anchor is not found, return early.
-					console.error( `No anchor found for ${page.anchor}` );
+					console.error( `No anchor found for ${ page.anchor }` );
 					return;
 				}
-		
-				const { offsetX, offsetY, hintOffsetX, hintOffsetY, label, hintSize } = page;
-				const { top, left } = getPosition( anchor, offsetX, offsetY, page.verticalplacement, page.horizontalplacement );
-				const { top: hintTop, left: hintLeft } = getPosition( anchor, hintOffsetX, hintOffsetY, page.verticalplacement, page.horizontalplacement );
-				const buttonId = `site-editor-tutorial-button-${index}`;
 
-				setProcessedAnchors( prevProcessedAnchors => [ ...prevProcessedAnchors, anchor ] );
+				const {
+					offsetX,
+					offsetY,
+					hintOffsetX,
+					hintOffsetY,
+					label,
+					hintSize,
+				} = page;
+				const { top, left } = getPosition(
+					anchor,
+					offsetX,
+					offsetY,
+					page.verticalplacement,
+					page.horizontalplacement
+				);
+				const { top: hintTop, left: hintLeft } = getPosition(
+					anchor,
+					hintOffsetX,
+					hintOffsetY,
+					page.verticalplacement,
+					page.horizontalplacement
+				);
+				const buttonId = `site-editor-tutorial-button-${ index }`;
+
+				setProcessedAnchors( ( prevProcessedAnchors ) => [
+					...prevProcessedAnchors,
+					anchor,
+				] );
 
 				const buttonProps = {
 					id: buttonId,
@@ -156,11 +198,11 @@ function SiteEditorTutorial() {
 					label,
 					index,
 					onClick( event ) {
-						onButtonClick( event, anchor, index, top, left);
-					}
+						onButtonClick( event, anchor, index, top, left );
+					},
 				};
 				acc.push( {
-					id: `site-editor-tutorial-button-${index}`,
+					id: `site-editor-tutorial-button-${ index }`,
 					...buttonProps,
 				} );
 			}, 1000 );
@@ -188,9 +230,11 @@ function SiteEditorTutorial() {
 				}
 				return false;
 			};
-	
+
 			// Check if the clicked element is inside the tutorial modal.
-			if ( isClassFoundInParents( event.target, 'site-editor-tutorial' ) ) {
+			if (
+				isClassFoundInParents( event.target, 'site-editor-tutorial' )
+			) {
 				return;
 			}
 
@@ -212,10 +256,14 @@ function SiteEditorTutorial() {
 	// If the iframe is clicked, generate new buttons for the correct page.
 	useEffect( () => {
 		const handleBlur = () => {
-			setTimeout( () => { // Use setTimeout to push to the end of the event queue
-				const iframe = document.querySelector( 'iframe.edit-site-visual-editor__editor-canvas' );
+			setTimeout( () => {
+				// Use setTimeout to push to the end of the event queue
+				const iframe = document.querySelector(
+					'iframe.edit-site-visual-editor__editor-canvas'
+				);
 				if ( document.activeElement === iframe ) {
-					const newHref = location.pathname + location.search + '?canvas=edit';
+					const newHref =
+						location.pathname + location.search + '?canvas=edit';
 
 					setTimeout( () => {
 						if ( newHref !== currentHref ) {
@@ -242,16 +290,16 @@ function SiteEditorTutorial() {
 	return (
 		<>
 			{ buttons.map( ( buttonProps ) => {
-				return <Hint key={buttonProps.id} {...buttonProps} />;
+				return <Hint key={ buttonProps.id } { ...buttonProps } />;
 			} ) }
-			{ activeAnchor &&
-			<TutorialModal
-				page={ page }
-				onFinish={ onFinish }
-				modalPosition={ modalPosition }
-				ref={ ref }
-			/>
-			}
+			{ activeAnchor && (
+				<TutorialModal
+					page={ page }
+					onFinish={ onFinish }
+					modalPosition={ modalPosition }
+					ref={ ref }
+				/>
+			) }
 		</>
 	);
 }

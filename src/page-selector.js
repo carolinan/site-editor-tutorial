@@ -8,18 +8,17 @@ import { unlock } from './unlock';
 const { useLocation } = unlock( routerPrivateApis );
 
 // Select the tutorial page based on the current location.
-export const selectPages = ( Pages, records ) => {
-	
+export const SelectPages = ( Pages, records ) => {
 	let screen = '';
 	let tutorials = '';
 
-	 // Get the current location
+	// Get the current location
 	const location = useLocation();
 	const search = location.search;
-	const params = new URLSearchParams(search);
-	const postID = params.get('postId');
-	const canvas = params.get('canvas');
-	let path = params.get('path');
+	const params = new URLSearchParams( search );
+	const postID = params.get( 'postId' );
+	const canvas = params.get( 'canvas' );
+	let path = params.get( 'path' );
 
 	// Currently unused, but likely to be needed when more tutorials pages are added.
 	// const postType = params.get('postType');
@@ -35,7 +34,10 @@ export const selectPages = ( Pages, records ) => {
 		case 'wp_navigation':
 			// If postID is set, or there is only one menu,
 			// show the tutorial for the navigation details.
-			if ( postID || ( Array.isArray( records ) && records.length === 1 ) ) {
+			if (
+				postID ||
+				( Array.isArray( records ) && records.length === 1 )
+			) {
 				tutorials = Pages.NavigationDetails;
 				screen = 'NavigationDetails';
 			} else {
@@ -68,7 +70,7 @@ export const selectPages = ( Pages, records ) => {
 			screen = 'Patterns';
 			break;
 		case 'edit':
-			tutorials = Pages.editorCanvas
+			tutorials = Pages.editorCanvas;
 			screen = 'editorCanvas';
 			break;
 		case 'Entry':
@@ -76,4 +78,4 @@ export const selectPages = ( Pages, records ) => {
 			screen = 'Entry';
 	}
 	return { tutorials, screen };
-}
+};

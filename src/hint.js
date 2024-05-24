@@ -6,10 +6,10 @@ import { Button } from '@wordpress/components';
 export function Hint( { id, top, left, size, label, onClick } ) {
 	const style = {
 		position: 'absolute',
-		top: top,
-		left: left,
-		width: `${size}px`,
-		height: `${size}px`,
+		top,
+		left,
+		width: `${ size }px`,
+		height: `${ size }px`,
 		cursor: 'pointer',
 	};
 	// The button is not focusable because it is printed at the bottom of the page,
