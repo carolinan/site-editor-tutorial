@@ -290,7 +290,6 @@ function SiteEditorTutorial() {
 							setCurrentHref( newHref );
 							onFinish();
 							generateButtons();
-							history.push( newHref );
 						}
 					}, 0 );
 				}

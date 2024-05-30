@@ -82,7 +82,7 @@ export const Entry = [
 		offsetX: 40,
 		offsetY: 40,
 		showArrow: false,
-		hintType: 'border',
+		hintType: 'button',
 		hintOffsetX: 22,
 		hintOffsetY: 100,
 		hintSize: 40,
