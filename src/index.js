@@ -69,6 +69,20 @@ function SiteEditorTutorial() {
 	 * and remove the button that activates the modal.
 	 */
 	const onFinish = () => {
+		// Remove the border CSS class from the active anchor element
+		if ( activeAnchor ) {
+			const anchorElement =
+				typeof activeAnchor === 'string'
+					? document.querySelector( activeAnchor )
+					: activeAnchor;
+
+			if ( anchorElement ) {
+				anchorElement.classList.remove(
+					'site-editor-tutorial__hint_border'
+				);
+			}
+		}
+
 		// Wihout these two resets, the modal does not close.
 		setIsOpen( false );
 		setActiveAnchor( null );
@@ -161,6 +175,11 @@ function SiteEditorTutorial() {
 					return;
 				}
 
+				// Add the border CSS class to the anchor element
+				if ( page.hintType === 'border' ) {
+					anchor.classList.add( 'site-editor-tutorial__hint_border' );
+				}
+
 				const {
 					offsetX,
 					offsetY,
@@ -250,7 +269,8 @@ function SiteEditorTutorial() {
 
 		document.addEventListener( 'click', checkHrefChangeOnClick );
 
-		return () => document.removeEventListener( 'click', checkHrefChangeOnClick );
+		return () =>
+			document.removeEventListener( 'click', checkHrefChangeOnClick );
 	}, [ currentHref, location ] );
 
 	// If the iframe is clicked, generate new buttons for the correct page.

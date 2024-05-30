@@ -60,7 +60,7 @@ export const Navigation = [
 		offsetY: 0,
 		showArrow: true,
 		arrowPosition: 'left',
-		hintType: 'button',
+		hintType: 'border',
 		hintOffsetX: -50,
 		hintOffsetY: 10,
 		hintSize: 16,

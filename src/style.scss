@@ -44,6 +44,11 @@
 	animation: none;
 }
 
+.site-editor-tutorial__hint_border {
+	border: 4px solid var(--wp-block-synced-color);
+	border-radius: 4px;
+}
+
 @keyframes pulse {
 	0% {
 		-moz-transform: scale(0.9);
