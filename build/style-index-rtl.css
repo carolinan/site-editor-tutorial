@@ -238,6 +238,12 @@
     width: 600px;
   }
 }
+.site-editor-tutorial h1.edit-site-welcome-guide__heading {
+  font-size: 1.5rem;
+}
+.site-editor-tutorial h2.edit-site-welcome-guide__heading {
+  font-size: 1.3rem;
+}
 .site-editor-tutorial .edit-site-welcome-guide__text {
   font-size: 1rem;
   padding: 0 32px 32px 32px;
