@@ -279,7 +279,7 @@ function SiteEditorTutorial() {
 			setTimeout( () => {
 				// Use setTimeout to push to the end of the event queue
 				const iframe = document.querySelector(
-					'iframe.edit-site-visual-editor__editor-canvas'
+					'iframe.edit-site-visual-editor__editor-canvas, iframe.edit-site-style-book__iframe'
 				);
 				if ( document.activeElement === iframe ) {
 					const newHref =
