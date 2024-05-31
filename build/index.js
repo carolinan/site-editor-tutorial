@@ -322,7 +322,7 @@ function SiteEditorTutorial() {
     const handleBlur = () => {
       setTimeout(() => {
         // Use setTimeout to push to the end of the event queue
-        const iframe = document.querySelector('iframe.edit-site-visual-editor__editor-canvas, iframe.edit-site-style-book__iframe');
+        const iframe = document.querySelector('iframe.edit-site-visual-editor__editor-canvas, iframe.edit-site-style-book__iframe, iframe.edit-site-visual-editor__editor-canvas');
         if (document.activeElement === iframe) {
           const newHref = location.pathname + location.search + '?canvas=edit';
           setTimeout(() => {
