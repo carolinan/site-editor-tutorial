@@ -1,7 +1,7 @@
 /**
  * This file contains the content for the Navigation screen in the Site Editor,
  * the screen with the list of menus.
- * Example: wp-admin/site-editor.php?path=%2Fnavigation
+ * Example: wp-admin/site-editor.php?postType=wp_navigation
  *
  * The first item is displayed automatically if the page is the point of entry,
  * or when the page is refreshed.

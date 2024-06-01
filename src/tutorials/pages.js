@@ -1,7 +1,7 @@
 /**
  * This file contains the content for the Pages screen in the Site Editor,
  * the screen with the list of pages and related options.
- * Example: hwp-admin/site-editor.php?path=%2Fpage
+ * Example: wp-admin/site-editor.php?postType=page
  *
  * The first item is displayed automatically if the page is the point of entry,
  * or when the page is refreshed.

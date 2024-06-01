@@ -254,7 +254,7 @@ export const Entry = [
 		),
 	},
 	{
-		anchor: '#/navigation',
+		anchor: '#navigation-navigation-item',
 		label: __( 'Navigation' ),
 		verticalplacement: 'top',
 		horizontalplacement: 'right',
@@ -300,7 +300,7 @@ export const Entry = [
 		),
 	},
 	{
-		anchor: '#/wp_global_styles',
+		anchor: '#global-styles-navigation-item',
 		label: __( 'Styles' ),
 		verticalplacement: 'top',
 		horizontalplacement: 'right',
@@ -336,7 +336,7 @@ export const Entry = [
 		),
 	},
 	{
-		anchor: '#/page',
+		anchor: '#page-navigation-item',
 		label: __( 'Pages' ),
 		verticalplacement: 'top',
 		horizontalplacement: 'right',
@@ -380,7 +380,7 @@ export const Entry = [
 		),
 	},
 	{
-		anchor: '#/wp_template',
+		anchor: '#template-navigation-item',
 		label: __( 'Templates' ),
 		verticalplacement: 'top',
 		horizontalplacement: 'right',
@@ -415,7 +415,7 @@ export const Entry = [
 		),
 	},
 	{
-		anchor: '#/patterns',
+		anchor: '#patterns-navigation-item',
 		label: __( 'Patterns' ),
 		verticalplacement: 'middletop',
 		horizontalplacement: 'right',
