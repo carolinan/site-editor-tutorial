@@ -205,6 +205,10 @@ function SiteEditorTutorial() {
   }, [isOpen, activeAnchor]);
   const generateButtons = () => {
     const tutorialList = _tutorials__WEBPACK_IMPORTED_MODULE_7__[screen];
+    if (!screen) {
+      console.error(`This screen does not have a tutorial`);
+      return;
+    }
     if (!tutorialList || !page) {
       console.error(`No tutorial list found for ${screen}`);
       return;

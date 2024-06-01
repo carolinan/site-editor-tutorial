@@ -17,9 +17,9 @@ const { useLocation, useHistory } = unlock( routerPrivateApis );
 import './style.scss';
 import * as Pages from './tutorials';
 import { TutorialModal } from './tutorial-modal';
-import { getPosition } from './utils';
 import { Hint } from './hint';
 import { SelectPages } from './page-selector';
+import { generateButtons } from './generatebuttons';
 
 function SiteEditorTutorial() {
 	const ref = useRef( null );
@@ -136,104 +136,17 @@ function SiteEditorTutorial() {
 		};
 	}, [ isOpen, activeAnchor ] );
 
-	const generateButtons = () => {
-		const tutorialList = Pages[ screen ];
-		if ( ! tutorialList || ! page ) {
-			console.error( `No tutorial list found for ${ screen }` );
-			return;
-		}
-		const newButtons = tutorialList.reduce( ( acc, page, index ) => {
-			// Skip tutorial pages that have been shown.
-			// This is temporarily disabled during development,
-			// so that the buttons can be tested witohut having to reset the local storage.
-			//if ( shownPages[index] ) {
-			//	return acc;
-			//}
-			setTimeout( () => {
-				let anchor = page.anchor;
-				// If the anchor is an ID, use getElementById./
-				if ( page.anchor.startsWith( '#' ) ) {
-					anchor = document.getElementById(
-						page.anchor.substring( 1 )
-					);
-				} else {
-					anchor = document.querySelector( page.anchor );
-					if ( page.nth !== undefined ) {
-						const nth = page.nth;
-						const nthAnchor = document.querySelectorAll(
-							page.anchor
-						)[ nth ];
-						if ( nthAnchor ) {
-							anchor = nthAnchor;
-						}
-					}
-				}
-
-				if ( ! anchor ) {
-					// If there is a list of tutorial pages, but the anchor is not found, return early.
-					console.error( `No anchor found for ${ page.anchor }` );
-					return;
-				}
-
-				// Add the border CSS class to the anchor element
-				if ( page.hintType === 'border' ) {
-					anchor.classList.add( 'site-editor-tutorial__hint_border' );
-				}
-
-				const {
-					offsetX,
-					offsetY,
-					hintOffsetX,
-					hintOffsetY,
-					label,
-					hintSize,
-				} = page;
-				const { top, left } = getPosition(
-					anchor,
-					offsetX,
-					offsetY,
-					page.verticalplacement,
-					page.horizontalplacement
-				);
-				const { top: hintTop, left: hintLeft } = getPosition(
-					anchor,
-					hintOffsetX,
-					hintOffsetY,
-					page.verticalplacement,
-					page.horizontalplacement
-				);
-				const buttonId = `site-editor-tutorial-button-${ index }`;
-
-				setProcessedAnchors( ( prevProcessedAnchors ) => [
-					...prevProcessedAnchors,
-					anchor,
-				] );
-
-				const buttonProps = {
-					id: buttonId,
-					top: hintTop,
-					left: hintLeft,
-					size: hintSize,
-					label,
-					index,
-					onClick( event ) {
-						onButtonClick( event, anchor, index, top, left );
-					},
-				};
-				acc.push( {
-					id: `site-editor-tutorial-button-${ index }`,
-					...buttonProps,
-				} );
-			}, 1000 );
-			return acc;
-		}, [] );
-		setButtons( newButtons );
-	};
-
 	// Generate the first set of buttons.
 	useEffect( () => {
 		if ( buttons.length === 0 ) {
-			generateButtons();
+			setButtons(
+				generateButtons(
+					Pages,
+					screen,
+					setProcessedAnchors,
+					onButtonClick
+				)
+			);
 		}
 	}, [] );
 
@@ -262,7 +175,14 @@ function SiteEditorTutorial() {
 				if ( newHref !== currentHref ) {
 					setCurrentHref( newHref );
 					onFinish();
-					generateButtons();
+					setButtons(
+						generateButtons(
+							Pages,
+							screen,
+							setProcessedAnchors,
+							onButtonClick
+						)
+					);
 				}
 			}, 0 );
 		};
@@ -289,7 +209,14 @@ function SiteEditorTutorial() {
 						if ( newHref !== currentHref ) {
 							setCurrentHref( newHref );
 							onFinish();
-							generateButtons();
+							setButtons(
+								generateButtons(
+									Pages,
+									screen,
+									setProcessedAnchors,
+									onButtonClick
+								)
+							);
 						}
 					}, 0 );
 				}
