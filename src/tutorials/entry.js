@@ -149,7 +149,7 @@ export const Entry = [
 		),
 	},
 	{
-		anchor: '.edit-site-site-hub__site-view-link',
+		anchor: '.edit-site-site-hub__title a',
 		label: __( 'Shortcut to the front of your site' ),
 		verticalplacement: 'bottom',
 		horizontalplacement: 'none',
@@ -168,7 +168,7 @@ export const Entry = [
 				</h1>
 				<p className="edit-site-welcome-guide__text">
 					{ __(
-						'Next to the site title is a link that opens the front of your site in a new window.'
+						'Clicking on the site title opens your site in a new window.'
 					) }
 				</p>
 			</>

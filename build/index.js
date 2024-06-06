@@ -139,6 +139,43 @@ function Hint({
 
 /***/ }),
 
+/***/ "./src/icons.js":
+/*!**********************!*\
+  !*** ./src/icons.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PageControlIcon: () => (/* binding */ PageControlIcon)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/primitives */ "@wordpress/primitives");
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__);
+
+/**
+ * This just adds the little circle icon when there is more than one page to walk through.
+ */
+
+/**
+ * WordPress dependencies
+ */
+
+const PageControlIcon = () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.SVG, {
+  width: "8",
+  height: "8",
+  fill: "none",
+  xmlns: "http://www.w3.org/2000/svg"
+}, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.Circle, {
+  cx: "4",
+  cy: "4",
+  r: "4"
+}));
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -364,13 +401,192 @@ function SiteEditorTutorial() {
     page: page,
     onFinish: onFinish,
     modalPosition: modalPosition,
-    ref: ref
+    setModalPosition: setModalPosition,
+    ref: ref,
+    currentPage: currentPage,
+    setCurrentPage: setCurrentPage,
+    tutorials: tutorials
   }));
 }
 (0,_wordpress_plugins__WEBPACK_IMPORTED_MODULE_2__.registerPlugin)('site-editor-tutorial-plugin', {
   render: SiteEditorTutorial,
   icon: null
 });
+
+/***/ }),
+
+/***/ "./src/modal-footer.js":
+/*!*****************************!*\
+  !*** ./src/modal-footer.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SiteEditorTutorialFooter)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _page_control__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./page-control */ "./src/page-control.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils */ "./src/utils.js");
+
+/**
+ * WordPress dependencies
+ */
+
+
+
+/**
+ * Internal dependencies
+ */
+
+
+function SiteEditorTutorialFooter(props) {
+  const {
+    currentPage,
+    setCurrentPage,
+    pages,
+    onFinish,
+    setModalPosition
+  } = props;
+  const canGoBack = currentPage > 0;
+  const canGoForward = currentPage < pages.length - 1;
+  const checkforAnchor = newPage => {
+    let anchor = pages[newPage].anchor;
+    if (pages[newPage].anchor.startsWith('#')) {
+      anchor = document.getElementById(pages[newPage].anchor.substring(1));
+    } else {
+      anchor = document.querySelector(pages[newPage].anchor);
+      if (pages[newPage].nth !== undefined) {
+        const nthAnchor = document.querySelectorAll(pages[newPage].anchor)[pages[newPage].nth];
+        if (nthAnchor) {
+          anchor = nthAnchor;
+        }
+      }
+    }
+    return anchor;
+  };
+  const goBack = () => {
+    if (canGoBack) {
+      setCurrentPage(prevPage => {
+        const newPage = prevPage - 1;
+        if (!pages[newPage].anchor) {
+          return newPage;
+        }
+        const anchor = checkforAnchor(newPage);
+        const {
+          top,
+          left
+        } = (0,_utils__WEBPACK_IMPORTED_MODULE_4__.getPosition)(anchor, pages[newPage].offsetX, pages[newPage].offsetY, pages[newPage].verticalplacement, pages[newPage].horizontalplacement);
+        setModalPosition({
+          top,
+          left
+        });
+        return newPage;
+      });
+    }
+  };
+  const goForward = () => {
+    if (canGoForward) {
+      setCurrentPage(prevPage => {
+        const newPage = prevPage + 1;
+        if (!pages[newPage].anchor) {
+          return newPage;
+        }
+        const anchor = checkforAnchor(newPage);
+        const {
+          top,
+          left
+        } = (0,_utils__WEBPACK_IMPORTED_MODULE_4__.getPosition)(anchor, pages[newPage].offsetX, pages[newPage].offsetY, pages[newPage].verticalplacement, pages[newPage].horizontalplacement);
+        setModalPosition({
+          top,
+          left
+        });
+        return newPage;
+      });
+    }
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "site-editor-tutorial__footer"
+  }, pages.length > 1 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_page_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    currentPage: currentPage,
+    numberOfPages: pages.length,
+    setCurrentPage: setCurrentPage
+  }), ",", canGoBack && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    className: "site-editor-tutorial__back-button",
+    variant: "tertiary",
+    onClick: goBack
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Previous')), canGoForward && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    className: "site-editor-tutorial__forward-button",
+    variant: "primary",
+    onClick: goForward
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Next')), !canGoForward && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    className: "site-editor-tutorial__finish-button",
+    variant: "primary",
+    onClick: onFinish
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Finish')));
+}
+
+/***/ }),
+
+/***/ "./src/page-control.js":
+/*!*****************************!*\
+  !*** ./src/page-control.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ PageControl)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./icons */ "./src/icons.js");
+
+/**
+ * WordPress dependencies
+ */
+
+
+
+/**
+ * Internal dependencies
+ */
+
+function PageControl(props) {
+  const {
+    currentPage,
+    numberOfPages,
+    setCurrentPage
+  } = props;
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
+    className: "site-editor-tutorial__page-control",
+    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Tutorial controls')
+  }, Array.from({
+    length: numberOfPages
+  }).map((_, page) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
+    key: page
+    // Set aria-current="step" on the active page, see https://www.w3.org/TR/wai-aria-1.1/#aria-current
+    ,
+    "aria-current": page === currentPage ? 'step' : undefined
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    key: page,
+    icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icons__WEBPACK_IMPORTED_MODULE_3__.PageControlIcon, null),
+    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.sprintf)( /* translators: 1: current page number 2: total number of pages */
+    (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Page %1$d of %2$d'), page + 1, numberOfPages),
+    onClick: () => setCurrentPage(page)
+  }))));
+}
 
 /***/ }),
 
@@ -491,6 +707,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _modal_footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modal-footer */ "./src/modal-footer.js");
 
 /**
  * External dependencies
@@ -503,38 +720,52 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * The tutorial modal component, which displays the tutorial content.
  * See https://developer.wordpress.org/block-editor/reference-guides/components/modal/
  */
-const TutorialModal = ({
-  modalPosition,
-  page,
-  onFinish,
-  ref
-}) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Modal, {
-  className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('site-editor-tutorial', {
-    'site-editor-tutorial-arrow': page.showArrow,
-    [`site-editor-tutorial-arrow-${page.arrowPosition}`]: page.showArrow
-  }),
-  shouldCloseOnEsc: true,
-  shouldCloseOnClickOutside: true,
-  style: {
-    position: 'absolute',
-    top: modalPosition.top,
-    left: modalPosition.left,
-    opacity: 1,
-    display: 'block'
-  },
-  contentLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Site Editor Tutorial'),
-  isDismissible: true,
-  onRequestClose: onFinish,
-  ref: ref
-}, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-  className: "site-editor-tutorial__container"
-}, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-  className: "site-editor-tutorial__page"
-}, page.image, page.content)));
+function TutorialModal(props) {
+  const {
+    modalPosition,
+    setModalPosition,
+    page,
+    onFinish,
+    ref,
+    tutorials,
+    currentPage,
+    setCurrentPage
+  } = props;
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Modal, {
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('site-editor-tutorial', {
+      'site-editor-tutorial-arrow': page.showArrow,
+      [`site-editor-tutorial-arrow-${page.arrowPosition}`]: page.showArrow
+    }),
+    shouldCloseOnEsc: true,
+    shouldCloseOnClickOutside: true,
+    style: {
+      position: 'absolute',
+      top: modalPosition.top,
+      left: modalPosition.left,
+      opacity: 1,
+      display: 'block'
+    },
+    contentLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Site Editor Tutorial'),
+    isDismissible: true,
+    onRequestClose: onFinish,
+    ref: ref
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "site-editor-tutorial__container"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "site-editor-tutorial__page"
+  }, page.image, page.content), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_modal_footer__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    pages: tutorials,
+    currentPage: currentPage,
+    setCurrentPage: setCurrentPage,
+    onFinish: onFinish,
+    setModalPosition: setModalPosition
+  })));
+}
 
 /***/ }),
 
@@ -634,7 +865,7 @@ const Entry = [{
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Depending on which page you are on, the link may also open the Site Editor entry page.')))
 }, {
-  anchor: '.edit-site-site-hub__site-view-link',
+  anchor: '.edit-site-site-hub__title a',
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Shortcut to the front of your site'),
   verticalplacement: 'bottom',
   horizontalplacement: 'none',
@@ -650,7 +881,7 @@ const Entry = [{
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Shortcut to the front of your site')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Next to the site title is a link that opens the front of your site in a new window.')))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Clicking on the site title opens your site in a new window.')))
 }, {
   anchor: '.edit-site-site-hub_toggle-command-center',
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Command Palette'),
@@ -1615,6 +1846,17 @@ module.exports = window["wp"]["i18n"];
 
 "use strict";
 module.exports = window["wp"]["plugins"];
+
+/***/ }),
+
+/***/ "@wordpress/primitives":
+/*!************************************!*\
+  !*** external ["wp","primitives"] ***!
+  \************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["primitives"];
 
 /***/ }),
 
