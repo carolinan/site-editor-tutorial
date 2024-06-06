@@ -479,6 +479,9 @@ function SiteEditorTutorialFooter(props) {
           return newPage;
         }
         const anchor = checkforAnchor(newPage);
+        if (!anchor) {
+          return newPage;
+        }
         const {
           top,
           left
@@ -499,6 +502,9 @@ function SiteEditorTutorialFooter(props) {
           return newPage;
         }
         const anchor = checkforAnchor(newPage);
+        if (!anchor) {
+          return newPage;
+        }
         const {
           top,
           left
@@ -582,6 +588,12 @@ function PageControl(props) {
       setCurrentPage(page);
     } else {
       const anchor = checkforAnchor(page);
+      if (!anchor) {
+        // TO DO: this tutorial page should be skipped,
+        // It should not be part of the array below!
+        setCurrentPage(page);
+        return;
+      }
       const {
         top,
         left
@@ -1548,7 +1560,9 @@ const Styles = [{
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Style Variations (presets)')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This list shows the style variations enabled for your theme.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('There are three types of style presets: General (which can change both colors, typography and spacing), Colors, and Typography. You may need to scroll to see all the presets.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Click on a preset to preview it. You can combine different presets to create a uniqe style.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Next, if you have selected a style that you want to save, click on the large "Save" button at the bottom of the panel.')))
-}, {
+},
+// This element only appears when the user has saved a style variation.
+{
   anchor: '.edit-site-sidebar-navigation-screen-details-footer',
   verticalplacement: 'middle',
   horizontalplacement: 'right',

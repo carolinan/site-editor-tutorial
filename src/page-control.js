@@ -25,6 +25,12 @@ export default function PageControl( props ) {
 			setCurrentPage( page );
 		} else {
 			const anchor = checkforAnchor( page );
+			if ( ! anchor ) {
+				// TO DO: this tutorial page should be skipped,
+				// It should not be part of the array below!
+				setCurrentPage( page );
+				return;
+			}
 			const { top, left } = getPosition(
 				anchor,
 				pages[ page ].offsetX,

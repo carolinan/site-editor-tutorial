@@ -45,6 +45,9 @@ export default function SiteEditorTutorialFooter( props ) {
 					return newPage;
 				}
 				const anchor = checkforAnchor( newPage );
+				if ( ! anchor ) {
+					return newPage;
+				}
 				const { top, left } = getPosition(
 					anchor,
 					pages[ newPage ].offsetX,
@@ -67,6 +70,9 @@ export default function SiteEditorTutorialFooter( props ) {
 					return newPage;
 				}
 				const anchor = checkforAnchor( newPage );
+				if ( ! anchor ) {
+					return newPage;
+				}
 				const { top, left } = getPosition(
 					anchor,
 					pages[ newPage ].offsetX,
