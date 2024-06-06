@@ -19,7 +19,6 @@ export function generateButtons(
 	onButtonClick
 ) {
 	const tutorialList = Pages[ screen ];
-
 	return tutorialList.reduce( ( acc, page, index ) => {
 		setTimeout( () => {
 			let anchor = page.anchor;
@@ -36,6 +35,9 @@ export function generateButtons(
 					}
 				}
 			}
+			if ( ! anchor ) {
+				return;
+			}
 
 			if ( page.hintType === 'border' ) {
 				anchor.classList.add( 'site-editor-tutorial__hint_border' );
@@ -49,6 +51,7 @@ export function generateButtons(
 				label,
 				hintSize,
 			} = page;
+
 			const { top, left } = getPosition(
 				anchor,
 				offsetX,

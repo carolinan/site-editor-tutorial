@@ -15,6 +15,9 @@ export const getPosition = (
 	verticalPlacement,
 	horizontalPlacement
 ) => {
+	if ( ! anchor ) {
+		return;
+	}
 	const rect = anchor.getBoundingClientRect();
 	const top =
 		verticalPlacement === 'bottom'

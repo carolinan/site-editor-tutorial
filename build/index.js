@@ -1,6 +1,94 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/generatebuttons.js":
+/*!********************************!*\
+  !*** ./src/generatebuttons.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   generateButtons: () => (/* binding */ generateButtons)
+/* harmony export */ });
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/utils.js");
+/**
+ * Internal dependencies
+ */
+
+
+/**
+ * Generate tutorial buttons.
+ *
+ * @param {Array}    Pages               - The list of tutorial pages.
+ * @param {string}   screen              - The current screen.
+ * @param {Function} setProcessedAnchors - Function to set processed anchors.
+ * @param {Function} onButtonClick       - Function to handle button click events.
+ * @return {Array} - The generated buttons.
+ */
+function generateButtons(Pages, screen, setProcessedAnchors, onButtonClick) {
+  const tutorialList = Pages[screen];
+  return tutorialList.reduce((acc, page, index) => {
+    setTimeout(() => {
+      let anchor = page.anchor;
+      if (page.anchor.startsWith('#')) {
+        anchor = document.getElementById(page.anchor.substring(1));
+      } else {
+        anchor = document.querySelector(page.anchor);
+        if (page.nth !== undefined) {
+          const nthAnchor = document.querySelectorAll(page.anchor)[page.nth];
+          if (nthAnchor) {
+            anchor = nthAnchor;
+          }
+        }
+      }
+      if (!anchor) {
+        return;
+      }
+      if (page.hintType === 'border') {
+        anchor.classList.add('site-editor-tutorial__hint_border');
+      }
+      const {
+        offsetX,
+        offsetY,
+        hintOffsetX,
+        hintOffsetY,
+        label,
+        hintSize
+      } = page;
+      const {
+        top,
+        left
+      } = (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getPosition)(anchor, offsetX, offsetY, page.verticalplacement, page.horizontalplacement);
+      const {
+        top: hintTop,
+        left: hintLeft
+      } = (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getPosition)(anchor, hintOffsetX, hintOffsetY, page.verticalplacement, page.horizontalplacement);
+      const buttonId = `site-editor-tutorial-button-${index}`;
+      setProcessedAnchors(prevProcessedAnchors => [...prevProcessedAnchors, anchor]);
+      const buttonProps = {
+        id: buttonId,
+        top: hintTop,
+        left: hintLeft,
+        size: hintSize,
+        label,
+        index,
+        onClick(event) {
+          onButtonClick(event, anchor, index, top, left);
+        }
+      };
+      acc.push({
+        id: `site-editor-tutorial-button-${index}`,
+        ...buttonProps
+      });
+    }, 1000);
+    return acc;
+  }, []);
+}
+
+/***/ }),
+
 /***/ "./src/hint.js":
 /*!*********************!*\
   !*** ./src/hint.js ***!
@@ -73,9 +161,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
 /* harmony import */ var _tutorials__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./tutorials */ "./src/tutorials/index.js");
 /* harmony import */ var _tutorial_modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./tutorial-modal */ "./src/tutorial-modal.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./utils */ "./src/utils.js");
-/* harmony import */ var _hint__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./hint */ "./src/hint.js");
-/* harmony import */ var _page_selector__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./page-selector */ "./src/page-selector.js");
+/* harmony import */ var _hint__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./hint */ "./src/hint.js");
+/* harmony import */ var _page_selector__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./page-selector */ "./src/page-selector.js");
+/* harmony import */ var _generatebuttons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./generatebuttons */ "./src/generatebuttons.js");
 
 /**
  * WordPress dependencies
@@ -123,7 +211,7 @@ function SiteEditorTutorial() {
   const {
     tutorials,
     screen
-  } = (0,_page_selector__WEBPACK_IMPORTED_MODULE_11__.SelectPages)(_tutorials__WEBPACK_IMPORTED_MODULE_7__, records, isResolving) || {};
+  } = (0,_page_selector__WEBPACK_IMPORTED_MODULE_10__.SelectPages)(_tutorials__WEBPACK_IMPORTED_MODULE_7__, records, isResolving) || {};
   const page = tutorials ? tutorials[currentPage] : null;
   const localStorageState = () => {
     try {
@@ -203,91 +291,11 @@ function SiteEditorTutorial() {
       focusAnchor();
     };
   }, [isOpen, activeAnchor]);
-  const generateButtons = () => {
-    const tutorialList = _tutorials__WEBPACK_IMPORTED_MODULE_7__[screen];
-    if (!screen) {
-      console.error(`This screen does not have a tutorial`);
-      return;
-    }
-    if (!tutorialList || !page) {
-      console.error(`No tutorial list found for ${screen}`);
-      return;
-    }
-    const newButtons = tutorialList.reduce((acc, page, index) => {
-      // Skip tutorial pages that have been shown.
-      // This is temporarily disabled during development,
-      // so that the buttons can be tested witohut having to reset the local storage.
-      //if ( shownPages[index] ) {
-      //	return acc;
-      //}
-      setTimeout(() => {
-        let anchor = page.anchor;
-        // If the anchor is an ID, use getElementById./
-        if (page.anchor.startsWith('#')) {
-          anchor = document.getElementById(page.anchor.substring(1));
-        } else {
-          anchor = document.querySelector(page.anchor);
-          if (page.nth !== undefined) {
-            const nth = page.nth;
-            const nthAnchor = document.querySelectorAll(page.anchor)[nth];
-            if (nthAnchor) {
-              anchor = nthAnchor;
-            }
-          }
-        }
-        if (!anchor) {
-          // If there is a list of tutorial pages, but the anchor is not found, return early.
-          console.error(`No anchor found for ${page.anchor}`);
-          return;
-        }
-
-        // Add the border CSS class to the anchor element
-        if (page.hintType === 'border') {
-          anchor.classList.add('site-editor-tutorial__hint_border');
-        }
-        const {
-          offsetX,
-          offsetY,
-          hintOffsetX,
-          hintOffsetY,
-          label,
-          hintSize
-        } = page;
-        const {
-          top,
-          left
-        } = (0,_utils__WEBPACK_IMPORTED_MODULE_9__.getPosition)(anchor, offsetX, offsetY, page.verticalplacement, page.horizontalplacement);
-        const {
-          top: hintTop,
-          left: hintLeft
-        } = (0,_utils__WEBPACK_IMPORTED_MODULE_9__.getPosition)(anchor, hintOffsetX, hintOffsetY, page.verticalplacement, page.horizontalplacement);
-        const buttonId = `site-editor-tutorial-button-${index}`;
-        setProcessedAnchors(prevProcessedAnchors => [...prevProcessedAnchors, anchor]);
-        const buttonProps = {
-          id: buttonId,
-          top: hintTop,
-          left: hintLeft,
-          size: hintSize,
-          label,
-          index,
-          onClick(event) {
-            onButtonClick(event, anchor, index, top, left);
-          }
-        };
-        acc.push({
-          id: `site-editor-tutorial-button-${index}`,
-          ...buttonProps
-        });
-      }, 1000);
-      return acc;
-    }, []);
-    setButtons(newButtons);
-  };
 
   // Generate the first set of buttons.
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (buttons.length === 0) {
-      generateButtons();
+      setButtons((0,_generatebuttons__WEBPACK_IMPORTED_MODULE_11__.generateButtons)(_tutorials__WEBPACK_IMPORTED_MODULE_7__, screen, setProcessedAnchors, onButtonClick));
     }
   }, []);
 
@@ -313,7 +321,7 @@ function SiteEditorTutorial() {
         if (newHref !== currentHref) {
           setCurrentHref(newHref);
           onFinish();
-          generateButtons();
+          setButtons((0,_generatebuttons__WEBPACK_IMPORTED_MODULE_11__.generateButtons)(_tutorials__WEBPACK_IMPORTED_MODULE_7__, screen, setProcessedAnchors, onButtonClick));
         }
       }, 0);
     };
@@ -333,7 +341,7 @@ function SiteEditorTutorial() {
             if (newHref !== currentHref) {
               setCurrentHref(newHref);
               onFinish();
-              generateButtons();
+              setButtons((0,_generatebuttons__WEBPACK_IMPORTED_MODULE_11__.generateButtons)(_tutorials__WEBPACK_IMPORTED_MODULE_7__, screen, setProcessedAnchors, onButtonClick));
             }
           }, 0);
         }
@@ -348,7 +356,7 @@ function SiteEditorTutorial() {
     return;
   }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, buttons.map(buttonProps => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_hint__WEBPACK_IMPORTED_MODULE_10__.Hint, {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_hint__WEBPACK_IMPORTED_MODULE_9__.Hint, {
       key: buttonProps.id,
       ...buttonProps
     });
@@ -1403,6 +1411,9 @@ __webpack_require__.r(__webpack_exports__);
 // Get the position of the element,
 // so that the button and modal can be positioned relative to it.
 const getPosition = (anchor, offsetX, offsetY, verticalPlacement, horizontalPlacement) => {
+  if (!anchor) {
+    return;
+  }
   const rect = anchor.getBoundingClientRect();
   const top = verticalPlacement === 'bottom' ? `${rect.bottom + window.scrollY + offsetY}px` : `${rect.top + window.scrollY + offsetY}px`;
   const left = horizontalPlacement === 'right' ? `${rect.right + window.scrollX + offsetX}px` : `${rect.left + window.scrollX + offsetX}px`;
