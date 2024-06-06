@@ -85,9 +85,13 @@ export default function SiteEditorTutorialFooter( props ) {
 		<div className="site-editor-tutorial__footer">
 			{ pages.length > 1 && (
 				<PageControl
+					pages={ pages }
 					currentPage={ currentPage }
 					numberOfPages={ pages.length }
 					setCurrentPage={ setCurrentPage }
+					checkforAnchor={ checkforAnchor }
+					setModalPosition={ setModalPosition }
+					getPosition={ getPosition }
 				/>
 			) }
 			,

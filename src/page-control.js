@@ -10,7 +10,32 @@ import { Button } from '@wordpress/components';
 import { PageControlIcon } from './icons';
 
 export default function PageControl( props ) {
-	const { currentPage, numberOfPages, setCurrentPage } = props;
+	const {
+		pages,
+		currentPage,
+		numberOfPages,
+		setCurrentPage,
+		getPosition,
+		setModalPosition,
+		checkforAnchor,
+	} = props;
+
+	const onClick = ( page ) => {
+		if ( ! pages[ page ].anchor ) {
+			setCurrentPage( page );
+		} else {
+			const anchor = checkforAnchor( page );
+			const { top, left } = getPosition(
+				anchor,
+				pages[ page ].offsetX,
+				pages[ page ].offsetY,
+				pages[ page ].verticalplacement,
+				pages[ page ].horizontalplacement
+			);
+			setModalPosition( { top, left } );
+			setCurrentPage( page );
+		}
+	};
 
 	return (
 		<ul
@@ -32,7 +57,7 @@ export default function PageControl( props ) {
 							page + 1,
 							numberOfPages
 						) }
-						onClick={ () => setCurrentPage( page ) }
+						onClick={ () => onClick( page ) }
 					/>
 				</li>
 			) ) }

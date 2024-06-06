@@ -514,9 +514,13 @@ function SiteEditorTutorialFooter(props) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "site-editor-tutorial__footer"
   }, pages.length > 1 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_page_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    pages: pages,
     currentPage: currentPage,
     numberOfPages: pages.length,
-    setCurrentPage: setCurrentPage
+    setCurrentPage: setCurrentPage,
+    checkforAnchor: checkforAnchor,
+    setModalPosition: setModalPosition,
+    getPosition: _utils__WEBPACK_IMPORTED_MODULE_4__.getPosition
   }), ",", canGoBack && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     className: "site-editor-tutorial__back-button",
     variant: "tertiary",
@@ -565,10 +569,30 @@ __webpack_require__.r(__webpack_exports__);
 
 function PageControl(props) {
   const {
+    pages,
     currentPage,
     numberOfPages,
-    setCurrentPage
+    setCurrentPage,
+    getPosition,
+    setModalPosition,
+    checkforAnchor
   } = props;
+  const onClick = page => {
+    if (!pages[page].anchor) {
+      setCurrentPage(page);
+    } else {
+      const anchor = checkforAnchor(page);
+      const {
+        top,
+        left
+      } = getPosition(anchor, pages[page].offsetX, pages[page].offsetY, pages[page].verticalplacement, pages[page].horizontalplacement);
+      setModalPosition({
+        top,
+        left
+      });
+      setCurrentPage(page);
+    }
+  };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
     className: "site-editor-tutorial__page-control",
     "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Tutorial controls')
@@ -584,7 +608,7 @@ function PageControl(props) {
     icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icons__WEBPACK_IMPORTED_MODULE_3__.PageControlIcon, null),
     "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.sprintf)( /* translators: 1: current page number 2: total number of pages */
     (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Page %1$d of %2$d'), page + 1, numberOfPages),
-    onClick: () => setCurrentPage(page)
+    onClick: () => onClick(page)
   }))));
 }
 
@@ -814,16 +838,21 @@ const Entry = [{
     className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Welcome to the Site Editor Tutorial')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
     className: "edit-site-welcome-guide__heading"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('How does the Site Editor tutorial work?')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "edit-site-welcome-guide__text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('The Site Editor is split into several setting screens and panels.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('With this guide, you can navigate freely between the Site Editor screens and read helpful hints and tips to get started.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Click on the purple hints to find out more about the interface or a feature.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can close the tips with the Esc key, or use the close button.')))
+}, {
+  anchor: '.edit-site-layout__content',
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Site Editor tutorial intro'),
+  showArrow: false,
+  content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "edit-site-welcome-guide__heading"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('What is the Site Editor?')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "edit-site-welcome-guide__text"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('The Site Editor is a WordPress feature where you can view, edit and create templates and patterns that you can use to change the design and layout of your site.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Here you can choose between premade designs, add custom color palettes and fonts.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "https://wordpress.org/documentation/article/site-editor/",
     target: "_new"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Read more about the Site Editor in the official documentation.'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
-    className: "edit-site-welcome-guide__heading"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('How does the Site Editor tutorial work?')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "edit-site-welcome-guide__text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('The Site Editor is split into several setting screens and panels.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('With this guide, you can navigate freely between the Site Editor screens and read helpful hints and tips to get started.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Click on the purple hints to find out more about the interface or a feature.'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can close the tips with the Esc key, or use the close button.')))
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Read more about the Site Editor in the official documentation.'))))
 }, {
   anchor: '.edit-site-layout__canvas',
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('The site preview'),
