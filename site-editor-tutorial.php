@@ -4,7 +4,6 @@
  * Description:       A tutorial for the Site Editor.
  * Requires at least: 6.5
  * Requires PHP:      7.0
- * Requires Plugins: gutenberg
  * Version:           0.1.0
  * Author:            Carolina Nymark
  * License:           GPL-2.0-or-later

@@ -132,6 +132,7 @@ export const Styles = [
 			</>
 		),
 	},
+	// This element only appears when the user has saved a style variation.
 	{
 		anchor: '.edit-site-sidebar-navigation-screen-details-footer',
 		verticalplacement: 'middle',

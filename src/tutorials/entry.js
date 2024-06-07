@@ -28,29 +28,6 @@ export const Entry = [
 					{ __( 'Welcome to the Site Editor Tutorial' ) }
 				</h1>
 				<h2 className="edit-site-welcome-guide__heading">
-					{ __( 'What is the Site Editor?' ) }
-				</h2>
-				<p className="edit-site-welcome-guide__text">
-					{ __(
-						'The Site Editor is a WordPress feature where you can view, edit and create templates and patterns that you can use to change the design and layout of your site.'
-					) }
-					<br />
-					<br />
-					{ __(
-						'Here you can choose between premade designs, add custom color palettes and fonts.'
-					) }
-					<br />
-					<br />
-					<a
-						href="https://wordpress.org/documentation/article/site-editor/"
-						target="_new"
-					>
-						{ __(
-							'Read more about the Site Editor in the official documentation.'
-						) }
-					</a>
-				</p>
-				<h2 className="edit-site-welcome-guide__heading">
 					{ __( 'How does the Site Editor tutorial work?' ) }
 				</h2>
 				<p className="edit-site-welcome-guide__text">
@@ -70,6 +47,38 @@ export const Entry = [
 					{ __(
 						'You can close the tips with the Esc key, or use the close button.'
 					) }
+				</p>
+			</>
+		),
+	},
+	{
+		anchor: '.edit-site-layout__content',
+		label: __( 'Site Editor tutorial intro' ),
+		showArrow: false,
+		content: (
+			<>
+				<h1 className="edit-site-welcome-guide__heading">
+					{ __( 'What is the Site Editor?' ) }
+				</h1>
+				<p className="edit-site-welcome-guide__text">
+					{ __(
+						'The Site Editor is a WordPress feature where you can view, edit and create templates and patterns that you can use to change the design and layout of your site.'
+					) }
+					<br />
+					<br />
+					{ __(
+						'Here you can choose between premade designs, add custom color palettes and fonts.'
+					) }
+					<br />
+					<br />
+					<a
+						href="https://wordpress.org/documentation/article/site-editor/"
+						target="_new"
+					>
+						{ __(
+							'Read more about the Site Editor in the official documentation.'
+						) }
+					</a>
 				</p>
 			</>
 		),
@@ -149,7 +158,7 @@ export const Entry = [
 		),
 	},
 	{
-		anchor: '.edit-site-site-hub__site-view-link',
+		anchor: '.edit-site-site-hub__title a',
 		label: __( 'Shortcut to the front of your site' ),
 		verticalplacement: 'bottom',
 		horizontalplacement: 'none',
@@ -168,7 +177,7 @@ export const Entry = [
 				</h1>
 				<p className="edit-site-welcome-guide__text">
 					{ __(
-						'Next to the site title is a link that opens the front of your site in a new window.'
+						'Clicking on the site title opens your site in a new window.'
 					) }
 				</p>
 			</>

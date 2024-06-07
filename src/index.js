@@ -243,7 +243,11 @@ function SiteEditorTutorial() {
 					page={ page }
 					onFinish={ onFinish }
 					modalPosition={ modalPosition }
+					setModalPosition={ setModalPosition }
 					ref={ ref }
+					currentPage={ currentPage }
+					setCurrentPage={ setCurrentPage }
+					tutorials={ tutorials }
 				/>
 			) }
 		</>
