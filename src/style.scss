@@ -6,7 +6,7 @@
 @import "../node_modules/@wordpress/base-styles/z-index";
 @import "arrows.scss";
 
-//TODO: Clean up unused CSS; including css used for the modal footer.
+//TODO: Clean up unused CSS;
 
 // Trick the Site Editor into showing the plugin render.
 .edit-site > div:nth-child(3) {
@@ -81,6 +81,11 @@
 		width: 600px;
 	}
 
+	&.site-editor-tutorial-large {
+		width: auto;
+		max-height: none !important; // Lazy hack to not have to deal with the specificity of .components-modal__frame.site-editor-tutorial .
+	}
+
 	h1.edit-site-welcome-guide__heading {
 		font-size: 1.5rem;
 	}
@@ -124,6 +129,10 @@
 		width: 90%;
 	}
 
+	li {
+		list-style-type: square;
+	}
+
 	&__container {
 		display: flex;
 		flex-direction: column;
@@ -142,10 +151,6 @@
 		flex-direction: column;
 		justify-content: center;
 		position: relative;
-
-		@include break-small() {
-			//min-height: $image-height;
-		}
 	}
 
 	&__footer {

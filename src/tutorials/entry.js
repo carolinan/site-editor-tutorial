@@ -21,6 +21,7 @@ export const Entry = [
 	{
 		anchor: '.edit-site-layout__content',
 		label: __( 'Site Editor tutorial intro' ),
+		size: 'large',
 		showArrow: false,
 		content: (
 			<>
@@ -28,46 +29,28 @@ export const Entry = [
 					{ __( 'Welcome to the Site Editor Tutorial' ) }
 				</h1>
 				<h2 className="edit-site-welcome-guide__heading">
-					{ __( 'How does the Site Editor tutorial work?' ) }
+					{ __( 'What is the Site Editor?' ) }
 				</h2>
 				<p className="edit-site-welcome-guide__text">
 					{ __(
-						'The Site Editor is split into several setting screens and panels.'
-					) }
-					<br />
-					{ __(
-						'With this guide, you can navigate freely between the Site Editor screens and read helpful hints and tips to get started.'
-					) }
-					<br />
-					{ __(
-						'Click on the purple hints to find out more about the interface or a feature.'
+						'The Site Editor is a block editor where you can edit all parts of your site: Including your homepage, site header, and the 404 page.'
 					) }
 					<br />
 					<br />
 					{ __(
-						'You can close the tips with the Esc key, or use the close button.'
-					) }
-				</p>
-			</>
-		),
-	},
-	{
-		anchor: '.edit-site-layout__content',
-		label: __( 'Site Editor tutorial intro' ),
-		showArrow: false,
-		content: (
-			<>
-				<h1 className="edit-site-welcome-guide__heading">
-					{ __( 'What is the Site Editor?' ) }
-				</h1>
-				<p className="edit-site-welcome-guide__text">
-					{ __(
-						'The Site Editor is a WordPress feature where you can view, edit and create templates and patterns that you can use to change the design and layout of your site.'
+						'The Site Editor is also a tool where you can sort and manage your pages, templates and patterns.'
 					) }
 					<br />
+					{ __(
+						'Both your own custom templates, synced and unsycned patterns, and those included in your theme or plugins.'
+					) }
+					<br /><br />
+					{ __(
+						'It is also where you can update site wide styles such as colors and fonts, or even the width of your content.'
+					) }
 					<br />
 					{ __(
-						'Here you can choose between premade designs, add custom color palettes and fonts.'
+						'You can choose and mix premade designs or create your own color palette and install new fonts with the Font Library.'
 					) }
 					<br />
 					<br />
@@ -79,6 +62,30 @@ export const Entry = [
 							'Read more about the Site Editor in the official documentation.'
 						) }
 					</a>
+				</p>
+				<h2 className="edit-site-welcome-guide__heading">
+					{ __( 'How does the Site Editor tutorial work?' ) }
+				</h2>
+				<p className="edit-site-welcome-guide__text">
+					{ __(
+						'With this guide, you can navigate freely between the Site Editor screens and read helpful hints and tips to get started.'
+					) }
+					<br />
+					{ __(
+						'You can click on the purple hints to find out more about the interface or a feature.'
+					) }
+					<br />
+					{ __(
+						'Or, you can use the next and previous buttons below to move between the hints.'
+					) }
+					<br />
+					{ __(
+						'Once you have finished one tutorial, you can navigate to a new page to see the tutorial for that specific page or feature.'
+					) }
+					<br />
+					{ __(
+						'You can close the tips with the Esc key, or use the close button.'
+					) }
 				</p>
 			</>
 		),
@@ -102,7 +109,7 @@ export const Entry = [
 				</h1>
 				<p className="edit-site-welcome-guide__text">
 					{ __(
-						'The main content of the Site Editor entry screen is a live preview that matches the front of your site.'
+						'The main content of the Site Editor start screen is a live preview that matches the front of your site.'
 					) }
 					{ __(
 						' You can use it to preview your homepage, pages, templates, menus, and template parts.'
@@ -110,7 +117,7 @@ export const Entry = [
 					<br />
 					<br />
 					{ __(
-						'Clicking anywhere on the preview will open it in the editor where you can customize your design and add new blocks and patterns.'
+						'Clicking anywhere on the preview will open it in the editor where you can edit your content and design and add new blocks and patterns.'
 					) }
 				</p>
 			</>
@@ -121,13 +128,13 @@ export const Entry = [
 		label: __( 'The Dashboard link' ),
 		verticalplacement: 'bottom',
 		horizontalplacement: 'none',
-		offsetX: 10,
-		offsetY: 10,
+		offsetX: -5,
+		offsetY: 20,
 		showArrow: true,
 		arrowPosition: 'top-left',
 		hintType: 'button',
-		hintOffsetX: 22,
-		hintOffsetY: -10,
+		hintOffsetX: 5,
+		hintOffsetY: 0,
 		hintSize: 18,
 		content: (
 			<>
@@ -151,7 +158,7 @@ export const Entry = [
 					<br />
 					<br />
 					{ __(
-						'Depending on which page you are on, the link may also open the Site Editor entry page.'
+						'Depending on which page you are on, the link may also open the Site Editor start screen.'
 					) }
 				</p>
 			</>

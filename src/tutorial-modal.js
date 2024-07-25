@@ -31,6 +31,7 @@ export function TutorialModal( props ) {
 		<Modal
 			className={ classnames( 'site-editor-tutorial', {
 				'site-editor-tutorial-arrow': page.showArrow,
+				'site-editor-tutorial-large': page.size === 'large',
 				[ `site-editor-tutorial-arrow-${ page.arrowPosition }` ]:
 					page.showArrow,
 			} ) }

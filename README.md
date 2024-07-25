@@ -13,7 +13,7 @@ The user selects which features they want to learn more about at their own pace 
 
 ## Installation
 
-<b>This plugin requires Gutenberg 18.3+.</b>
+<b>This plugin requires Gutenberg 18.8.</b>
 
 This repository already includes the built plugin files, and the plugin can be installed and activated.
 
